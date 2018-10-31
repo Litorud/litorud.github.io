@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="1921 0 382 448">
+	<style type="text/css">
+		circle, ellipse, line {
+			stroke : red;
+			stroke-width : 2;
+		}
+
+		circle, ellipse {
+			fill : none;
+		}
+	</style>
+	<image id="image" width="2304" height="448" xlink:href="http://www.geocities.jp/litorud/StageTitle.jpg"/>
+	<circle cx="2113" cy="334" r="85" opacity="0"/>
+	<line x1="2088" y1="334" x2="2088" y2="334"/>
+	<circle cx="1728" cy="81" r="85" opacity="0"/>
+	<circle cx="1728" cy="227" r="85" opacity="0"/>
+	<line x1="1703" y1="227" x2="1703" y2="227"/>
+	<circle cx="1346" cy="131" r="85" opacity="0"/>
+	<ellipse cx="1346" cy="300" rx="85" ry="170" opacity="0"/>
+	<line x1="1321" y1="300" x2="1321" y2="300"/>
+	<ellipse cx="962" cy="161" rx="85" ry="170" opacity="0"/>
+	<circle cx="962" cy="281" r="85" opacity="0"/>
+	<line x1="937" y1="281" x2="937" y2="281"/>
+	<circle cx="576" cy="98" r="85" opacity="0"/>
+	<circle cx="576" cy="192" r="85" opacity="0"/>
+	<line x1="551" y1="192" x2="551" y2="192"/>
+	<circle cx="220" cy="151" r="85" opacity="0"/>
+	<script type="text/ecmascript"><![CDATA[
+	(function(){
+		var svgElem = document.documentElement,
+		array = new Array(),
+		index = 0,
+		viewX = 1921;
+
+		function Circle(e){
+			this.elem = e;
+			this.r = e.r.baseVal;
+			this.opacity = 0;
+		}
+
+		Circle.prototype.anim = function(){
+			this.elem.setAttribute("opacity", this.opacity += 0.05);
+			if((this.r.value -= 3) <= 25){
+				object = array[++index];
+			}
+		};
+
+		Circle.prototype.init = function(){
+			this.elem.setAttribute("opacity", this.opacity = 0);
+			this.r.value = 85;
+		};
+
+		function Line(e, xDec, yDec, end){
+			this.elem = e;
+			this.x2 = e.x2.baseVal;
+			this.y2 = e.y2.baseVal;
+			this.xDec = xDec;
+			this.yDec = yDec;
+			this.end = end;
+		}
+
+		Line.prototype.anim = function(){
+			this.x2.value -= this.xDec;
+			this.y2.value -= this.yDec;
+			svgElem.setAttribute("viewBox", (viewX -= 19.2) + " 0 382 448");
+			if(viewX <= this.end){
+				object = array[++index];
+			}
+		};
+
+		Line.prototype.init = function(){
+			this.x2.value = this.elem.x1.baseVal.value;
+			this.y2.value = this.elem.y1.baseVal.value;
+		};
+
+		function Ellipse(e){
+			this.elem = e;
+			this.rx = e.rx.baseVal;
+			this.ry = e.ry.baseVal;
+			this.opacity = 0;
+		}
+
+		Ellipse.prototype.anim = function(){
+			this.elem.setAttribute("opacity", this.opacity += 0.05);
+			this.rx.value -= 3;
+			if((this.ry.value -= 6) <= 50){
+				object = array[++index];
+			}
+		};
+
+		Ellipse.prototype.init = function(){
+			this.elem.setAttribute("opacity", this.opacity = 0);
+			this.rx.value = 85;
+			this.ry.value = 170;
+		};
+
+		var result = document.evaluate("*[position() > 2 and position() < 18]", document.documentElement, null, XPathResult.ORDERED_NODE_ITERATOR_TYPE, null);
+		array.push(object = new Circle(result.iterateNext()));
+		array.push(new Line(result.iterateNext(), 16.75, 12.65, 1537));
+		array.push(new Circle(result.iterateNext()));
+		array.push(new Circle(result.iterateNext()));
+		array.push(new Line(result.iterateNext(), 16.65, 4.8, 1153));
+		array.push(new Circle(result.iterateNext()));
+		array.push(new Ellipse(result.iterateNext()));
+		array.push(new Line(result.iterateNext(), 16.65, 6.95, 769));
+		array.push(new Ellipse(result.iterateNext()));
+		array.push(new Circle(result.iterateNext()));
+		array.push(new Line(result.iterateNext(), 16.8, 9.15, 385));
+		array.push(new Circle(result.iterateNext()));
+		array.push(new Circle(result.iterateNext()));
+		array.push(new Line(result.iterateNext(), 15.3, 2.05, 1));
+		array.push(new Circle(result.iterateNext()));
+
+		array.push({
+			count : 0,
+
+			anim : function(){
+				this.count++;
+				if(this.count >= 20)
+					object = array[++index];
+			},
+
+			init : function(){
+				this.count = 0;
+			}
+		});
+
+		array.push({
+			opacity : 1,
+
+			anim : function(){
+				this.opacity -= 0.05;
+				if(this.opacity <= 0){
+					svgElem.setAttribute("opacity", 0);
+					for(var i = 0, l = array.length; i < l; i++){
+						array[i].init();
+					}
+					viewX = 1920;
+					svgElem.setAttribute("viewBox", "1921 0 382 448");
+					object = array[++index];
+				}else{
+					svgElem.setAttribute("opacity", this.opacity);
+				}
+			},
+
+			init : function(){
+				this.opacity = 1;
+			}
+		});
+
+		array.push({
+			opacity : 0,
+
+			anim : function(){
+				svgElem.setAttribute("opacity", this.opacity += 0.05);
+				if(this.opacity >= 1){
+					object = array[index = 0];
+				}
+			},
+
+			init : function(){
+				this.opacity = 0;
+			}
+		});
+
+		function start(){
+			removeEventListener("click", start, false);
+			addEventListener("click", stop, false);
+			timer = setInterval(function(){
+				object.anim();
+			}, 50);
+		}
+
+		function stop(){
+			clearInterval(timer);
+			removeEventListener("click", stop, false);
+			addEventListener("click", start, false);
+		}
+
+		addEventListener("click", start, false);
+	})()
+	]]></script>
+</svg>

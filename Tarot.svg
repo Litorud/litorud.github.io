@@ -1,0 +1,87 @@
+<?xml version="1.0" standalone="no"?>
+<svg viewBox="0 0 160 90" version="1.1" xmlns="http://www.w3.org/2000/svg"
+	font-family="游ゴシック"
+	font-weight="900"
+	text-anchor="middle">
+	<!--<rect x="0" y="0" width="16" height="9" fill="aliceblue"/>-->
+	<text x="80" y="90" font-family="Serif" font-size="120" lengthAdjust="spacingAndGlyphs" fill="orange" id="number"></text>
+	<text x="80" y="60" font-size="60" lengthAdjust="spacingAndGlyphs" id="cardName">愚者</text>
+	<text x="80" y="80" font-size="20" lengthAdjust="spacingAndGlyphs" id="englishName">The Fool</text>
+	<script><![CDATA[
+		(function(){
+			function Card(cardName, englishName, number){
+				this.cardName = cardName;
+				this.englishName = englishName;
+				this.number = number;
+			}
+
+			const cards = [
+				new Card("愚者", "The Fool", ""),
+				new Card("魔術師", "The Magician", "Ⅰ"),
+				new Card("女教皇", "The High Priestess", "Ⅱ"),
+				new Card("女帝", "The Empress", "Ⅲ"),
+				new Card("皇帝", "The Emperor", "Ⅳ"),
+				new Card("教皇", "The Hierophant", "Ⅴ"),
+				new Card("恋人", "The Lovers", "Ⅵ"),
+				new Card("戦車", "The Chariot", "Ⅶ"),
+				new Card("正義", "Justice", "Ⅷ"),
+				new Card("隠者", "The Hermit", "Ⅸ"),
+				new Card("運命の輪", "Wheel of Fortune", "Ⅹ"),
+				new Card("力", "Strength", "Ⅺ"),
+				new Card("吊るされた男", "The Hanged Man", "Ⅻ"),
+				new Card("死神", "Death", "ⅩⅢ"),
+				new Card("節制", "Temperance", "ⅩⅣ"),
+				new Card("悪魔", "The Devil", "ⅩⅤ"),
+				new Card("塔", "The Tower", "ⅩⅥ"),
+				new Card("星", "The Star", "ⅩⅦ"),
+				new Card("月", "The Moon", "ⅩⅧ"),
+				new Card("太陽", "The Sun", "ⅩⅨ"),
+				new Card("審判", "Judgement", "ⅩⅩ"),
+				new Card("世界", "The World", "ⅩⅪ")];
+			const cardsLength = cards.length;
+
+			const documentElement = document.documentElement;
+			const cardName = document.getElementById("cardName");
+			const englishName = document.getElementById("englishName");
+			const number = document.getElementById("number");
+			const cardNameTextLengthBaseVal = cardName.textLength.baseVal;
+			const englishNameTextLengthBaseVal = englishName.textLength.baseVal;
+			const numberTextLengthBaseVal = number.textLength.baseVal;
+			var index = 0;
+			var timer;
+
+			function change(){
+				cardName.removeAttribute("textLength");
+				englishName.removeAttribute("textLength");
+				number.removeAttribute("textLength");
+
+				index = (index + 1) % cardsLength;
+				var card = cards[index];
+				cardName.textContent = card.cardName;
+				englishName.textContent = card.englishName;
+				number.textContent = card.number;
+
+				if(cardName.getComputedTextLength() > 160)
+					cardNameTextLengthBaseVal.value = 160;
+				if(englishName.getComputedTextLength() > 160)
+					englishNameTextLengthBaseVal.value = 160;
+				if(number.getComputedTextLength() > 160)
+					numberTextLengthBaseVal.value = 160;
+			}
+
+			function start(){
+				timer = setInterval(change, 2000);
+				documentElement.onclick = stop;
+				documentElement.style.opacity = 1;
+			}
+
+			function stop(){
+				clearInterval(timer);
+				documentElement.onclick = start;
+				documentElement.style.opacity = 0.5;
+			}
+
+			start();
+		})()
+	]]></script>
+</svg>

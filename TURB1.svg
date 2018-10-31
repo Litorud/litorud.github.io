@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 43 38">
+	<style type="text/css">
+		text {
+			font-size : 2px;
+			fill : white;
+		}
+	</style>
+	<rect width="43" height="38"/>
+	<path fill="#bb6600" d="M16,38v-1h-14v-1h-1v-7h1v-4h1v-2h1v-2h1v-2h1v-2h1v-1h1v-1h1v-2h1v-1h1v-1h2v-1h-5v-1h-3v1h-2v2h-1v1h-1v1h-1V38"/>
+	<path fill="#bb6600" d="M0,10h1v-1h1v-1h2v-1h6v1h1v1h4v-1h1v-1h2v-1h2v-1h2v-1h1v-1h2v-1h5v-1h11v1h1v3h-1v6h-1v2h-1v4h-1v1h-1v3h-1v3h-1v1h-1v2h-1v1h-1v1h-1v1h-1v1h-1v1h-1v1h-2v1h-1v1h-2v1h-4v2H43V0H0"/>
+	<rect x="12" y="9" width="1" height="1" fill="#7799ee"/>
+	<path fill="#00ccff" d="M3,34v-5h1v-2h1v-3h1v-1h1v-2h1v-1h1v-2h1v-1h1v-1h1v-2h1v-1h1v-1h2v-1h2v1h1v2h1v2h1v2h1v2h1v1h1v2h1v1h1v1h1v2h1v2h-1v1h-1v1h-2v1h-2v1h-5v1h-4v1h-9v-1"/>
+	<path fill="#00ccff" d="M19,9h1v1h1v1h1v1h1v1h1v1h1v2h1v1h1v2h1v1h1v2h1v3h1v-1h1v-1h1v-1h1v-1h1v-3h1v-2h1v-3h1v-2h1v-4h1v-3h-1v-1h-11v1h-3v1h-2v1h-1v1h-2v1h-1"/>
+	<text x="10" y="15">(1)</text>
+	<text x="3" y="22">(2)</text>
+	<text x="39" y="2">(3)</text>
+	<text x="38" y="13">(4)</text>
+	<text x="14" y="37">(5)</text>
+	<text x="19" y="6">(6)</text>
+	<text x="6" y="17">(7)</text>
+	<text x="26" y="27">(8)</text>
+	<text x="0" y="36">(9)</text>
+	<text x="23" y="17">(10)</text>
+	<text x="17" y="14">(11)</text>
+	<text x="13" y="9">(12)</text>
+</svg>
+<!-- ちなみに、TURB 第2話で立ち入り禁止を解除するには、色を青赤黄、青黄青、赤青青に揃えます。-->
