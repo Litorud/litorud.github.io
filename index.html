@@ -1,46 +1,45 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-<meta charset="UTF-8">
-<title>リートルード</title>
-<link rel="stylesheet" type="text/css" href="Style.css">
-<link rel="next" href="ImagePicker.html" title="Image Picker">
-<link rel="icon" type="image/png" href="Icon.png">
-<meta name="author" content="Itaru">
-<meta name="description" content="HTMLなどのWeb系の標準技術を実際に試してみたくて作成した、基本的には実験サイトです。">
+	<meta charset="UTF-8">
+	<title>リートルード</title>
+	<link rel="stylesheet" type="text/css" href="Style.css">
+	<link rel="next" href="Experiment.html" title="実験ページ">
+	<link rel="icon" type="image/png" href="Icon.png">
+	<meta name="author" content="Itaru">
+	<meta name="description" content="HTML などの Web 系の標準技術を実際に試したくて作成した、基本的には実験サイトです。">
 </head>
+
 <body>
-<p id="header">最終更新 : 2011年11月12日 23時20分<object data="Logo.svg" type="image/svg+xml" id="logo"><a href="index.html">トップページへ</a></object>
-<h1>リートルード</h1>
-<p>2007年12月20日にGoogle Page Creatorを使って公開したサイト『リートルード』は、Google Page Creatorのサービス終了により、2009年11月29日に消滅しました。その後、一部の内容はGoogle Sitesで公開していましたが、SVGファイルやJARファイルなどのアップロードができず、自分で<abbr title="Hyper Text Markup Language">HTML</abbr>を使ってページを記述することもできなかったため、2010年1月8日に内容をYahoo!ジオシティーズに移行しました。</p>
-<p>Yahoo!ジオシティーズでもアップロードできるファイルに制限はありますが、SVGファイル、JARファイル、XPIファイルはいずれもアップロードできます。アップロードできるファイルの種類は<a href="http://help.yahoo.co.jp/help/jp/geo/transfer/transfer-11.html">Yahoo!ジオシティーズ ヘルプ</a>で確認できました。XPIファイルはFirefoxの拡張機能と想定してアップロードできるようになっているわけではないようです。</p>
-<p>HTMLファイルをアップロードすると、body要素開始タグの直後に広告表示用のコードが挿入されますが、XHTMLファイルについてはそれはないようです。また、HTML5の仕様に則りbodyタグを省略した場合も同様のようです。ただ、こちらの場合はHTMLファイルの末尾に広告用と思われるコードが追加されます。</p>
-<p>Yahoo!ジオシティーズではSVGファイルをアップロードすることはできますが、レスポンスではContent-Typeをapplication/octet-streamにしてしまうので、object要素でHTML文書内にSVGを表示するということはできないようです。</p>
-<ul>
-	<li><a href="ImagePicker.html">Image Picker</a></li>
-	<li><a href="Bookmarklet.html">人気投票のコメント掲載ページから見たくないコメントを消し飛ばすブックマークレット</a></li>
-	<li><a href="Experiment.html">実験ページ</a></li>
-	<li><a href="WPF.html">WPFによる開発覚え書き</a></li>
-	<li><a href="DesktopBackgroundGenerator.html">文字をデスクトップの背景に</a></li>
-</ul>
-<h2>ブックマークレット</h2>
-<dl>
-	<dt><a class="app" href="javascript:(function(c,b,d,e,h,a,f){if(c){var g=function(i){b.open('GET','/status/show/'+i+'.json');b.send()};b.addEventListener('load',function(){d=JSON.parse(b.responseText);if(e=d.in_reply_to_status_id_str){h=c.parentNode;a=c.cloneNode(true);b=new XMLHttpRequest;b.addEventListener('load',function(){d=JSON.parse(b.responseText);f=d.user;a.querySelector('.user-profile-link').src=f.profile_image_url;a.querySelector('.tweet-full-name').textContent=f.name;a.querySelector('.tweet-text').textContent=d.text;a.querySelector('.tweet-timestamp').href='/#!/'+(a.querySelector('.tweet-screen-name').textContent=f.screen_name)+'/status/'+e;a.querySelector('.in-reply-to-text').textContent='';h.insertBefore(a,c);if(e=d.in_reply_to_status_id_str){c=a;a=c.cloneNode(true);b.abort();g(e)}},false);g(e)}},false);g(c.getAttribute('data-replied-tweet-id'))}})(document.querySelector('.in-reply-to'),new XMLHttpRequest)">リプライの連鎖を一括表示</a></dt>
-	<dd>Twitterのパーマリンクのページでこのブックマークレットを実行すると、リプライ先のツイートを現在のページに読み込んで表示します。そのツイートがさらにリプライになっていれば、次々と連続して読み込んで表示します。ただし、予めTwitterにログイン済みである必要があります。</dd>
-	<dt><a class="app" href="javascript:void(document.body.style.fontFamily = &quot;ＭＳ Ｐゴシック&quot;)">ＭＳ Ｐゴシックに</a></dt>
-	<dt><a class="app" href="javascript:(function(a){if(!a.isCollapsed||(a=prompt(&quot;Google Search&quot;)))open(&quot;http://www.google.com/search?q=-\u006e\u0069\u0063\u006f -&quot;+encodeURIComponent(&quot;\u30cb\u30b3\u30cb\u30b3 -\u30cb\u30b3 -\u306b\u3053 &quot;+a))})(getSelection())">除外検索 (Google)</a><a class="app" href="javascript:(function(a){if(!a.isCollapsed||(a=prompt(&quot;Bing Search&quot;)))open(&quot;http://www.bing.com/search?q=-\u006e\u0069\u0063\u006f -&quot;+encodeURIComponent(&quot;\u30cb\u30b3\u30cb\u30b3 -\u30cb\u30b3 &quot;+a))})(getSelection())">除外検索 (Bing)</a></dt>
-</dl>
-<h2><abbr title="Scalable Vector Graphics">SVG</abbr>の話</h2>
-<p>Firefoxは、SVGのline要素やpolyline要素が水平または垂直の場合、stroke属性にグラデーション要素を適用しても機能しません。たとえば、<code>&lt;line x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;50&quot; y2=&quot;0&quot; stroke=&quot;url(#grad)&quot;/&gt;</code>という要素は水平なのでグラデーションが掛かりません。y2属性を"1"にすればグラデーションが掛かるようになります。</p>
-<p>textPath要素は、xlink:href属性にpath要素のidを指定します(XLinkの名前空間接頭辞を“xlink”としています)。このときは、<code>xlink:href=&quot;#path&quot;</code>のように、‘#’に続けてidを記述すれば正しく解釈されます。しかし、何らかの要素にグラデーションを掛けるなどの目的で、fill属性にlinearGradient要素などのidを指定するときは、<code>fill=&quot;url(#grad)&quot;</code>のようにurl()関数を使う必要があります。xlink:hrefがXLinkの仕様であるのに対し、fillはSVGの仕様なので、このような違いがあるのでしょうか。</p>
-<h2>CSSのz-indexプロパティーの話</h2>
-<p>Webページでは、通常、HTMLで後に記述された要素ほど前面に描画されます。</p>
-<p>しかし、positionプロパティーにstatic以外を指定した要素は、そうでない要素（positionプロパティーがstaticの要素）より前面に描画されます。positionプロパティーを特に指定しなかったときの既定値はstaticです。したがって、positionプロパティーにstatic以外を指定するだけで、他の要素より前面に描画させることができます。z-indexを指定する必要はありません。</p>
-<p>positionプロパティーにstatic以外を指定した要素が複数ある場合、それらの要素の間では、HTMLで後に記述されている要素ほど前面に描画されます。この重なり順序を、z-indexプロパティーで変更することができます。</p>
-<p>positionプロパティーを指定していない要素にz-indexプロパティーを指定しても、意味はありません。</p>
-<h2>Google App Engine for Javaで、データストアに保存したプロパティーの型の変更法</h2>
-<p>Google App Engine for Javaにおいてデータストアを使用する場合、以下のようなクラスを作成し、そのインスタンスをPersistenceManagerクラスのmakePersistentメソッドに渡します。</p>
-<pre><code>@PersistenceCapable(identityType = IdentityType.APPLICATION)
+	<p id="header">最終更新 : 2011年11月12日 23時20分<object data="Logo.svg" type="image/svg+xml" id="logo"><a href="index.html">トップページへ</a></object>
+		<h1>リートルード</h1>
+		<p>2007年12月20日に、Google Page Creator を使って公開したサイト『リートルード』は、Google Page Creator のサービス終了により、2009年11月29日に消滅しました。その後、一部の内容は
+			Google Sites で公開していましたが、2010年1月8日に Yahoo!ジオシティーズに移行しました。</p>
+		<p>その Yahoo!ジオシティーズも、2019年3月31日に終了することが決まったため、2018年10月31日、『リートルード』は GitHub Pages に移行しました。</p>
+		<ul>
+			<li><a href="Experiment.html">実験ページ</a></li>
+			<li><a href="WPF.html">WPFによる開発覚え書き</a></li>
+			<li><a href="DesktopBackgroundGenerator.html">文字をデスクトップの背景に</a></li>
+		</ul>
+		<h2>ブックマークレット</h2>
+		<dl>
+			<dt><a class="app" href="javascript:void(document.body.style.fontFamily = &quot;ＭＳ Ｐゴシック&quot;)">ＭＳ Ｐゴシックに</a></dt>
+			<dt><a class="app" href="javascript:(function(a){if(!a.isCollapsed||(a=prompt(&quot;Google Search&quot;)))open(&quot;http://www.google.com/search?q=-\u006e\u0069\u0063\u006f -&quot;+encodeURIComponent(&quot;\u30cb\u30b3\u30cb\u30b3 -\u30cb\u30b3 -\u306b\u3053 &quot;+a))})(getSelection())">除外検索
+					(Google)</a><a class="app" href="javascript:(function(a){if(!a.isCollapsed||(a=prompt(&quot;Bing Search&quot;)))open(&quot;http://www.bing.com/search?q=-\u006e\u0069\u0063\u006f -&quot;+encodeURIComponent(&quot;\u30cb\u30b3\u30cb\u30b3 -\u30cb\u30b3 &quot;+a))})(getSelection())">除外検索
+					(Bing)</a></dt>
+		</dl>
+		<h2><abbr title="Scalable Vector Graphics">SVG</abbr>の話</h2>
+		<p>Firefoxは、SVGのline要素やpolyline要素が水平または垂直の場合、stroke属性にグラデーション要素を適用しても機能しません。たとえば、<code>&lt;line x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;50&quot; y2=&quot;0&quot; stroke=&quot;url(#grad)&quot;/&gt;</code>という要素は水平なのでグラデーションが掛かりません。y2属性を"1"にすればグラデーションが掛かるようになります。</p>
+		<p>textPath要素は、xlink:href属性にpath要素のidを指定します(XLinkの名前空間接頭辞を“xlink”としています)。このときは、<code>xlink:href=&quot;#path&quot;</code>のように、‘#’に続けてidを記述すれば正しく解釈されます。しかし、何らかの要素にグラデーションを掛けるなどの目的で、fill属性にlinearGradient要素などのidを指定するときは、<code>fill=&quot;url(#grad)&quot;</code>のようにurl()関数を使う必要があります。xlink:hrefがXLinkの仕様であるのに対し、fillはSVGの仕様なので、このような違いがあるのでしょうか。</p>
+		<h2>CSSのz-indexプロパティーの話</h2>
+		<p>Webページでは、通常、HTMLで後に記述された要素ほど前面に描画されます。</p>
+		<p>しかし、positionプロパティーにstatic以外を指定した要素は、そうでない要素（positionプロパティーがstaticの要素）より前面に描画されます。positionプロパティーを特に指定しなかったときの既定値はstaticです。したがって、positionプロパティーにstatic以外を指定するだけで、他の要素より前面に描画させることができます。z-indexを指定する必要はありません。</p>
+		<p>positionプロパティーにstatic以外を指定した要素が複数ある場合、それらの要素の間では、HTMLで後に記述されている要素ほど前面に描画されます。この重なり順序を、z-indexプロパティーで変更することができます。</p>
+		<p>positionプロパティーを指定していない要素にz-indexプロパティーを指定しても、意味はありません。</p>
+		<h2>Google App Engine for Javaで、データストアに保存したプロパティーの型の変更法</h2>
+		<p>Google App Engine for Javaにおいてデータストアを使用する場合、以下のようなクラスを作成し、そのインスタンスをPersistenceManagerクラスのmakePersistentメソッドに渡します。</p>
+		<pre><code>@PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class Data {
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
@@ -53,24 +52,26 @@ public class Data {
     private String content;
 
 	（以下略）</code></pre>
-<p>このクラスでは、<var>content</var>プロパティーはString型としています。この型を後からcom.google.appengine.api.datastore.Textに変更したい場合などは、低レベルAPIを使用します。</p>
-<p>まずDatastoreService実装を取得します。</p>
-<pre><code><a href="http://code.google.com/intl/ja/appengine/docs/java/javadoc/com/google/appengine/api/datastore/DatastoreService.html">DatastoreService</a> service = <a href="http://code.google.com/intl/ja/appengine/docs/java/javadoc/com/google/appengine/api/datastore/DatastoreServiceFactory.html">DatastoreServiceFactory</a>.<a href="http://code.google.com/intl/ja/appengine/docs/java/javadoc/com/google/appengine/api/datastore/DatastoreServiceFactory.html#getDatastoreService%28%29">getDatastoreService</a>();</code></pre>
-<p>取得したDatastoreService実装のgetメソッドで、データストアに保存したエンティティーを取得します。getメソッドの引数にはKeyオブジェクトを指定します。KeyオブジェクトはKeyFactoryクラスのcreateKeyメソッドで作成します。createKeyメソッドの引数には、親のKey（親を持つKeyを作成する場合）と、データストアに永続化したオブジェクトのクラス名と、各エンティティーのIDの値を指定します。IDは、Google App Engineのアプリケーション管理ページの、Datastore Viewerで確認することができます。</p>
-<pre><code><a href="http://code.google.com/intl/ja/appengine/docs/java/javadoc/com/google/appengine/api/datastore/Key.html">Key</a> key = <a href="http://code.google.com/intl/ja/appengine/docs/java/javadoc/com/google/appengine/api/datastore/KeyFactory.html">KeyFactory</a>.<a href="http://code.google.com/intl/ja/appengine/docs/java/javadoc/com/google/appengine/api/datastore/KeyFactory.html#createKey%28java.lang.String,%20long%29">createKey</a>("Data", 1);
+		<p>このクラスでは、<var>content</var>プロパティーはString型としています。この型を後からcom.google.appengine.api.datastore.Textに変更したい場合などは、低レベルAPIを使用します。</p>
+		<p>まずDatastoreService実装を取得します。</p>
+		<pre><code><a href="http://code.google.com/intl/ja/appengine/docs/java/javadoc/com/google/appengine/api/datastore/DatastoreService.html">DatastoreService</a> service = <a href="http://code.google.com/intl/ja/appengine/docs/java/javadoc/com/google/appengine/api/datastore/DatastoreServiceFactory.html">DatastoreServiceFactory</a>.<a href="http://code.google.com/intl/ja/appengine/docs/java/javadoc/com/google/appengine/api/datastore/DatastoreServiceFactory.html#getDatastoreService%28%29">getDatastoreService</a>();</code></pre>
+		<p>取得したDatastoreService実装のgetメソッドで、データストアに保存したエンティティーを取得します。getメソッドの引数にはKeyオブジェクトを指定します。KeyオブジェクトはKeyFactoryクラスのcreateKeyメソッドで作成します。createKeyメソッドの引数には、親のKey（親を持つKeyを作成する場合）と、データストアに永続化したオブジェクトのクラス名と、各エンティティーのIDの値を指定します。IDは、Google
+			App Engineのアプリケーション管理ページの、Datastore Viewerで確認することができます。</p>
+		<pre><code><a href="http://code.google.com/intl/ja/appengine/docs/java/javadoc/com/google/appengine/api/datastore/Key.html">Key</a> key = <a href="http://code.google.com/intl/ja/appengine/docs/java/javadoc/com/google/appengine/api/datastore/KeyFactory.html">KeyFactory</a>.<a href="http://code.google.com/intl/ja/appengine/docs/java/javadoc/com/google/appengine/api/datastore/KeyFactory.html#createKey%28java.lang.String,%20long%29">createKey</a>("Data", 1);
 <a href="http://code.google.com/intl/ja/appengine/docs/java/javadoc/com/google/appengine/api/datastore/Entity.html">Entity</a> entity = service.<a href="http://code.google.com/intl/ja/appengine/docs/java/javadoc/com/google/appengine/api/datastore/DatastoreService.html#get%28com.google.appengine.api.datastore.Key%29">get</a>(key);</code></pre>
-<p>取得したエンティティーから、getPropertyメソッドで型を変更したいプロパティーの値を取得します。その値を使って変更したい型で値を作り、setPropertyメソッドでその新しい値をエンティティーに設定します。</p>
-<pre><code>String str = (String)entity.<a href="http://code.google.com/intl/ja/appengine/docs/java/javadoc/com/google/appengine/api/datastore/Entity.html#getProperty%28java.lang.String%29">getProperty</a>("content");
+		<p>取得したエンティティーから、getPropertyメソッドで型を変更したいプロパティーの値を取得します。その値を使って変更したい型で値を作り、setPropertyメソッドでその新しい値をエンティティーに設定します。</p>
+		<pre><code>String str = (String)entity.<a href="http://code.google.com/intl/ja/appengine/docs/java/javadoc/com/google/appengine/api/datastore/Entity.html#getProperty%28java.lang.String%29">getProperty</a>("content");
 <a href="http://code.google.com/intl/ja/appengine/docs/java/javadoc/com/google/appengine/api/datastore/Text.html">Text</a> text = new <a href="http://code.google.com/intl/ja/appengine/docs/java/javadoc/com/google/appengine/api/datastore/Text.html#Text%28java.lang.String%29">Text</a>(str);
 entity.<a href="http://code.google.com/intl/ja/appengine/docs/java/javadoc/com/google/appengine/api/datastore/Entity.html#setProperty%28java.lang.String,%20java.lang.Object%29">setProperty</a>("content", text);</code></pre>
-<p>後は、DatastoreServiceクラスのputメソッドで変更したエンティティーをデータストアに保存します。</p>
-<pre><code>service.<a href="http://code.google.com/intl/ja/appengine/docs/java/javadoc/com/google/appengine/api/datastore/DatastoreService.html#put%28com.google.appengine.api.datastore.Entity%29">put</a>(entity);</code></pre>
-<p>全てのエンティティーについて、新しい型の値をプロパティーに設定し、データストアへの保存を行えば完了です。</p>
-<hr/>
-<p>リートルードとは、『ドラゴンクエストⅦ エデンの戦士たち』に登場する町の名前です。最も好きなRPGの、最も好きな町の名前です。</p>
-<dl>
-	<dt>サイト開設日</dt>
-	<dd>2007年12月20日</dd>
-</dl>
+		<p>後は、DatastoreServiceクラスのputメソッドで変更したエンティティーをデータストアに保存します。</p>
+		<pre><code>service.<a href="http://code.google.com/intl/ja/appengine/docs/java/javadoc/com/google/appengine/api/datastore/DatastoreService.html#put%28com.google.appengine.api.datastore.Entity%29">put</a>(entity);</code></pre>
+		<p>全てのエンティティーについて、新しい型の値をプロパティーに設定し、データストアへの保存を行えば完了です。</p>
+		<hr>
+		<p>リートルードとは、『ドラゴンクエストⅦ エデンの戦士たち』に登場する町の名前です。最も好きなRPGの、最も好きな町の名前です。</p>
+		<dl>
+			<dt>サイト開設日</dt>
+			<dd>2007年12月20日</dd>
+		</dl>
 </body>
+
 </html>

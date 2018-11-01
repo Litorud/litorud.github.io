@@ -2,179 +2,160 @@
 <meta charset="UTF-8">
 <title>実験ページ</title>
 <link rel="stylesheet" type="text/css" href="Style.css">
-<link rel="start" href="Top.xhtml" title="トップページ">
+<link rel="start" href="index.html" title="トップページ">
 <link rel="icon" type="image/png" href="Icon.png">
-<meta name="author" content="Itaru"/>
+<meta name="author" content="Itaru">
 <script type="application/ecmascript" src="Script.js" async></script>
-<p id="header">最終更新 : 2011年11月12日 23時20分<object data="Logo.svg" type="image/svg+xml" id="logo"><a href="Top.xhtml">トップページへ</a></object>
-<h1>実験ページ</h1>
-<form action="Experiment.html" onsubmit="childNodes[5].textContent=normalizeJapanese(text1.value);return false">
-	<p>全角の英数字記号を半角に変換したり、半角のカタカナを全角に変換したり、カタカナや捨て仮名を捨て仮名でないひらがなに変換したりします。</p>
-	<p><input type="text" name="text1" placeholder="変換したい文を入力してください。" tabindex="1"><button tabindex="2">変換</button></p>
-	<p>ここに変換した文が表示されます。</p>
-</form>
-<form action="#" onsubmit="return false">
-	<textarea id="a" rows=10 cols=50 placeholder="ここに入力された文字数を表示します。" onchange="count(this)" onkeypress="count(this)" onclick="count(this)"></textarea><button type=reset onclick="dd1.textContent=dd2.textContent=0">消去</button>
-	<dl>
-		<dt>文字数</dt>
-		<dd id="num1">0</dd>
-		<dt>改行文字を除いた文字数</dt>
-		<dd id="num2">0</dd>
-	</dl>
-</form>
-<form action="#" onsubmit="print(this);return false">
+<p id="header">最終更新 : 2011年11月12日 23時20分<object data="Logo.svg" type="image/svg+xml" id="logo"><a href="index.html">トップページへ</a></object>
+	<h1>実験ページ</h1>
+	<form action="Experiment.html" onsubmit="childNodes[5].textContent=normalizeJapanese(text1.value);return false">
+		<p>全角の英数字記号を半角に変換したり、半角のカタカナを全角に変換したり、カタカナや捨て仮名を捨て仮名でないひらがなに変換したりします。</p>
+		<p><input type="text" name="text1" placeholder="変換したい文を入力してください。" tabindex="1"><button tabindex="2">変換</button></p>
+		<p>ここに変換した文が表示されます。</p>
+	</form>
+	<form action="#" onsubmit="return false">
+		<textarea id="a" rows=10 cols=50 placeholder="ここに入力された文字数を表示します。" onchange="count(this)" onkeypress="count(this)"
+		 onclick="count(this)"></textarea><button type=reset onclick="dd1.textContent=dd2.textContent=0">消去</button>
+		<dl>
+			<dt>文字数</dt>
+			<dd id="num1">0</dd>
+			<dt>改行文字を除いた文字数</dt>
+			<dd id="num2">0</dd>
+		</dl>
+	</form>
+	<form action="#" onsubmit="print(this);return false">
+		<p>
+			<input type="text" name="text1" placeholder="入力してください。" onfocus="value=''" tabindex="1">
+			<button tabindex="2">書き出す</button>
+			<p>ここが変化します。
+	</form>
 	<p>
-		<input type="text" name="text1" placeholder="入力してください。" onfocus="value=''" tabindex="1">
-		<button tabindex="2">書き出す</button>
-	<p>ここが変化します。
-</form>
-<p>
-	マインスイーパのJavaアプレットです。
-	<object type="application/x-java-applet" width="400" height="400">
-		<param name="archive" value="Minesweeper.jar">
-		<param name="classid" value="java:Minesweeper">
-		<param name="row" value="8">
-		<param name="column" value="8">
-		<param name="mine" value="10">
-		Javaアプレットの動作するブラウザであれば、ここにマインスイーパのアプレットが表示されます。
-	</object>
-<p>
-	<object type="application/x-java-applet" width="600" height="600" class=fullwidth>
-		<param name="archive" value="PhysicalBall.jar">
-		<param name="classid" value="java:PhysicalBall">
-		Javaアプレットの動作するブラウザであれば、ここにボールが跳ね回るアプレットが表示されます。
-	</object>
-	ボールはドラッグできます。右クリックでボールを消したり生み出したりできます。
-<p>
-	<object data="StageTitle.svg" type="image/svg+xml" width="382" height="448"><a href="StageTitle.svg">アニメーションするSVG</a></object>
-	2度クリックすると止まります。
-<form action="#" onsubmit="getCode(this);return false">
-	<p>
-		<select name="select" tabindex="3">
-			<option selected="selected">Top.html
-			<option>Style.css
-			<option>Script.js
-			<option>Logo.svg
-			<option>ImagePicker.html
-			<option>Bookmarklet.html
-			<option>Bookmarklet.txt
-			<option>Experiment.html
-			<option>StageTitle.svg
-			<option>TURB1.svg
-		</select>
-		<button tabindex="4">読み込む</button>
-	<pre>ここにコードが表示されます。</pre>
-</form>
-<p class="draggable">ドラッグできます。
-<ol class="draggable">
-	<li>色は匂えど散りぬるを
-	<li>我が世誰ぞ常ならん
-	<li>有為の奥山今日越えて
-	<li>浅き夢見じ酔いもせず
-	<li><strong>ん</strong>
-</ol>
-<p>
-	<a href="http://bio100.jp/">Bio_100%</a>の<a href="http://www.vector.co.jp/soft/dos/game/se003374.html">TURB第1話</a>において、旅の楽団Ⅱに話しかける順番です。
-	<object data="TURB1.svg" type="image/svg+xml" width="688" height="608"><a href="TURB1.svg">順番を示すSVG</a></object>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 110" id="star">
-	<style>
-		line { stroke : black }
-	</style>
-	<circle r="2" cx="55" cy="55"/>
-	<circle r="2" cx="55" cy="55"/>
-	<circle r="2" cx="55" cy="55"/>
-	<circle r="2" cx="55" cy="55"/>
-	<circle r="2" cx="55" cy="55"/>
-	<line x1="0" y1="0" x2="0" y2="0"/>
-	<line x1="0" y1="0" x2="0" y2="0"/>
-	<line x1="0" y1="0" x2="0" y2="0"/>
-	<line x1="0" y1="0" x2="0" y2="0"/>
-	<line x1="0" y1="0" x2="0" y2="0"/>
-	<script><![CDATA[
-		(function(){
-			var svgElem = document.getElementById("star"), nodes = svgElem.childNodes,
-			c1x = nodes[3].cx.baseVal, c1y = nodes[3].cy.baseVal,
-			c2x = nodes[5].cx.baseVal, c2y = nodes[5].cy.baseVal,
-			c3x = nodes[7].cx.baseVal, c3y = nodes[7].cy.baseVal,
-			c4x = nodes[9].cx.baseVal, c4y = nodes[9].cy.baseVal,
-			c5x = nodes[11].cx.baseVal, c5y = nodes[11].cy.baseVal,
-			theta = -Math.PI / 2, d = 2 * Math.PI / 5,
-			c1xd = Math.cos(theta) * 50, c1yd = Math.sin(theta) * 50,
-			c2xd = Math.cos(theta += d) * 50, c2yd = Math.sin(theta) * 50,
-			c3xd = Math.cos(theta += d) * 50, c3yd = Math.sin(theta) * 50,
-			c4xd = Math.cos(theta += d) * 50, c4yd = Math.sin(theta) * 50,
-			c5xd = Math.cos(theta += d) * 50, c5yd = Math.sin(theta) * 50,
-			count = 0,
-			l1 = nodes[13], l2 = nodes[15], l3 = nodes[17], l4 = nodes[19], l5 = nodes[21],
-			l = l1, index = 13,
-			animate = moveCircle,
-			timer = setInterval(function(){
-				animate();
-			}, 20);
-			function moveCircle(){
-				d = Math.sin(count * Math.PI / 2);
-				c1x.value = 55 + c1xd * d;
-				c2x.value = 55 + c2xd * d;
-				c3x.value = 55 + c3xd * d;
-				c4x.value = 55 + c4xd * d;
-				c5x.value = 55 + c5xd * d;
-				c1y.value = 55 + c1yd * d;
-				c2y.value = 55 + c2yd * d;
-				c3y.value = 55 + c3yd * d;
-				c4y.value = 55 + c4yd * d;
-				c5y.value = 55 + c5yd * d;
-				if((count += 0.02) >= 1){
-					l1.xspeed = (c3x.value - (l1.x2.baseVal.value = l1.x1.baseVal.value = c1x.value)) / 10;
-					l2.xspeed = (c5x.value - (l2.x2.baseVal.value = l2.x1.baseVal.value = c3x.value)) / 10;
-					l3.xspeed = (c2x.value - (l3.x2.baseVal.value = l3.x1.baseVal.value = c5x.value)) / 10;
-					l4.xspeed = (c4x.value - (l4.x2.baseVal.value = l4.x1.baseVal.value = c2x.value)) / 10;
-					l5.xspeed = (c1x.value - (l5.x2.baseVal.value = l5.x1.baseVal.value = c4x.value)) / 10;
-					l1.yspeed = (c3y.value - (l1.y2.baseVal.value = l1.y1.baseVal.value = c1y.value)) / 10;
-					l2.yspeed = (c5y.value - (l2.y2.baseVal.value = l2.y1.baseVal.value = c3y.value)) / 10;
-					l3.yspeed = (c2y.value - (l3.y2.baseVal.value = l3.y1.baseVal.value = c5y.value)) / 10;
-					l4.yspeed = (c4y.value - (l4.y2.baseVal.value = l4.y1.baseVal.value = c2y.value)) / 10;
-					l5.yspeed = (c1y.value - (l5.y2.baseVal.value = l5.y1.baseVal.value = c4y.value)) / 10;
-					count = 0;
-					animate = drawLine;
-				}
-			}
-			function drawLine(){
-				l.x2.baseVal.value += l.xspeed;
-				l.y2.baseVal.value += l.yspeed;
-				if(++count >= 10){
-					if(index < 20){
-						l = nodes[index += 2];
-						count = 0;
-					}else{
-						clearInterval(timer);
-						addEventListener("click", restart, false);
-					}
-				}
-			}
-			function restart(){
-				removeEventListener("click", restart, false);
-				count = 1;
-				animate = clear;
-				timer = setInterval(function(){
-					animate();
-				}, 20);
-			}
-			function clear(){
-				if(count <= 0){
-					c1x.value = c1y.value = c2x.value = c2y.value = c3x.value = c3y.value = c4x.value = c4y.value = c5x.value = c5y.value = 55;
-					(l = l1).x1.baseVal.value = l2.x1.baseVal.value = l3.x1.baseVal.value = l4.x1.baseVal.value = l5.x1.baseVal.value = l1.y1.baseVal.value = l2.y1.baseVal.value = l3.y1.baseVal.value = l4.y1.baseVal.value = l5.y1.baseVal.value = l1.x2.baseVal.value = l2.x2.baseVal.value = l3.x2.baseVal.value = l4.x2.baseVal.value = l5.x2.baseVal.value = l1.y2.baseVal.value = l2.y2.baseVal.value = l3.y2.baseVal.value = l4.y2.baseVal.value = l5.y2.baseVal.value = count = 0;
-					index = 13;
-					animate = moveCircle;
-					svgElem.setAttribute("opacity", 1);
-				}else{
-					svgElem.setAttribute("opacity", count -= 0.05);
-				}
-			}
-		})();
-	]]></script>
-</svg>
-<form action="#" onsubmit="read(this);return false">
-	<p><input type="file" name="file1"><button>インポート</button></p>
-	<textarea rows=10 cols=50 name="textarea1">UTF-8のテキストファイルを指定してください。</textarea>
-	<p><button type="button" onclick="write(this)">エクスポート</button></p>
-</form>
+		<object data="StageTitle.svg" type="image/svg+xml" width="382" height="448"><a href="StageTitle.svg">アニメーションするSVG</a></object>
+		2度クリックすると止まります。
+		<form action="#" onsubmit="getCode(this);return false">
+			<p>
+				<select name="select" tabindex="3">
+					<option selected="selected">Top.html
+					<option>Style.css
+					<option>Script.js
+					<option>Logo.svg
+					<option>Experiment.html
+					<option>StageTitle.svg
+					<option>TURB1.svg
+				</select>
+				<button tabindex="4">読み込む</button>
+				<pre>ここにコードが表示されます。</pre>
+		</form>
+		<p class="draggable">ドラッグできます。
+			<ol class="draggable">
+				<li>色は匂えど散りぬるを
+				<li>我が世誰ぞ常ならん
+				<li>有為の奥山今日越えて
+				<li>浅き夢見じ酔いもせず
+				<li><strong>ん</strong>
+			</ol>
+			<p>
+				<a href="http://bio100.jp/">Bio_100%</a>の<a href="http://www.vector.co.jp/soft/dos/game/se003374.html">TURB第1話</a>において、旅の楽団Ⅱに話しかける順番です。
+				<object data="TURB1.svg" type="image/svg+xml" width="688" height="608"><a href="TURB1.svg">順番を示すSVG</a></object>
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 110" id="star">
+					<style>
+						line { stroke : black }
+					</style>
+					<circle r="2" cx="55" cy="55" />
+					<circle r="2" cx="55" cy="55" />
+					<circle r="2" cx="55" cy="55" />
+					<circle r="2" cx="55" cy="55" />
+					<circle r="2" cx="55" cy="55" />
+					<line x1="0" y1="0" x2="0" y2="0" />
+					<line x1="0" y1="0" x2="0" y2="0" />
+					<line x1="0" y1="0" x2="0" y2="0" />
+					<line x1="0" y1="0" x2="0" y2="0" />
+					<line x1="0" y1="0" x2="0" y2="0" />
+					<script>// <![CDATA[
+						(function () {
+							var svgElem = document.getElementById("star"), nodes = svgElem.childNodes,
+								c1x = nodes[3].cx.baseVal, c1y = nodes[3].cy.baseVal,
+								c2x = nodes[5].cx.baseVal, c2y = nodes[5].cy.baseVal,
+								c3x = nodes[7].cx.baseVal, c3y = nodes[7].cy.baseVal,
+								c4x = nodes[9].cx.baseVal, c4y = nodes[9].cy.baseVal,
+								c5x = nodes[11].cx.baseVal, c5y = nodes[11].cy.baseVal,
+								theta = -Math.PI / 2, d = 2 * Math.PI / 5,
+								c1xd = Math.cos(theta) * 50, c1yd = Math.sin(theta) * 50,
+								c2xd = Math.cos(theta += d) * 50, c2yd = Math.sin(theta) * 50,
+								c3xd = Math.cos(theta += d) * 50, c3yd = Math.sin(theta) * 50,
+								c4xd = Math.cos(theta += d) * 50, c4yd = Math.sin(theta) * 50,
+								c5xd = Math.cos(theta += d) * 50, c5yd = Math.sin(theta) * 50,
+								count = 0,
+								l1 = nodes[13], l2 = nodes[15], l3 = nodes[17], l4 = nodes[19], l5 = nodes[21],
+								l = l1, index = 13,
+								animate = moveCircle,
+								timer = setInterval(function () {
+									animate();
+								}, 20);
+							function moveCircle() {
+								d = Math.sin(count * Math.PI / 2);
+								c1x.value = 55 + c1xd * d;
+								c2x.value = 55 + c2xd * d;
+								c3x.value = 55 + c3xd * d;
+								c4x.value = 55 + c4xd * d;
+								c5x.value = 55 + c5xd * d;
+								c1y.value = 55 + c1yd * d;
+								c2y.value = 55 + c2yd * d;
+								c3y.value = 55 + c3yd * d;
+								c4y.value = 55 + c4yd * d;
+								c5y.value = 55 + c5yd * d;
+								if ((count += 0.02) >= 1) {
+									l1.xspeed = (c3x.value - (l1.x2.baseVal.value = l1.x1.baseVal.value = c1x.value)) / 10;
+									l2.xspeed = (c5x.value - (l2.x2.baseVal.value = l2.x1.baseVal.value = c3x.value)) / 10;
+									l3.xspeed = (c2x.value - (l3.x2.baseVal.value = l3.x1.baseVal.value = c5x.value)) / 10;
+									l4.xspeed = (c4x.value - (l4.x2.baseVal.value = l4.x1.baseVal.value = c2x.value)) / 10;
+									l5.xspeed = (c1x.value - (l5.x2.baseVal.value = l5.x1.baseVal.value = c4x.value)) / 10;
+									l1.yspeed = (c3y.value - (l1.y2.baseVal.value = l1.y1.baseVal.value = c1y.value)) / 10;
+									l2.yspeed = (c5y.value - (l2.y2.baseVal.value = l2.y1.baseVal.value = c3y.value)) / 10;
+									l3.yspeed = (c2y.value - (l3.y2.baseVal.value = l3.y1.baseVal.value = c5y.value)) / 10;
+									l4.yspeed = (c4y.value - (l4.y2.baseVal.value = l4.y1.baseVal.value = c2y.value)) / 10;
+									l5.yspeed = (c1y.value - (l5.y2.baseVal.value = l5.y1.baseVal.value = c4y.value)) / 10;
+									count = 0;
+									animate = drawLine;
+								}
+							}
+							function drawLine() {
+								l.x2.baseVal.value += l.xspeed;
+								l.y2.baseVal.value += l.yspeed;
+								if (++count >= 10) {
+									if (index < 20) {
+										l = nodes[index += 2];
+										count = 0;
+									} else {
+										clearInterval(timer);
+										addEventListener("click", restart, false);
+									}
+								}
+							}
+							function restart() {
+								removeEventListener("click", restart, false);
+								count = 1;
+								animate = clear;
+								timer = setInterval(function () {
+									animate();
+								}, 20);
+							}
+							function clear() {
+								if (count <= 0) {
+									c1x.value = c1y.value = c2x.value = c2y.value = c3x.value = c3y.value = c4x.value = c4y.value = c5x.value = c5y.value = 55;
+									(l = l1).x1.baseVal.value = l2.x1.baseVal.value = l3.x1.baseVal.value = l4.x1.baseVal.value = l5.x1.baseVal.value = l1.y1.baseVal.value = l2.y1.baseVal.value = l3.y1.baseVal.value = l4.y1.baseVal.value = l5.y1.baseVal.value = l1.x2.baseVal.value = l2.x2.baseVal.value = l3.x2.baseVal.value = l4.x2.baseVal.value = l5.x2.baseVal.value = l1.y2.baseVal.value = l2.y2.baseVal.value = l3.y2.baseVal.value = l4.y2.baseVal.value = l5.y2.baseVal.value = count = 0;
+									index = 13;
+									animate = moveCircle;
+									svgElem.setAttribute("opacity", 1);
+								} else {
+									svgElem.setAttribute("opacity", count -= 0.05);
+								}
+							}
+						})();
+					// ]]></script>
+				</svg>
+				<form action="#" onsubmit="read(this);return false">
+					<p><input type="file" name="file1"><button>インポート</button></p>
+					<textarea rows=10 cols=50 name="textarea1">UTF-8のテキストファイルを指定してください。</textarea>
+					<p><button type="button" onclick="write(this)">エクスポート</button></p>
+				</form>

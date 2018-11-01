@@ -10,7 +10,7 @@
 			fill : none;
 		}
 	</style>
-	<image id="image" width="2304" height="448" xlink:href="http://www.geocities.jp/litorud/StageTitle.jpg"/>
+	<image id="image" width="2304" height="448" xlink:href="StageTitle.jpg"/>
 	<circle cx="2113" cy="334" r="85" opacity="0"/>
 	<line x1="2088" y1="334" x2="2088" y2="334"/>
 	<circle cx="1728" cy="81" r="85" opacity="0"/>

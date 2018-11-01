@@ -9,7 +9,7 @@
 			<rect width="100%" height="50"/>
 		</clipPath>
 	</defs>
-	<a xlink:href="http://www.geocities.jp/litorud/" target="_parent">
+	<a xlink:href="https://litorud.github.io/" target="_parent">
 		<rect width="100%" height="100%" fill-opacity="0"/>
 		<text id="background" font-size="75" x="5" y="60" fill="#dfe6e6" fill-opacity="0" font-family="serif">Litorud</text>
 		<text font-size="25" x="20" clip-path="url(#clip)"><tspan id="t1" y="75">リ</tspan><tspan id="t2" y="75">ー</tspan><tspan id="t3" y="75">ト</tspan><tspan id="t4" y="75">ル</tspan><tspan id="t5" y="75">ー</tspan><tspan id="t6" y="75">ド</tspan></text>
