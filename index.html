@@ -12,7 +12,7 @@
 </head>
 
 <body>
-	<p id="header">最終更新 : 2018年11月2日 1時14分<object data="Logo.svg" type="image/svg+xml" id="logo"><a href="index.html">トップページへ</a></object>
+	<p id="header">最終更新 : 2018年11月11日 0時42分<object data="Logo.svg" type="image/svg+xml" id="logo"><a href="index.html">トップページへ</a></object>
 		<h1>リートルード</h1>
 		<p>2007年12月20日に、Google Page Creator を使って公開したサイト『リートルード』は、Google Page Creator のサービス終了により、2009年11月29日に消滅しました。その後、一部の内容は
 			Google Sites で公開していましたが、2010年1月8日に Yahoo!ジオシティーズに移行しました。</p>
@@ -22,6 +22,23 @@
 			<li><a href="WPF.html">WPFによる開発覚え書き</a></li>
 			<li><a href="DesktopBackgroundGenerator.html">文字をデスクトップの背景に</a></li>
 		</ul>
+		<h2>「PowerShell ウィンドウをここに開く」の話</h2>
+		<p>エクスプローラーのフォルダー上、または何も選択していないときに何もない所で Shift+右クリックすると、「PowerShell ウィンドウをここに開く」というメニューが表示されます。これを選択したとき、どのようなコマンドで
+			PowerShell が起動するのか検索しました。</p>
+		<p>コマンドは、レジストリの“<code>HKEY_CLASSES_ROOT\Directory\shell\Powershell\command</code>”または“<code>HKEY_CLASSES_ROOT\Directory\Background\shell\Powershell\command</code>”に保存されていることが分かりました。前者がフォルダー上で
+			Shift+右クリックしたとき、後者が何も選択していないときに何もない所で Shift+右クリックしたときだと思います。</p>
+		<p>次のような値になっていました。</p>
+		<dl>
+			<dt><code>HKEY_CLASSES_ROOT\Directory\shell\Powershell\command</code> の値</dt>
+			<dd><code>powershell.exe -noexit -command Set-Location '%V'</code></dd>
+			<dt><code>HKEY_CLASSES_ROOT\Directory\Background\shell\Powershell\command</code> の値</dt>
+			<dd><code>powershell.exe -noexit -command Set-Location -literalPath '%V'</code></dd>
+		</dl>
+		<p>コマンド中に現れる“<code>%V</code>”という文字列については、<a href="https://superuser.com/questions/136838/which-special-variables-are-available-when-writing-a-shell-command-for-a-context">Which
+				special variables are available when writing a shell command for a context menu</a> に記述を見つけました。</p>
+		<p>このページ、およびさらにリンク先のページによると、“<code>%v</code>”は基本的に「<span title="ファイルのコンテキストメニューで見られる「開く」「印刷」「編集」などのことだと思います。">動詞</span>」を表し、それが無いときは作業ディレクトリを表すようです。これによって、上記コマンドは「<code>powershell.exe</code>
+			を起動し、<code>Set-Location</code> コマンドで作業ディレクトリに移動し、そのまま実行を継続する」ということを実現しているようです。</p>
+		<p>一方のコマンドだけ <code>-literalPath</code> オプションで指定していることには何か理由があるのか分かりませんでした。</p>
 		<h2>ブックマークレット</h2>
 		<dl>
 			<dt><a class="app" href="javascript:void(document.body.style.fontFamily = &quot;ＭＳ Ｐゴシック&quot;)">ＭＳ Ｐゴシックに</a></dt>
