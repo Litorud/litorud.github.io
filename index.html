@@ -12,7 +12,7 @@
 </head>
 
 <body>
-	<p id="header">最終更新 : 2018年11月11日 0時42分<object data="Logo.svg" type="image/svg+xml" id="logo"><a href="index.html">トップページへ</a></object>
+	<p id="header">最終更新 : 2018年11月12日 0時24分<object data="Logo.svg" type="image/svg+xml" id="logo"><a href="index.html">トップページへ</a></object>
 		<h1>リートルード</h1>
 		<p>2007年12月20日に、Google Page Creator を使って公開したサイト『リートルード』は、Google Page Creator のサービス終了により、2009年11月29日に消滅しました。その後、一部の内容は
 			Google Sites で公開していましたが、2010年1月8日に Yahoo!ジオシティーズに移行しました。</p>
@@ -22,7 +22,7 @@
 			<li><a href="WPF.html">WPFによる開発覚え書き</a></li>
 			<li><a href="DesktopBackgroundGenerator.html">文字をデスクトップの背景に</a></li>
 		</ul>
-		<h2>「PowerShell ウィンドウをここに開く」の話</h2>
+		<h2>「PowerShell ウィンドウをここに開く」のコマンド</h2>
 		<p>エクスプローラーのフォルダー上、または何も選択していないときに何もない所で Shift+右クリックすると、「PowerShell ウィンドウをここに開く」というメニューが表示されます。これを選択したとき、どのようなコマンドで
 			PowerShell が起動するのか検索しました。</p>
 		<p>コマンドは、レジストリの“<code>HKEY_CLASSES_ROOT\Directory\shell\Powershell\command</code>”または“<code>HKEY_CLASSES_ROOT\Directory\Background\shell\Powershell\command</code>”に保存されていることが分かりました。前者がフォルダー上で
@@ -47,7 +47,7 @@
 					(Bing)</a></dt>
 		</dl>
 		<h2><abbr title="Scalable Vector Graphics">SVG</abbr>の話</h2>
-		<p>Firefoxは、SVGのline要素やpolyline要素が水平または垂直の場合、stroke属性にグラデーション要素を適用しても機能しません。たとえば、<code>&lt;line x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;50&quot; y2=&quot;0&quot; stroke=&quot;url(#grad)&quot;/&gt;</code>という要素は水平なのでグラデーションが掛かりません。y2属性を"1"にすればグラデーションが掛かるようになります。</p>
+		<p>かつての Firefoxは、SVGのline要素やpolyline要素が水平または垂直の場合、stroke属性にグラデーション要素を適用しても機能しませんでした（今は検証していないのでわかりません）。たとえば、<code>&lt;line x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;50&quot; y2=&quot;0&quot; stroke=&quot;url(#grad)&quot;/&gt;</code>という要素は水平なのでグラデーションが掛かりません。y2属性を"1"にすればグラデーションが掛かるようになります。</p>
 		<p>textPath要素は、xlink:href属性にpath要素のidを指定します(XLinkの名前空間接頭辞を“xlink”としています)。このときは、<code>xlink:href=&quot;#path&quot;</code>のように、‘#’に続けてidを記述すれば正しく解釈されます。しかし、何らかの要素にグラデーションを掛けるなどの目的で、fill属性にlinearGradient要素などのidを指定するときは、<code>fill=&quot;url(#grad)&quot;</code>のようにurl()関数を使う必要があります。xlink:hrefがXLinkの仕様であるのに対し、fillはSVGの仕様なので、このような違いがあるのでしょうか。</p>
 		<h2>CSSのz-indexプロパティーの話</h2>
 		<p>Webページでは、通常、HTMLで後に記述された要素ほど前面に描画されます。</p>
