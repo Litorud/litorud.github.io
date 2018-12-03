@@ -3,6 +3,7 @@ html {
 }
 
 body {
+	font-family: "游ゴシック", "Yu Gothic", sans-serif;
 	margin: 0 8% 30%;
 	padding: 1em 2em;
 	background-color: whitesmoke;
@@ -114,4 +115,10 @@ a.app:hover {
 	background-color: #fffff0;
 	vertical-align: top;
 	cursor: move;
+}
+
+.note {
+	color: #505050;
+	font-size: smaller;
+	margin: 0 1em;
 }
