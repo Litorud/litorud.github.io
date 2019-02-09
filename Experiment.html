@@ -37,8 +37,8 @@
 	</form>
 	<form action="#" onsubmit="print(this);return false">
 		<p>
-			<input type="text" name="text1" placeholder="入力してください。" onfocus="value=''" tabindex="1">
-			<button tabindex="2">書き出す</button>
+			<input type="text" name="text1" placeholder="入力してください。" onfocus="value=''" tabindex="3">
+			<button tabindex="4">書き出す</button>
 		</p>
 		<p>ここが変化します。</p>
 	</form>
@@ -48,7 +48,7 @@
 	</p>
 	<form action="#" onsubmit="getCode(this);return false">
 		<p>
-			<select name="select" tabindex="3">
+			<select name="select" tabindex="5">
 				<option selected="selected">index.html
 				<option>Style.css
 				<option>Script.js
@@ -57,7 +57,7 @@
 				<option>StageTitle.svg
 				<option>TURB1.svg
 			</select>
-			<button tabindex="4">読み込む</button>
+			<button tabindex="6">読み込む</button>
 		</p>
 		<pre>ここにコードが表示されます。</pre>
 	</form>
@@ -181,6 +181,108 @@
 		Itaru (@Litorud) <a href="https://twitter.com/Litorud/status/1052942297774481408?ref_src=twsrc%5Etfw">2018年10月18日</a>
 	</blockquote>
 	<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+	<section>
+		<h2>基数変換</h2>
+		<dl>
+			<dt>2進数</dt>
+			<dd><input id="text2" tabindex="7"></dd>
+			<dt>10進数</dt>
+			<dd><input id="text10" type="number" tabindex="8"></dd>
+			<dt>36進数</dt>
+			<dd><input id="text36" tabindex="9"></dd>
+			<dt>64進数</dt>
+			<dd><input id="text64" tabindex="10">※負数には対応しません。‘-（ハイフンマイナス）’は10進数における63を表します。</dd>
+		</dl>
+		<script defer>
+			addEventListener("DOMContentLoaded", function () {
+				const chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-";
+				const text2 = document.getElementById("text2");
+				const text10 = document.getElementById("text10");
+				const text36 = document.getElementById("text36");
+				const text64 = document.getElementById("text64");
+
+				text2.addEventListener("input", function () {
+					const i = parseInt(text2.value, 2);
+
+					text10.value = to10(i);
+					text36.value = to36(i);
+					text64.value = to64(i);
+				});
+
+				text10.addEventListener("input", function () {
+					const i = parseInt(text10.value);
+
+					text2.value = to2(i);
+					text36.value = to36(i);
+					text64.value = to64(i);
+				});
+
+				text36.addEventListener("input", function () {
+					const i = parseInt(text36.value, 36);
+
+					text2.value = to2(i);
+					text10.value = to10(i);
+					text64.value = to64(i);
+				});
+
+				text64.addEventListener("input", function () {
+					const i = from64(text64.value);
+
+					text2.value = to2(i);
+					text10.value = to10(i);
+					text36.value = to36(i);
+				});
+
+				function from64(text) {
+					const is = Array.from(text)
+						.map(c => chars.indexOf(c))
+						.reverse();
+
+					let result = 0;
+					let power = 1;
+					for (let i of is) {
+						result += i * power;
+						power *= 64;
+					}
+
+					return result;
+				}
+
+				function to2(i) {
+					return i.toString(2);
+				}
+
+				function to10(i) {
+					return i.toString();
+				}
+
+				function to36(i) {
+					return i.toString(36);
+				}
+
+				function to64(i) {
+					if (isNaN(i)) {
+						return "NaN";
+					} else if (i < 0) {
+						return "Underflow"
+					}
+
+					const bitsIterator = getBitsIterator(i);
+					return Array.from(bitsIterator)
+						.map(b => chars[b])
+						.reverse()
+						.join("");
+				}
+
+				function* getBitsIterator(number) {
+					do {
+						yield number % 64;
+						number = Math.floor(number / 64);
+					} while (number > 0);
+				}
+			});
+		</script>
+	</section>
 </body>
 
 </html>
