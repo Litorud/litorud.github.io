@@ -16,11 +16,12 @@
 		<object data="Logo.svg" type="image/svg+xml"><a href="index.html">トップページへ</a></object>
 		<dl>
 			<dt>最終更新</dt>
-			<dd>2018年12月2日 22時35分</dd>
+			<dd>2019年2月10日 21時30分</dd>
 		</dl>
 	</header>
 	<h1>リートルード</h1>
-	<p>2007年12月20日に、Google Page Creator を使って公開したサイト『リートルード』は、Google Page Creator のサービス終了により、2009年11月29日に消滅しました。その後、一部の内容は
+	<p>2007年12月20日に、Google Page Creator を使って公開したサイト『リートルード』は、Google Page Creator
+		のサービス終了により、2009年11月29日に消滅しました。その後、一部の内容は
 		Google Sites で公開していましたが、2010年1月8日に Yahoo!ジオシティーズに移行しました。</p>
 	<p>その Yahoo!ジオシティーズも、2019年3月31日に終了することが決まったため、2018年10月31日、『リートルード』は GitHub Pages に移行しました。</p>
 	<ul>
@@ -28,6 +29,8 @@
 		<li><a href="WPF.html">WPFによる開発覚え書き</a></li>
 		<li><a href="Experiment.html">実験ページ</a></li>
 		<li><a href="Bookmarklet.html">人気投票のコメント掲載ページから見たくないコメントを消し飛ばすブックマークレット</a></li>
+		<li><a href="AstrologicalSigns.svg">黄道12星座</a></li>
+		<li><a href="Tarot.svg">タロット 大アルカナ</a></li>
 	</ul>
 	<section>
 		<h2>「PowerShell ウィンドウをここに開く」のコマンド</h2>
@@ -50,35 +53,45 @@
 				<td><code>powershell.exe -noexit -command Set-Location -literalPath '%V'</code></td>
 			</tr>
 		</table>
-		<p>コマンド中に現れる“<code>%V</code>”という文字列については、<a href="https://superuser.com/questions/136838/which-special-variables-are-available-when-writing-a-shell-command-for-a-context">Which
+		<p>コマンド中に現れる“<code>%V</code>”という文字列については、<a
+				href="https://superuser.com/questions/136838/which-special-variables-are-available-when-writing-a-shell-command-for-a-context">Which
 				special variables are available when writing a shell command for a context menu</a> に記述を見つけました。</p>
-		<p>このページ、およびさらにリンク先のページによると、“<code>%v</code>”は基本的に「<span title="ファイルのコンテキストメニューで見られる「開く」「印刷」「編集」などのことだと思います。">動詞</span>」を表し、それが無いときは作業ディレクトリを表すようです。これによって、上記コマンドは「<code>powershell.exe</code>
+		<p>このページ、およびさらにリンク先のページによると、“<code>%v</code>”は基本的に「<span
+				title="ファイルのコンテキストメニューで見られる「開く」「印刷」「編集」などのことだと思います。">動詞</span>」を表し、それが無いときは作業ディレクトリを表すようです。これによって、上記コマンドは「<code>powershell.exe</code>
 			を起動し、<code>Set-Location</code> コマンドで作業ディレクトリに移動し、そのまま実行を継続する」ということを実現しているようです。</p>
 		<p>一方のコマンドだけ <code>-literalPath</code> オプションで指定していることには何か理由があるのか分かりませんでした。</p>
 	</section>
 	<section>
 		<h2>ブックマークレット</h2>
 		<a class="app" href="javascript:void(document.body.style.fontFamily = &quot;ＭＳ Ｐゴシック&quot;)">ＭＳ Ｐゴシックに</a>
-		<a class="app" href="javascript:(function(a){if(!a.isCollapsed||(a=prompt(&quot;Google Search&quot;)))open(&quot;http://www.google.com/search?q=-\u006e\u0069\u0063\u006f -&quot;+encodeURIComponent(&quot;\u30cb\u30b3\u30cb\u30b3 -\u30cb\u30b3 -\u306b\u3053 &quot;+a))})(getSelection())">除外検索
+		<a class="app"
+			href="javascript:(function(a){if(!a.isCollapsed||(a=prompt(&quot;Google Search&quot;)))open(&quot;http://www.google.com/search?q=-\u006e\u0069\u0063\u006f -&quot;+encodeURIComponent(&quot;\u30cb\u30b3\u30cb\u30b3 -\u30cb\u30b3 -\u306b\u3053 &quot;+a))})(getSelection())">除外検索
 			(Google)</a>
-		<a class="app" href="javascript:(function(a){if(!a.isCollapsed||(a=prompt(&quot;Bing Search&quot;)))open(&quot;http://www.bing.com/search?q=-\u006e\u0069\u0063\u006f -&quot;+encodeURIComponent(&quot;\u30cb\u30b3\u30cb\u30b3 -\u30cb\u30b3 &quot;+a))})(getSelection())">除外検索
+		<a class="app"
+			href="javascript:(function(a){if(!a.isCollapsed||(a=prompt(&quot;Bing Search&quot;)))open(&quot;http://www.bing.com/search?q=-\u006e\u0069\u0063\u006f -&quot;+encodeURIComponent(&quot;\u30cb\u30b3\u30cb\u30b3 -\u30cb\u30b3 &quot;+a))})(getSelection())">除外検索
 			(Bing)</a>
 	</section>
 	<section>
 		<h2><abbr title="Scalable Vector Graphics">SVG</abbr>の話</h2>
-		<p>かつての Firefoxは、SVGのline要素やpolyline要素が水平または垂直の場合、stroke属性にグラデーション要素を適用しても機能しませんでした（今は検証していないのでわかりません）。たとえば、<code>&lt;line x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;50&quot; y2=&quot;0&quot; stroke=&quot;url(#grad)&quot;/&gt;</code>という要素は水平なのでグラデーションが掛かりません。y2属性を"1"にすればグラデーションが掛かるようになります。</p>
-		<p>textPath要素は、xlink:href属性にpath要素のidを指定します(XLinkの名前空間接頭辞を“xlink”としています)。このときは、<code>xlink:href=&quot;#path&quot;</code>のように、‘#’に続けてidを記述すれば正しく解釈されます。しかし、何らかの要素にグラデーションを掛けるなどの目的で、fill属性にlinearGradient要素などのidを指定するときは、<code>fill=&quot;url(#grad)&quot;</code>のようにurl()関数を使う必要があります。xlink:hrefがXLinkの仕様であるのに対し、fillはSVGの仕様なので、このような違いがあるのでしょうか。</p>
+		<p>かつての
+			Firefoxは、SVGのline要素やpolyline要素が水平または垂直の場合、stroke属性にグラデーション要素を適用しても機能しませんでした（今は検証していないのでわかりません）。たとえば、<code>&lt;line x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;50&quot; y2=&quot;0&quot; stroke=&quot;url(#grad)&quot;/&gt;</code>という要素は水平なのでグラデーションが掛かりません。y2属性を"1"にすればグラデーションが掛かるようになります。
+		</p>
+		<p>textPath要素は、xlink:href属性にpath要素のidを指定します(XLinkの名前空間接頭辞を“xlink”としています)。このときは、<code>xlink:href=&quot;#path&quot;</code>のように、‘#’に続けてidを記述すれば正しく解釈されます。しかし、何らかの要素にグラデーションを掛けるなどの目的で、fill属性にlinearGradient要素などのidを指定するときは、<code>fill=&quot;url(#grad)&quot;</code>のようにurl()関数を使う必要があります。xlink:hrefがXLinkの仕様であるのに対し、fillはSVGの仕様なので、このような違いがあるのでしょうか。
+		</p>
 	</section>
 	<section>
 		<h2>CSSのz-indexプロパティーの話</h2>
 		<p>Webページでは、通常、HTMLで後に記述された要素ほど前面に描画されます。</p>
-		<p>しかし、positionプロパティーにstatic以外を指定した要素は、そうでない要素（positionプロパティーがstaticの要素）より前面に描画されます。positionプロパティーを特に指定しなかったときの既定値はstaticです。したがって、positionプロパティーにstatic以外を指定するだけで、他の要素より前面に描画させることができます。z-indexを指定する必要はありません。</p>
-		<p>positionプロパティーにstatic以外を指定した要素が複数ある場合、それらの要素の間では、HTMLで後に記述されている要素ほど前面に描画されます。この重なり順序を、z-indexプロパティーで変更することができます。</p>
+		<p>しかし、positionプロパティーにstatic以外を指定した要素は、そうでない要素（positionプロパティーがstaticの要素）より前面に描画されます。positionプロパティーを特に指定しなかったときの既定値はstaticです。したがって、positionプロパティーにstatic以外を指定するだけで、他の要素より前面に描画させることができます。z-indexを指定する必要はありません。
+		</p>
+		<p>positionプロパティーにstatic以外を指定した要素が複数ある場合、それらの要素の間では、HTMLで後に記述されている要素ほど前面に描画されます。この重なり順序を、z-indexプロパティーで変更することができます。
+		</p>
 		<p>positionプロパティーを指定していない要素にz-indexプロパティーを指定しても、意味はありません。</p>
 	</section>
 	<section>
 		<h2>Google App Engine for Javaで、データストアに保存したプロパティーの型の変更法</h2>
-		<p>Google App Engine for Javaにおいてデータストアを使用する場合、以下のようなクラスを作成し、そのインスタンスをPersistenceManagerクラスのmakePersistentメソッドに渡します。</p>
+		<p>Google App Engine for
+			Javaにおいてデータストアを使用する場合、以下のようなクラスを作成し、そのインスタンスをPersistenceManagerクラスのmakePersistentメソッドに渡します。</p>
 		<pre><code>@PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class Data {
     @PrimaryKey
@@ -92,14 +105,16 @@ public class Data {
     private String content;
 
 	（以下略）</code></pre>
-		<p>このクラスでは、<var>content</var>プロパティーはString型としています。この型を後からcom.google.appengine.api.datastore.Textに変更したい場合などは、低レベルAPIを使用します。</p>
+		<p>このクラスでは、<var>content</var>プロパティーはString型としています。この型を後からcom.google.appengine.api.datastore.Textに変更したい場合などは、低レベルAPIを使用します。
+		</p>
 		<p>まずDatastoreService実装を取得します。</p>
 		<pre><code>DatastoreService service = DatastoreServiceFactory.getDatastoreService();</code></pre>
 		<p>取得したDatastoreService実装のgetメソッドで、データストアに保存したエンティティーを取得します。getメソッドの引数にはKeyオブジェクトを指定します。KeyオブジェクトはKeyFactoryクラスのcreateKeyメソッドで作成します。createKeyメソッドの引数には、親のKey（親を持つKeyを作成する場合）と、データストアに永続化したオブジェクトのクラス名と、各エンティティーのIDの値を指定します。IDは、Google
 			App Engineのアプリケーション管理ページの、Datastore Viewerで確認することができます。</p>
 		<pre><code>Key key = KeyFactory.createKey("Data", 1);
 Entity entity = service.get(key);</code></pre>
-		<p>取得したエンティティーから、getPropertyメソッドで型を変更したいプロパティーの値を取得します。その値を使って変更したい型で値を作り、setPropertyメソッドでその新しい値をエンティティーに設定します。</p>
+		<p>取得したエンティティーから、getPropertyメソッドで型を変更したいプロパティーの値を取得します。その値を使って変更したい型で値を作り、setPropertyメソッドでその新しい値をエンティティーに設定します。
+		</p>
 		<pre><code>String str = (String)entity.getProperty("content");
 Text text = new Text(str);
 entity.setProperty("content", text);</code></pre>
