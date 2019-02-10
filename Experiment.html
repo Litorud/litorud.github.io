@@ -16,21 +16,29 @@
 		<object data="Logo.svg" type="image/svg+xml"><a href="index.html">トップページへ</a></object>
 		<dl>
 			<dt>最終更新</dt>
-			<dd>2019年2月10日 21時30分</dd>
+			<dd>2019年2月11日 2時19分</dd>
 		</dl>
 	</header>
 	<h1>実験ページ</h1>
 	<section>
-		<h2>日本語の個人的正規化</h2>
+		<h2>日本語の独自正規化</h2>
 		<p>全角の英数字記号を半角に変換したり、半角のカタカナを全角に変換したり、カタカナや捨て仮名を捨て仮名でないひらがなに変換したりします。</p>
 		<form name="normalizer">
 			<dl>
-				<dt><label for="source">変換元</label></dt>
+				<dt><label for="source">元の文字列</label></dt>
 				<dd><input type="text" id="source" name="source" class="text"><button type="button"
-						name="normalize">変換</button>
+						name="normalize">正規化</button>
 				</dd>
-				<dt><label for="result">変換後</label></dt>
+				<dt><label for="result">独自正規化</label></dt>
 				<dd><input type="text" id="result" name="result" class="text" readonly></dd>
+				<dt><label for="dResult">正規化形式 D</label></dt>
+				<dd><input type="text" id="dResult" name="dResult" class="text" readonly></dd>
+				<dt><label for="cResult">正規化形式 C</label></dt>
+				<dd><input type="text" id="cResult" name="cResult" class="text" readonly></dd>
+				<dt><label for="kdResult">正規化形式 KD</label></dt>
+				<dd><input type="text" id="kdResult" name="kdResult" class="text" readonly></dd>
+				<dt><label for="kcResult">正規化形式 KC</label></dt>
+				<dd><input type="text" id="kcResult" name="kcResult" class="text" readonly></dd>
 			</dl>
 		</form>
 	</section>
@@ -41,12 +49,14 @@
 			<div><textarea name="text"></textarea><button type="button" name="count">数える</button><button
 					type="reset">消去</button></div>
 			<dl>
-				<dt><label>全文字数</label></dt>
-				<dd><input id="whole" class="number" readonly></dd>
-				<dt><label>先頭と末尾の空白を除いた文字数</label></dt>
-				<dd><input id="trimmed" class="number" readonly></dd>
-				<dt><label>改行および先頭と末尾の空白を除いた文字数</label></dt>
-				<dd><input id="noBreak" class="number" readonly></dd>
+				<dt><label for="whole">全文字数</label></dt>
+				<dd><input id="whole" name="whole" class="number" readonly></dd>
+				<dt><label for="trimmed">先頭と末尾の空白を除いた文字数</label></dt>
+				<dd><input id="trimmed" name="trimmed" class="number" readonly></dd>
+				<dt><label for="optimized">先頭と行末の空白および2行以上連続する空行を除いた文字数</label></dt>
+				<dd><input id="optimized" name="optimized" class="number" readonly></dd>
+				<dt><label for="shrinked">先頭と行末の空白およびすべての改行を除いた文字数</label></dt>
+				<dd><input id="shrinked" name="shrinked" class="number" readonly></dd>
 			</dl>
 		</form>
 	</section>
@@ -61,7 +71,7 @@
 				<dt><label for="num36">36進数</label></dt>
 				<dd><input id="num36" name="num36" class="number"></dd>
 				<dt><label for="num64">64進数</label></dt>
-				<dd><input id="num64" name="num64" class="number">※負数には対応しません。‘-（ハイフンマイナス）’は10進数における63を表します。</dd>
+				<dd><input id="num64" name="num64" class="number">※負数には対応しません。ハイフンマイナス‘-’は10進数における63を表します。</dd>
 			</dl>
 		</form>
 	</section>

@@ -1,20 +1,28 @@
 //
-// 日本語の個人的正規化
+// 日本語の独自正規化
 //
 
 const normalizerForm = document.forms["normalizer"];
 const sourceText = normalizerForm.source;
 const normalizeButton = normalizerForm.normalize;
 const resultText = normalizerForm.result;
+const dResultText = normalizerForm.dResult;
+const cResultText = normalizerForm.cResult;
+const kdResultText = normalizerForm.kdResult;
+const kcResultText = normalizerForm.kcResult;
 const normalizerFormEventHandler = function () {
-	resultText.value = normalizeJapanese(sourceText.value);
+	const text = sourceText.value;
+	resultText.value = normalizeJapanese(text);
+	dResultText.value = text.normalize("NFD");
+	cResultText.value = text.normalize("NFC");
+	kdResultText.value = text.normalize("NFKD");
+	kcResultText.value = text.normalize("NFKC");
 };
 
 sourceText.addEventListener("input", normalizerFormEventHandler);
-normalizeButton.addEventListener("click", normalizerFormEventHandler)
+normalizeButton.addEventListener("click", normalizerFormEventHandler);
 
 const charTable = {
-	"　": " ",
 	"ㇷ゚": "ぷ",
 	"ゐ": "い",
 	"ゑ": "え",
@@ -35,111 +43,31 @@ const charTable = {
 	"ㇼ": "り",
 	"ㇽ": "る",
 	"ㇾ": "れ",
-	"ㇿ": "ろ",
-	"ｶﾞ": "が",
-	"ｷﾞ": "ぎ",
-	"ｸﾞ": "ぐ",
-	"ｹﾞ": "げ",
-	"ｺﾞ": "ご",
-	"ｻﾞ": "ざ",
-	"ｼﾞ": "じ",
-	"ｽﾞ": "ず",
-	"ｾﾞ": "ぜ",
-	"ｿﾞ": "ぞ",
-	"ﾀﾞ": "だ",
-	"ﾁﾞ": "ぢ",
-	"ﾂﾞ": "づ",
-	"ﾃﾞ": "で",
-	"ﾄﾞ": "ど",
-	"ﾊﾞ": "ば",
-	"ﾋﾞ": "び",
-	"ﾌﾞ": "ぶ",
-	"ﾍﾞ": "べ",
-	"ﾎﾞ": "ぼ",
-	"ﾊﾟ": "ぱ",
-	"ﾋﾟ": "ぴ",
-	"ﾌﾟ": "ぷ",
-	"ﾍﾟ": "ぺ",
-	"ﾎﾟ": "ぽ",
-	"｡": "。",
-	"｢": "「",
-	"｣": "」",
-	"､": "、",
-	"･": "・",
-	"ｦ": "を",
-	"ｧ": "あ",
-	"ｨ": "い",
-	"ｩ": "う",
-	"ｪ": "え",
-	"ｫ": "お",
-	"ｬ": "や",
-	"ｭ": "ゆ",
-	"ｮ": "よ",
-	"ｯ": "つ",
-	"ｰ": "ー",
-	"ｱ": "あ",
-	"ｲ": "い",
-	"ｳ": "う",
-	"ｴ": "え",
-	"ｵ": "お",
-	"ｶ": "か",
-	"ｷ": "き",
-	"ｸ": "く",
-	"ｹ": "け",
-	"ｺ": "こ",
-	"ｻ": "さ",
-	"ｼ": "し",
-	"ｽ": "す",
-	"ｾ": "せ",
-	"ｿ": "そ",
-	"ﾀ": "た",
-	"ﾁ": "ち",
-	"ﾂ": "つ",
-	"ﾃ": "て",
-	"ﾄ": "と",
-	"ﾅ": "な",
-	"ﾆ": "に",
-	"ﾇ": "ぬ",
-	"ﾈ": "ね",
-	"ﾉ": "の",
-	"ﾊ": "は",
-	"ﾋ": "ひ",
-	"ﾌ": "ふ",
-	"ﾍ": "へ",
-	"ﾎ": "ほ",
-	"ﾏ": "ま",
-	"ﾐ": "み",
-	"ﾑ": "む",
-	"ﾒ": "め",
-	"ﾓ": "も",
-	"ﾔ": "や",
-	"ﾕ": "ゆ",
-	"ﾖ": "よ",
-	"ﾗ": "ら",
-	"ﾘ": "り",
-	"ﾙ": "る",
-	"ﾚ": "れ",
-	"ﾛ": "ろ",
-	"ﾜ": "わ",
-	"ﾝ": "ん",
-	"ﾞ": "",
-	"ﾟ": "",
-	"゚": ""
-}
+	"ㇿ": "ろ"
+};
 
 function normalizeJapanese(str) {
-	return str.replace(/[ァ-ヶ]/g, function (match) {
-		return String.fromCharCode(match.charCodeAt(0) - 96);
-	}).replace(/[ぁぃぅぇぉっゃゅょゎ]/g, function (match) {
-		return String.fromCharCode(match.charCodeAt(0) + 1);
-	}).replace(/[ｶ-ﾄﾊ-ﾎ]ﾞ|[ﾊ-ﾎ]ﾟ|ㇷ゚|[　｡-ﾟゐゑゕゖㇰㇱㇲㇳㇴㇵㇶㇷㇸㇹㇺㇻㇼㇽㇾㇿ゚]/g, function (match) {
-		return charTable[match];
-	}).replace(/[­‐‑‒–—―⁃⁻₋−─〜〰－～─→]/g, "ー").replace(/[！-｝]/g, function (match) {
-		return String.fromCharCode(match.charCodeAt(0) - 65248);
-	}).replace(/-/g, "ー").toLowerCase();
+	return str.normalize("NFKC") // 全角英数記号を半角に、半角カタカナを全角に。
+		.replace(/[ァ-ヶ]/g, function (match) { // カタカナをひらがなに。
+			return String.fromCharCode(match.charCodeAt(0) - 96);
+		})
+		.replace(/ㇷ゚|[ゐゑゕゖㇰㇱㇲㇳㇴㇵㇶㇷㇸㇹㇺㇻㇼㇽㇾㇿ]/g, function (match) { // 一部の文字をひらがなに。
+			return charTable[match];
+		})
+		.replace(/[か-とは-ほ] ゙/g, function (match) { // 濁点を合成。
+			return String.fromCharCode(match.charCodeAt(0) + 1);
+		})
+		.replace(/[は-ほ] ゚/g, function (match) { // 半濁点を合成。
+			return String.fromCharCode(match.charCodeAt(0) + 2);
+		})
+		.toLowerCase() // 大文字を小文字に。
+		.replace(/[ぁぃぅぇぉっゃゅょゎ]/g, function (match) { // 捨て仮名を普通のひらがなに。
+			return String.fromCharCode(match.charCodeAt(0) + 1);
+		})
+		.replace(/[­‐‑‒–—―⁃⁻₋−─〜〰－～─→]/g, "ー"); // そのほか、長音符として使われそうな文字を長音符に。
 }
 
-sourceText.value = "aAａＡ!！いぃイィｲｨゐヰぷプふ゜フ゜ﾌﾟㇷ゚";
+sourceText.value = "｢aAａＡ?？　いぃイィｲｨゐヰぷフ゜ふﾟﾌ゜ﾌﾟㇷ゚｡｣";
 normalizerFormEventHandler();
 
 //
@@ -151,17 +79,31 @@ const textarea = counterForm.text;
 const countButton = counterForm.count;
 const wholeCount = counterForm.whole;
 const trimmedCount = counterForm.trimmed;
-const noBreakCount = counterForm.noBreak;
+const optimizedCount = counterForm.optimized;
+const shrinkedCount = counterForm.shrinked;
 const counterFormEventHandler = function () {
 	wholeCount.value = textarea.textLength;
 
 	const trimmedText = textarea.value.trim();
 	trimmedCount.value = trimmedText.length;
-	noBreakCount.value = trimmedText.replace(/\n/g, "").length;
+
+	const optimizedText = trimmedText.replace(/\s+?\n/g, "\n");
+	optimizedCount.value = optimizedText.length;
+
+	shrinkedCount.value = optimizedText.replace(/\n/g, "").length;
 };
 
 textarea.addEventListener("input", counterFormEventHandler);
 countButton.addEventListener("click", counterFormEventHandler);
+
+textarea.value = ` 
+あ
+
+ 
+ い　
+  
+`;
+counterFormEventHandler();
 
 //
 // 基数変換
