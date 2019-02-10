@@ -8,7 +8,7 @@
 	<link rel="icon" type="image/png" href="Icon.png">
 	<link rel="start" href="index.html" title="トップページ">
 	<meta name="author" content="Itaru">
-	<script type="application/ecmascript" src="Script.js" async></script>
+	<script type="application/ecmascript" src="Script.js" defer></script>
 </head>
 
 <body>
@@ -20,30 +20,64 @@
 		</dl>
 	</header>
 	<h1>実験ページ</h1>
-	<form action="Experiment.html" onsubmit="childNodes[5].textContent=normalizeJapanese(text1.value);return false">
+	<section>
+		<h2>日本語の個人的正規化</h2>
 		<p>全角の英数字記号を半角に変換したり、半角のカタカナを全角に変換したり、カタカナや捨て仮名を捨て仮名でないひらがなに変換したりします。</p>
-		<p><input type="text" name="text1" placeholder="変換したい文を入力してください。" tabindex="1"><button tabindex="2">変換</button>
-		</p>
-		<p>ここに変換した文が表示されます。</p>
-	</form>
-	<form action="#" onsubmit="return false">
-		<textarea id="a" rows=10 cols=50 placeholder="ここに入力された文字数を表示します。" onchange="count(this)"
-			onkeypress="count(this)" onclick="count(this)"></textarea><button type=reset
-			onclick="dd1.textContent=dd2.textContent=0">消去</button>
-		<dl>
-			<dt>文字数</dt>
-			<dd id="num1">0</dd>
-			<dt>改行文字を除いた文字数</dt>
-			<dd id="num2">0</dd>
-		</dl>
-	</form>
-	<form action="#" onsubmit="print(this);return false">
-		<p>
-			<input type="text" name="text1" placeholder="入力してください。" onfocus="value=''" tabindex="3">
-			<button tabindex="4">書き出す</button>
-		</p>
-		<p>ここが変化します。</p>
-	</form>
+		<form name="normalizer">
+			<dl>
+				<dt><label for="source">変換元</label></dt>
+				<dd><input type="text" id="source" name="source" class="text"><button type="button"
+						name="normalize">変換</button>
+				</dd>
+				<dt><label for="result">変換後</label></dt>
+				<dd><input type="text" id="result" name="result" class="text" readonly></dd>
+			</dl>
+		</form>
+	</section>
+	<section>
+		<h2>文字数</h2>
+		<p>入力した文字数を数えます。</p>
+		<form name="counter">
+			<div><textarea name="text"></textarea><button type="button" name="count">数える</button><button
+					type="reset">消去</button></div>
+			<dl>
+				<dt><label>全文字数</label></dt>
+				<dd><input id="whole" class="number" readonly></dd>
+				<dt><label>先頭と末尾の空白を除いた文字数</label></dt>
+				<dd><input id="trimmed" class="number" readonly></dd>
+				<dt><label>改行および先頭と末尾の空白を除いた文字数</label></dt>
+				<dd><input id="noBreak" class="number" readonly></dd>
+			</dl>
+		</form>
+	</section>
+	<section>
+		<h2>基数変換</h2>
+		<form name="radixConverter">
+			<dl>
+				<dt><label for="num2">2進数</label></dt>
+				<dd><input id="num2" name="num2" class="number"></dd>
+				<dt><label for="num10">10進数</label></dt>
+				<dd><input type="number" id="num10" name="num10" class="number"></dd>
+				<dt><label for="num36">36進数</label></dt>
+				<dd><input id="num36" name="num36" class="number"></dd>
+				<dt><label for="num64">64進数</label></dt>
+				<dd><input id="num64" name="num64" class="number">※負数には対応しません。‘-（ハイフンマイナス）’は10進数における63を表します。</dd>
+			</dl>
+		</form>
+	</section>
+	<section>
+		<h2>読み込みと書き出し</h2>
+		<form name="editor">
+			<dl>
+				<dt><label for="file">読み込む UTF-8 のテキストファイル</label></dt>
+				<dd><input type="file" id="file" name="file" accept=".txt"><button type="button"
+						name="import">読み込む</button></dd>
+				<dt><label for="content">内容</label></dt>
+				<dd><textarea id="content" name="content"></textarea><button type="button" name="export">書き出す</button>
+				</dd>
+			</dl>
+		</form>
+	</section>
 	<p>
 		<object data="StageTitle.svg" type="image/svg+xml" width="382" height="448"><a
 				href="StageTitle.svg">アニメーションするSVG</a></object>
@@ -177,11 +211,6 @@
 			})();
 		</script>
 	</svg>
-	<form action="#" onsubmit="read(this);return false">
-		<p><input type="file" name="file1"><button>インポート</button></p>
-		<textarea rows=10 cols=50 name="textarea1">UTF-8のテキストファイルを指定してください。</textarea>
-		<p><button type="button" onclick="write(this)">エクスポート</button></p>
-	</form>
 	<blockquote class="twitter-tweet" data-lang="ja">
 		<p lang="ja" dir="ltr">先日「アメガエリの滝」に行った。水は綺麗で滝は迫力があり、とても素敵な所だった。 <a
 				href="https://t.co/VZNdAfpv9a">pic.twitter.com/VZNdAfpv9a</a></p>&mdash;
@@ -189,108 +218,6 @@
 			href="https://twitter.com/Litorud/status/1052942297774481408?ref_src=twsrc%5Etfw">2018年10月18日</a>
 	</blockquote>
 	<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-	<section>
-		<h2>基数変換</h2>
-		<dl>
-			<dt>2進数</dt>
-			<dd><input id="text2" tabindex="7"></dd>
-			<dt>10進数</dt>
-			<dd><input id="text10" type="number" tabindex="8"></dd>
-			<dt>36進数</dt>
-			<dd><input id="text36" tabindex="9"></dd>
-			<dt>64進数</dt>
-			<dd><input id="text64" tabindex="10">※負数には対応しません。‘-（ハイフンマイナス）’は10進数における63を表します。</dd>
-		</dl>
-		<script defer>
-			addEventListener("DOMContentLoaded", function () {
-				const chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-";
-				const text2 = document.getElementById("text2");
-				const text10 = document.getElementById("text10");
-				const text36 = document.getElementById("text36");
-				const text64 = document.getElementById("text64");
-
-				text2.addEventListener("input", function () {
-					const i = parseInt(text2.value, 2);
-
-					text10.value = to10(i);
-					text36.value = to36(i);
-					text64.value = to64(i);
-				});
-
-				text10.addEventListener("input", function () {
-					const i = parseInt(text10.value);
-
-					text2.value = to2(i);
-					text36.value = to36(i);
-					text64.value = to64(i);
-				});
-
-				text36.addEventListener("input", function () {
-					const i = parseInt(text36.value, 36);
-
-					text2.value = to2(i);
-					text10.value = to10(i);
-					text64.value = to64(i);
-				});
-
-				text64.addEventListener("input", function () {
-					const i = from64(text64.value);
-
-					text2.value = to2(i);
-					text10.value = to10(i);
-					text36.value = to36(i);
-				});
-
-				function from64(text) {
-					const is = Array.from(text)
-						.map(c => chars.indexOf(c))
-						.reverse();
-
-					let result = 0;
-					let power = 1;
-					for (let i of is) {
-						result += i * power;
-						power *= 64;
-					}
-
-					return result;
-				}
-
-				function to2(i) {
-					return i.toString(2);
-				}
-
-				function to10(i) {
-					return i.toString();
-				}
-
-				function to36(i) {
-					return i.toString(36);
-				}
-
-				function to64(i) {
-					if (isNaN(i)) {
-						return "NaN";
-					} else if (i < 0) {
-						return "Underflow"
-					}
-
-					const bitsIterator = getBitsIterator(i);
-					return Array.from(bitsIterator)
-						.map(b => chars[b])
-						.reverse()
-						.join("");
-				}
-
-				function* getBitsIterator(number) {
-					do {
-						yield number % 64;
-						number = Math.floor(number / 64);
-					} while (number > 0);
-				}
-			});
-		</script>
-	</section>
 </body>
 
 </html>
