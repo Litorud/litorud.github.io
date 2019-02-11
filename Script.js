@@ -24,6 +24,8 @@ normalizeButton.addEventListener("click", normalizerFormEventHandler);
 
 const charTable = {
 	"ㇷ゚": "ぷ",
+	"𛀀": "え",
+	"𛀁": "え",
 	"ゐ": "い",
 	"ゑ": "え",
 	"ゕ": "か",
@@ -51,7 +53,8 @@ function normalizeJapanese(str) {
 		.replace(/[ァ-ヶ]/g, function (match) { // カタカナをひらがなに。
 			return String.fromCharCode(match.charCodeAt(0) - 96);
 		})
-		.replace(/ㇷ゚|[ゐゑゕゖㇰㇱㇲㇳㇴㇵㇶㇷㇸㇹㇺㇻㇼㇽㇾㇿ]/g, function (match) { // 一部の文字をひらがなに。
+		.replace(/ㇷ゚|𛀀|𛀁|[ゐゑゕゖㇰㇱㇲㇳㇴㇵㇶㇷㇸㇹㇺㇻㇼㇽㇾㇿ]/g, function (match) {
+			// 一部の文字をひらがなに。
 			return charTable[match];
 		})
 		.replace(/[か-とは-ほ] ゙/g, function (match) { // 濁点を合成。
@@ -67,7 +70,7 @@ function normalizeJapanese(str) {
 		.replace(/[­‐‑‒–—―⁃⁻₋−─〜〰－～─→]/g, "ー"); // そのほか、長音符として使われそうな文字を長音符に。
 }
 
-sourceText.value = "｢aAａＡ?？　いぃイィｲｨゐヰぷフ゜ふﾟﾌ゜ﾌﾟㇷ゚｡｣";
+sourceText.value = "｢aAａＡ?？　えぇエェｴｪゑヱ𛀀𛀁ぷフ゜ふﾟﾌ゜ﾌﾟㇷ゚｡｣";
 normalizerFormEventHandler();
 
 //
