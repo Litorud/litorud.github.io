@@ -4,24 +4,11 @@
 
 const normalizerForm = document.forms["normalizer"];
 const sourceText = normalizerForm.source;
-const normalizeButton = normalizerForm.normalize;
 const resultText = normalizerForm.result;
 const dResultText = normalizerForm.dResult;
 const cResultText = normalizerForm.cResult;
 const kdResultText = normalizerForm.kdResult;
 const kcResultText = normalizerForm.kcResult;
-const normalizerFormEventHandler = function () {
-	const text = sourceText.value;
-	resultText.value = normalizeJapanese(text);
-	dResultText.value = text.normalize("NFD");
-	cResultText.value = text.normalize("NFC");
-	kdResultText.value = text.normalize("NFKD");
-	kcResultText.value = text.normalize("NFKC");
-};
-
-sourceText.addEventListener("input", normalizerFormEventHandler);
-normalizeButton.addEventListener("click", normalizerFormEventHandler);
-
 const charTable = {
 	"ㇷ゚": "ぷ",
 	"𛀀": "え",
@@ -48,6 +35,18 @@ const charTable = {
 	"ㇿ": "ろ"
 };
 
+sourceText.addEventListener("input", normalize);
+normalizerForm.normalize.addEventListener("click", normalize);
+
+function normalize() {
+	const text = sourceText.value;
+	resultText.value = normalizeJapanese(text);
+	dResultText.value = text.normalize("NFD");
+	cResultText.value = text.normalize("NFC");
+	kdResultText.value = text.normalize("NFKD");
+	kcResultText.value = text.normalize("NFKC");
+}
+
 function normalizeJapanese(str) {
 	return str.normalize("NFKC") // 全角英数記号を半角に、半角カタカナを全角に。
 		.replace(/[ァ-ヶ]/g, function (match) { // カタカナをひらがなに。
@@ -70,8 +69,8 @@ function normalizeJapanese(str) {
 		.replace(/[­‐‑‒–—―⁃⁻₋−─〜〰－～─→]/g, "ー"); // そのほか、長音符として使われそうな文字を長音符に。
 }
 
-sourceText.value = "｢aAａＡ?？　えぇエェｴｪゑヱ𛀀𛀁ぷフ゜ふﾟﾌ゜ﾌﾟㇷ゚｡｣";
-normalizerFormEventHandler();
+sourceText.value = "｢aAａＡ?？　えぇエェｴｪゑヱ𛀀𛀁ぷプふ゜フ゜ﾌ゜ㇷ゜ふﾟフﾟﾌﾟㇷﾟふ ゚フ ゚ﾌ ゚ㇷ ゚ㇷ゚｡｣";
+normalize();
 
 //
 // 文字数
@@ -79,12 +78,15 @@ normalizerFormEventHandler();
 
 const counterForm = document.forms["counter"];
 const textarea = counterForm.text;
-const countButton = counterForm.count;
 const wholeCount = counterForm.whole;
 const trimmedCount = counterForm.trimmed;
 const optimizedCount = counterForm.optimized;
 const shrinkedCount = counterForm.shrinked;
-const counterFormEventHandler = function () {
+
+textarea.addEventListener("input", count);
+counterForm.count.addEventListener("click", count);
+
+function count() {
 	wholeCount.value = textarea.textLength;
 
 	const trimmedText = textarea.value.trim();
@@ -94,10 +96,7 @@ const counterFormEventHandler = function () {
 	optimizedCount.value = optimizedText.length;
 
 	shrinkedCount.value = optimizedText.replace(/\n/g, "").length;
-};
-
-textarea.addEventListener("input", counterFormEventHandler);
-countButton.addEventListener("click", counterFormEventHandler);
+}
 
 textarea.value = ` 
 あ
@@ -106,7 +105,7 @@ textarea.value = `
  い　
   
 `;
-counterFormEventHandler();
+count();
 
 //
 // 基数変換
@@ -205,13 +204,11 @@ function* getBitsIterator(number) {
 
 const editorForm = document.forms["editor"];
 const file = editorForm.file;
-const importButton = editorForm.import;
 const content = editorForm.content;
-const exportButton = editorForm.export;
 
 file.addEventListener("change", importFile);
-importButton.addEventListener("click", importFile);
-exportButton.addEventListener("click", exportContent);
+editorForm.import.addEventListener("click", importFile);
+editorForm.export.addEventListener("click", exportContent);
 
 function importFile() {
 	if (!file.files.length) {
@@ -234,7 +231,28 @@ function exportContent() {
 	location = "data:application/octet-stream," + encodeURI(content.value);
 }
 
+//
+// Fetch
+//
 
+const fetcherForm = document.forms["fetcher"];
+const select = fetcherForm.select;
+const fetchedCode = document.getElementById("fetchedCode");
+
+select.addEventListener("change", fetchCode);
+fetcherForm.fetch.addEventListener("click", fetchCode);
+
+async function fetchCode() {
+	fetchedCode.textContent = "取得しています...";
+
+	try {
+		const response = await fetch(select.value);
+		const text = await response.text();
+		fetchedCode.textContent = text.replace(/\t/g, "  ");
+	} catch (e) {
+		fetchedCode.textContent = "取得できませんでした。\n" + e;
+	}
+}
 
 addEventListener("load", function () {
 	var elem, style, x, y, body = document.body, elems = document.getElementsByClassName("draggable"), i = 0, l = elems.length;
@@ -258,22 +276,4 @@ addEventListener("load", function () {
 			}, false);
 		}, false);
 	}
-
-	dd1 = document.getElementById("num1");
-	dd2 = document.getElementById("num2");
 }, false);
-
-function getCode(form) {
-	var pre = form.childNodes[3], req = new XMLHttpRequest();
-	pre.textContent = "読み込んでいます...";
-	req.open("GET", form.select.value);
-	req.onreadystatechange = function () {
-		if (req.readyState == 4) {
-			if (req.status == 200)
-				pre.textContent = req.responseText.replace(/\t/g, "  ");
-			else
-				pre.textContent = "読み込みに失敗しました。";
-		}
-	};
-	req.send(null);
-}

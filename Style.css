@@ -80,7 +80,7 @@ pre {
 }
 
 code {
-	font-family: "Consolas", monospaced;
+	font-family: "Consolas", monospace;
 }
 
 footer {
@@ -125,6 +125,8 @@ textarea {
 }
 
 .number{
+	font-family: "Consolas", monospace;
+	width: 20em;
 	text-align: end;
 }
 
