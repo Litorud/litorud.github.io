@@ -232,7 +232,7 @@ function exportContent() {
 }
 
 //
-// Fetch
+// 非同期的取得
 //
 
 const fetcherForm = document.forms["fetcher"];
