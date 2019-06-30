@@ -1,9 +1,8 @@
 <?xml version="1.0" standalone="no"?>
-<svg viewBox="0 0 160 90" version="1.1" xmlns="http://www.w3.org/2000/svg"
-	font-weight="900"
-	text-anchor="middle">
+<svg viewBox="0 0 160 90" version="1.1" 
+	xmlns="http://www.w3.org/2000/svg" font-weight="900" text-anchor="middle">
 	<text x="80" y="90" font-family="Serif" font-size="120" lengthAdjust="spacingAndGlyphs" fill="orange" id="number"></text>
-	<text x="80" y="60" font-family="游ゴシック" font-size="60" lengthAdjust="spacingAndGlyphs" id="cardName">愚者</text>
+	<text x="80" y="60" font-family="Sans-Serif,游ゴシック" font-size="60" lengthAdjust="spacingAndGlyphs" id="cardName">愚者</text>
 	<text x="80" y="80" font-family="Serif" font-size="20" lengthAdjust="spacingAndGlyphs" id="englishName">The Fool</text>
 	<script><![CDATA[
 		(function(){
@@ -45,8 +44,8 @@
 			const cardNameTextLengthBaseVal = cardName.textLength.baseVal;
 			const englishNameTextLengthBaseVal = englishName.textLength.baseVal;
 			const numberTextLengthBaseVal = number.textLength.baseVal;
-			var index = 0;
-			var timer;
+			let index = 0;
+			let timer;
 
 			function change(){
 				cardName.removeAttribute("textLength");
@@ -54,7 +53,7 @@
 				number.removeAttribute("textLength");
 
 				index = (index + 1) % cardsLength;
-				var card = cards[index];
+				let card = cards[index];
 				cardName.textContent = card.cardName;
 				englishName.textContent = card.englishName;
 				number.textContent = card.number;
@@ -81,5 +80,5 @@
 
 			start();
 		})()
-	]]></script>
+	]]>	</script>
 </svg>
