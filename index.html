@@ -16,7 +16,7 @@
 		<a href="/"><img src="Logo.svg" width="400" height="80" alt="トップページへ"></a>
 		<dl>
 			<dt>最終更新</dt>
-			<dd>2019年7月6日 18時55分</dd>
+			<dd>2019年7月7日 2時3分</dd>
 		</dl>
 	</header>
 	<h1>リートルード</h1>
@@ -75,11 +75,78 @@
 	</section>
 	<section>
 		<h2><abbr title="Scalable Vector Graphics">SVG</abbr>の話</h2>
-		<p>かつての
-			Firefoxは、SVGのline要素やpolyline要素が水平または垂直の場合、stroke属性にグラデーション要素を適用しても機能しませんでした（今は検証していないのでわかりません）。たとえば、<code>&lt;line x1=&quot;0&quot; y1=&quot;0&quot; x2=&quot;50&quot; y2=&quot;0&quot; stroke=&quot;url(#grad)&quot;/&gt;</code>という要素は水平なのでグラデーションが掛かりません。y2属性を"1"にすればグラデーションが掛かるようになります。
+		<p>Firefox は、バージョン67.0現在、SVG の line 要素や polyline 要素が水平または垂直の場合、stroke
+			属性にグラデーション要素を指定しても適用されません。例えば、以下に示すグラデーションを指定した水平の line は、グラデーションがかかりません。わずかでも斜めの line であれば、グラデーションがかかります。
 		</p>
-		<p>textPath要素は、xlink:href属性にpath要素のidを指定します(XLinkの名前空間接頭辞を“xlink”としています)。このときは、<code>xlink:href=&quot;#path&quot;</code>のように、‘#’に続けてidを記述すれば正しく解釈されます。しかし、何らかの要素にグラデーションを掛けるなどの目的で、fill属性にlinearGradient要素などのidを指定するときは、<code>fill=&quot;url(#grad)&quot;</code>のようにurl()関数を使う必要があります。xlink:hrefがXLinkの仕様であるのに対し、fillはSVGの仕様なので、このような違いがあるのでしょうか。
+		<pre>&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;&gt;
+	&lt;defs&gt;
+		&lt;linearGradient id=&quot;grad&quot;&gt;
+			&lt;stop stop-color=&quot;red&quot; offset=&quot;50%&quot; /&gt;
+			&lt;stop stop-color=&quot;black&quot; offset=&quot;100%&quot; /&gt;
+		&lt;/linearGradient&gt;
+	&lt;/defs&gt;
+	&lt;text x=&quot;0&quot; y=&quot;8&quot; font-size=&quot;4&quot;&gt;グラデーションではない水平の line&lt;/text&gt;
+	&lt;line x1=&quot;0&quot; y1=&quot;10&quot; x2=&quot;100&quot; y2=&quot;10&quot; stroke=&quot;red&quot; stroke-width=&quot;3&quot; /&gt;
+	&lt;text x=&quot;0&quot; y=&quot;18&quot; font-size=&quot;4&quot;&gt;グラデーションを指定した水平の line&lt;/text&gt;
+	<strong>&lt;line x1=&quot;0&quot; y1=&quot;20&quot; x2=&quot;100&quot; y2=&quot;20&quot; stroke=&quot;url(#grad)&quot; stroke-width=&quot;3&quot; /&gt;</strong>
+	&lt;text x=&quot;0&quot; y=&quot;28&quot; font-size=&quot;4&quot;&gt;グラデーションを指定した水平ではない line&lt;/text&gt;
+	&lt;line x1=&quot;0&quot; y1=&quot;30&quot; x2=&quot;100&quot; y2=&quot;30.1&quot; stroke=&quot;url(#grad)&quot; stroke-width=&quot;3&quot; /&gt;
+&lt;/svg&gt;</pre>
+		<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 35"
+			width="400">
+			<defs>
+				<linearGradient id="grad">
+					<stop stop-color="red" offset="50%" />
+					<stop stop-color="black" offset="100%" />
+				</linearGradient>
+			</defs>
+			<text x="0" y="8" font-size="4">グラデーションではない水平の line</text>
+			<line x1="0" y1="10" x2="100" y2="10" stroke="red" stroke-width="3" />
+			<text x="0" y="18" font-size="4">グラデーションを指定した水平の line</text>
+			<line x1="0" y1="20" x2="100" y2="20" stroke="url(#grad)" stroke-width="3" />
+			<text x="0" y="28" font-size="4">グラデーションを指定した水平ではない line</text>
+			<line x1="0" y1="30" x2="100" y2="30.1" stroke="url(#grad)" stroke-width="3" />
+		</svg>
+		<p>線を斜めにする以外の方法で、グラデーションがかかるようにするならば、line の代わりに rect を使うか、あるいはグラデーション要素の gradientUnits 属性を、userSpaceOnUse にします。
 		</p>
+		<pre>&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot; xmlns:xlink=&quot;http://www.w3.org/1999/xlink&quot;&gt;
+	&lt;defs&gt;
+		&lt;linearGradient id=&quot;grad&quot;&gt;
+			&lt;stop stop-color=&quot;red&quot; offset=&quot;50%&quot; /&gt;
+			&lt;stop stop-color=&quot;black&quot; offset=&quot;100%&quot; /&gt;
+		&lt;/linearGradient&gt;
+		&lt;linearGradient id=&quot;grad2&quot; <strong>gradientUnits=&quot;userSpaceOnUse&quot;</strong>&gt;
+			&lt;stop stop-color=&quot;red&quot; offset=&quot;50%&quot; /&gt;
+			&lt;stop stop-color=&quot;black&quot; offset=&quot;100%&quot; /&gt;
+		&lt;/linearGradient&gt;
+	&lt;/defs&gt;
+	&lt;text x=&quot;0&quot; y=&quot;9&quot; font-size=&quot;4&quot;&gt;rect 要素を使う&lt;/text&gt;
+	<strong>&lt;rect x=&quot;0&quot; y=&quot;9.5&quot; width=&quot;100&quot; height=&quot;1&quot; fill=&quot;url(#grad)&quot; /&gt;</strong>
+	&lt;text x=&quot;0&quot; y=&quot;19&quot; font-size=&quot;4&quot;&gt;gradientUnits 属性を userSpaceOnUse にする&lt;/text&gt;
+	&lt;line x1=&quot;0&quot; y1=&quot;20&quot; x2=&quot;100&quot; y2=&quot;20&quot; stroke=&quot;url(#grad2)&quot; /&gt;
+&lt;/svg&gt;</pre>
+		<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 100 25"
+			width="400">
+			<defs>
+				<linearGradient id="grad">
+					<stop stop-color="red" offset="50%" />
+					<stop stop-color="black" offset="100%" />
+				</linearGradient>
+				<linearGradient id="grad2" gradientUnits="userSpaceOnUse">
+					<stop stop-color="red" offset="50%" />
+					<stop stop-color="black" offset="100%" />
+				</linearGradient>
+			</defs>
+			<text x="0" y="8" font-size="4">rect 要素を使う</text>
+			<rect x="0" y="9.5" width="100" height="1" fill="url(#grad)" />
+			<text x="0" y="18" font-size="4">gradientUnits 属性を userSpaceOnUse にする</text>
+			<line x1="0" y1="20" x2="100" y2="20" stroke="url(#grad2)" />
+		</svg>
+		<p>textPath 要素は、xlink:href 属性に path 要素の id を指定します（XLink の名前空間接頭辞を “xlink”
+			としています）。このときは、<code>xlink:href=&quot;#path&quot;</code> のように、‘#’ に続けて id
+			を記述すれば正しく解釈されます。しかし、何らかの要素にグラデーションを掛けるなどの目的で、fill 属性に linearGradient 要素などの id
+			を指定するときは、<code>fill=&quot;url(#grad)&quot;</code> のように url() 関数を使う必要があります。xlink:href が XLink の仕様であるのに対し、fill
+			は SVG の仕様なので、このような違いがあるのでしょうか。</p>
 	</section>
 	<section>
 		<h2>CSSのz-indexプロパティーの話</h2>
