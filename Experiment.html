@@ -26,9 +26,7 @@
 		<form name="normalizer">
 			<dl>
 				<dt><label for="source">元の文字列</label></dt>
-				<dd><input type="text" id="source" name="source" class="text"><button type="button"
-						name="normalize">正規化</button>
-				</dd>
+				<dd><input type="text" id="source" name="source" class="text"><button type="button" name="normalize">正規化</button> </dd>
 				<dt><label for="result">独自正規化</label></dt>
 				<dd><input type="text" id="result" name="result" class="text" readonly></dd>
 				<dt><label for="dResult">正規化形式 D</label></dt>
@@ -46,17 +44,28 @@
 		<h2>文字数</h2>
 		<p>入力した文字数を数えます。</p>
 		<form name="counter">
-			<div><textarea name="text"></textarea><button type="button" name="count">数える</button><button
-					type="reset">消去</button></div>
 			<dl>
-				<dt><label for="whole">全文字数</label></dt>
-				<dd><input id="whole" name="whole" class="number" readonly></dd>
-				<dt><label for="trimmed">先頭と末尾の空白を除いた文字数</label></dt>
-				<dd><input id="trimmed" name="trimmed" class="number" readonly></dd>
-				<dt><label for="optimized">先頭と行末の空白および2行以上連続する空行を除いた文字数</label></dt>
-				<dd><input id="optimized" name="optimized" class="number" readonly></dd>
-				<dt><label for="shrinked">先頭と行末の空白およびすべての改行を除いた文字数</label></dt>
-				<dd><input id="shrinked" name="shrinked" class="number" readonly></dd>
+				<dt><label for="original">原文</label></dt>
+				<dd>
+					<textarea id="original" name="original" rows="7"></textarea>
+					<input name="originalLength" class="number" readonly>文字
+					<button type="button" name="count">数える</button><button type="reset">消去</button>
+				</dd>
+				<dt><label for="optimized">行末の空白と、先頭と末尾の改行を除去</label></dt>
+				<dd>
+					<textarea id="optimized" name="optimized" rows="5"></textarea>
+					<input name="optimizedLength" class="number" readonly>文字
+				</dd>
+				<dt><label for="shrinked">連続する空白を圧縮</label></dt>
+				<dd>
+					<textarea id="shrinked" name="shrinked" rows="1"></textarea>
+					<input name="shrinkedLength" class="number" readonly>文字
+				</dd>
+				<dt><label for="removed">すべての空白を除去</label></dt>
+				<dd>
+					<textarea id="removed" name="removed" rows="1"></textarea>
+					<input id="removedLength" name="removedLength" class="number" readonly>文字
+				</dd>
 			</dl>
 		</form>
 	</section>
@@ -68,6 +77,8 @@
 				<dd><input id="num2" name="num2" class="number"></dd>
 				<dt><label for="num10">10進数</label></dt>
 				<dd><input type="number" id="num10" name="num10" class="number"></dd>
+				<dt><label for="num16">16進数</label></dt>
+				<dd><input id="num16" name="num16" class="number"></dd>
 				<dt><label for="num36">36進数</label></dt>
 				<dd><input id="num36" name="num36" class="number"></dd>
 				<dt><label for="num64">64進数</label></dt>
@@ -80,8 +91,7 @@
 		<form name="editor">
 			<dl>
 				<dt><label for="file">読み込む UTF-8 のテキストファイル</label></dt>
-				<dd><input type="file" id="file" name="file" accept=".txt"><button type="button"
-						name="import">読み込む</button></dd>
+				<dd><input type="file" id="file" name="file" accept=".txt"><button type="button" name="import">読み込む</button></dd>
 				<dt><label for="content">内容</label></dt>
 				<dd><textarea id="content" name="content"></textarea><button type="button" name="export">書き出す</button>
 				</dd>
@@ -112,8 +122,7 @@
 		</dl>
 	</section>
 	<p>
-		<object data="StageTitle.svg" type="image/svg+xml" width="382" height="448"><a
-				href="StageTitle.svg">アニメーションするSVG</a></object>
+		<object data="StageTitle.svg" type="image/svg+xml" width="382" height="448"><a href="StageTitle.svg">アニメーションするSVG</a></object>
 		2度クリックすると止まります。
 	</p>
 	<p>💦💢💮</p>
@@ -127,10 +136,8 @@
 		</ol>
 	</p>
 	<p>
-		<a href="http://bio100.jp/">Bio_100%</a> の <a
-			href="http://www.vector.co.jp/soft/dos/game/se003374.html">TURB第1話</a>において、旅の楽団Ⅱに話しかける順番です。
-		<object data="TURB1.svg" type="image/svg+xml" width="688" height="608"><a href="TURB1.svg">順番を示す
-				SVG</a></object>
+		<a href="http://bio100.jp/">Bio_100%</a> の <a href="http://www.vector.co.jp/soft/dos/game/se003374.html">TURB第1話</a>において、旅の楽団Ⅱに話しかける順番です。
+		<object data="TURB1.svg" type="image/svg+xml" width="688" height="608"><a href="TURB1.svg">順番を示す SVG</a></object>
 	</p>
 	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 110" id="star">
 		<style>
@@ -232,10 +239,8 @@
 		</script>
 	</svg>
 	<blockquote class="twitter-tweet" data-lang="ja">
-		<p lang="ja" dir="ltr">先日「アメガエリの滝」に行った。水は綺麗で滝は迫力があり、とても素敵な所だった。 <a
-				href="https://t.co/VZNdAfpv9a">pic.twitter.com/VZNdAfpv9a</a></p>&mdash;
-		Itaru (@Litorud) <a
-			href="https://twitter.com/Litorud/status/1052942297774481408?ref_src=twsrc%5Etfw">2018年10月18日</a>
+		<p lang="ja" dir="ltr">先日「アメガエリの滝」に行った。水は綺麗で滝は迫力があり、とても素敵な所だった。 <a href="https://t.co/VZNdAfpv9a">pic.twitter.com/VZNdAfpv9a</a></p>&mdash;
+		Itaru (@Litorud) <a href="https://twitter.com/Litorud/status/1052942297774481408?ref_src=twsrc%5Etfw">2018年10月18日</a>
 	</blockquote>
 	<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 </body>

@@ -77,32 +77,43 @@ normalize();
 //
 
 const counterForm = document.forms["counter"];
-const textarea = counterForm.text;
-const wholeCount = counterForm.whole;
-const trimmedCount = counterForm.trimmed;
-const optimizedCount = counterForm.optimized;
-const shrinkedCount = counterForm.shrinked;
+const original = counterForm.original;
+const originalLength = counterForm.originalLength;
+const optimized = counterForm.optimized;
+const optimizedLength = counterForm.optimizedLength;
+const shrinked = counterForm.shrinked;
+const shrinkedLength = counterForm.shrinkedLength;
+const removed = counterForm.removed;
+const removedLength = counterForm.removedLength;
 
-textarea.addEventListener("input", count);
+original.addEventListener("input", count);
 counterForm.count.addEventListener("click", count);
 
 function count() {
-	wholeCount.value = textarea.textLength;
+	originalLength.value = original.textLength;
 
-	const trimmedText = textarea.value.trim();
-	trimmedCount.value = trimmedText.length;
+	optimized.value = original.value
+		.replace(/^\s+\n/, "")
+		.trimEnd()
+		.split('\n')
+		.map(l => l.trimEnd())
+		.join('\n');
+	optimizedLength.value = optimized.textLength;
 
-	const optimizedText = trimmedText.replace(/\s+?\n/g, "\n");
-	optimizedCount.value = optimizedText.length;
+	shrinked.value = optimized.value
+		.trimStart()
+		.replace(/\s\s+/g, ' ');
+	shrinkedLength.value = shrinked.textLength;
 
-	shrinkedCount.value = optimizedText.replace(/\n/g, "").length;
+	removed.value = shrinked.value.replace(/ /g, "");
+	removedLength.value = removed.textLength;
 }
 
-textarea.value = ` 
-あ
+original.value = ` 
+　 あ   い
 
  
- い　
+う　
   
 `;
 count();
@@ -114,6 +125,7 @@ count();
 const radixConverterForm = document.forms["radixConverter"];
 const num2 = radixConverterForm.num2;
 const num10 = radixConverterForm.num10;
+const num16 = radixConverterForm.num16;
 const num36 = radixConverterForm.num36;
 const num64 = radixConverterForm.num64;
 const chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-";
@@ -122,6 +134,7 @@ num2.addEventListener("input", function () {
 	const i = parseInt(num2.value, 2);
 
 	num10.value = to10(i);
+	num16.value = to16(i);
 	num36.value = to36(i);
 	num64.value = to64(i);
 });
@@ -130,6 +143,16 @@ num10.addEventListener("input", function () {
 	const i = parseInt(num10.value);
 
 	num2.value = to2(i);
+	num16.value = to16(i);
+	num36.value = to36(i);
+	num64.value = to64(i);
+});
+
+num16.addEventListener("input", function () {
+	const i = parseInt(num16.value, 16);
+
+	num2.value = to2(i);
+	num10.value = to10(i);
 	num36.value = to36(i);
 	num64.value = to64(i);
 });
@@ -139,6 +162,7 @@ num36.addEventListener("input", function () {
 
 	num2.value = to2(i);
 	num10.value = to10(i);
+	num16.value = to16(i);
 	num64.value = to64(i);
 });
 
@@ -147,6 +171,7 @@ num64.addEventListener("input", function () {
 
 	num2.value = to2(i);
 	num10.value = to10(i);
+	num16.value = to16(i);
 	num36.value = to36(i);
 });
 
@@ -171,6 +196,10 @@ function to2(i) {
 
 function to10(i) {
 	return i.toString();
+}
+
+function to16(i) {
+	return i.toString(16);
 }
 
 function to36(i) {
