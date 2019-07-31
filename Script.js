@@ -93,7 +93,7 @@ function count() {
 	originalLength.value = original.textLength;
 
 	optimized.value = original.value
-		.replace(/^\s+\n/, "")
+		.replace(/^\s*\n/, "")
 		.trimEnd()
 		.split('\n')
 		.map(l => l.trimEnd())
