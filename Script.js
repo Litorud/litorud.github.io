@@ -1,4 +1,16 @@
 //
+// Echo
+//
+
+const echoForm = document.forms["echo"];
+const input = echoForm.input;
+const output = document.getElementById("output");
+
+input.addEventListener("input", function () {
+	output.textContent = input.value;
+});
+
+//
 // 日本語の独自正規化
 //
 
