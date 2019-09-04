@@ -114,7 +114,7 @@ function count() {
 
 	shrinked.value = optimized.value
 		.trimStart()
-		.replace(/\s\s+/g, ' ');
+		.replace(/\s+/g, ' ');
 	shrinkedLength.value = shrinked.textLength;
 
 	removed.value = shrinked.value.replace(/ /g, "");
