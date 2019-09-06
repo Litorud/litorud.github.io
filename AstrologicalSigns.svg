@@ -1,7 +1,7 @@
 <?xml version="1.0" standalone="no"?>
 <svg viewBox="0 0 160 90" version="1.1" 
 	xmlns="http://www.w3.org/2000/svg" font-weight="900" text-anchor="middle">
-	<text x="80" y="80" font-family="sans-serif" font-size="100" fill="orange" id="mark">♈︎</text>
+	<text x="80" y="41" font-family="sans-serif" font-size="88" fill="orange" id="mark" dominant-baseline="central">♈︎</text>
 	<text x="80" y="50" font-family="游ゴシック,sans-serif" font-size="50" id="signName">牡羊座</text>
 	<text x="80" y="80" font-family="Georgia,serif" font-size="20" id="range">3/21 ～ 4/19</text>
 	<script><![CDATA[
