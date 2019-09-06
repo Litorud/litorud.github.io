@@ -1,141 +1,165 @@
+@charset "UTF-8";
+* {
+  margin-top: 0;
+}
+
 html {
-	background-color: #e5e5f5;
+  background-color: #e0e0f0;
 }
 
 body {
-	font-family: "游ゴシック", "Yu Gothic", sans-serif;
-	margin: 0 8% 30%;
-	padding: 1em 2em;
-	background-color: whitesmoke;
+  font-family: "游ゴシック", "Yu Gothic", sans-serif;
+  margin: 0 8% 30%;
+  padding: 0 2em 4em;
+  background-color: whitesmoke;
 }
 
-header {
-	font-size: smaller;
+header,
+footer {
+  font-size: smaller;
 }
 
-header>a {
-	max-height: 80px;
-	float: left;
+header > a,
+footer > a {
+  float: left;
 }
 
-header>dl, footer>dl {
-	text-align: right;
+header > a:hover,
+footer > a:hover {
+  background: none;
 }
 
-header>dl>dt, header>dl>dd, footer>dl>dt, footer>dl>dd {
-	display: inline;
+header > dl,
+footer > dl {
+  text-align: end;
+  padding-top: 1em;
 }
 
-header>dl>dt::after, footer>dl>dt::after {
-	content: ":";
+header > dl > dt,
+header > dl > dd,
+footer > dl > dt,
+footer > dl > dd {
+  display: inline;
 }
 
-header>dl>dd, footer>dl>dd {
-	margin-left: 0;
+header > dl > dt::after,
+footer > dl > dt::after {
+  content: ":";
+}
+
+header > dl > dd,
+footer > dl > dd {
+  margin-left: 0;
 }
 
 h1 {
-	clear: both;
-	margin-top: 100px;
-	margin-bottom: 40px;
-	border-bottom-style: double;
+  margin-top: 100px;
+  margin-bottom: 40px;
+  border-bottom-style: double;
 }
 
-h1::first-letter{
-	font-size: larger;
+h1::first-letter {
+  font-size: larger;
 }
 
 h2 {
-	margin-top: 50px;
-	padding: 5px;
-	border-left: 10px solid #c9d0e6;
-	background-color: #e6e8f0;
+  margin-top: 50px;
+  padding: 5px;
+  border-left: 10px solid #c9d0e6;
+  background-color: #e6e8f0;
 }
 
 p {
-	text-indent: 1em;
+  text-indent: 1em;
 }
 
 a:hover {
-	background: linear-gradient(transparent, paleturquoise);
+  background: linear-gradient(transparent, orange);
 }
 
 table {
-	border: thin dotted;
-	border-collapse: collapse;
+  border: thin gray solid;
+  border-collapse: collapse;
 }
 
-th, td {
-	padding: 2px;
-	border: thin dotted;
+th,
+td {
+  border: thin gray dotted;
+  padding: 2px;
 }
 
 th {
-	background-color: #e6e8f0;
+  border-bottom: thin gray solid;
+  background-color: #e6e8f0;
 }
 
 pre {
-	border: thin lightgray ridge;
-	white-space: pre-wrap;
+  font-family: "游ゴシック", "Yu Gothic", sans-serif;
+  border: thin lightgray ridge;
+  white-space: pre-wrap;
+  line-height: 120%;
+  padding: 3px;
 }
 
 code {
-	font-family: "Consolas", monospace;
+  font-family: "Consolas", "BIZ UDゴシック", monospace;
 }
 
 footer {
-	font-size: smaller;
-	margin-top: 40px;
-	padding-top: 40px;
-	border-top: 4px black dotted;
+  margin-top: 4em;
+  padding-top: 1em;
+  border-top: thin darkgray solid;
 }
 
 .app {
-	display: inline-block;
-	margin: 5px;
-	padding: 10px;
-	border: thin solid;
-	background-color: #ffffeb;
-	font-size: larger;
-	font-weight: bolder;
-	text-indent: 0;
+  display: inline-block;
+  margin: 5px;
+  padding: 10px;
+  border: thin solid;
+  background-color: #ffffeb;
+  font-size: larger;
+  font-weight: bolder;
+  text-indent: 0;
 }
 
 a.app:hover {
-	background: lightcyan;
+  background: orange;
 }
 
 .note {
-	color: #505050;
-	font-size: smaller;
-	margin: 0 1em;
-}
-
-input:-moz-read-only {
-	background-color: gainsboro;
+  color: #505050;
+  font-size: smaller;
+  margin-left: 2em;
+  margin-right: 2em;
+  border: 1px darkgray dotted;
 }
 
 textarea {
-	width: 100%;
+  font-family: "メイリオ", "Meiryo", sans-serif;
+  width: 100%;
+}
+
+input:-moz-read-only {
+  background-color: gainsboro;
 }
 
 .text {
-	width: 100%
+  width: 100%;
 }
 
-.number{
-	font-family: "Consolas", monospace;
-	width: 20em;
-	text-align: end;
+.number {
+  font-family: "Consolas", monospace;
+  width: 20em;
+  text-align: end;
 }
 
 .draggable {
-	display: inline-block;
-	position: relative;
-	max-width: 300px;
-	padding: 5px;
-	border: thin solid;
-	background-color: #fffff0;
-	vertical-align: top;
-	cursor: move;
+  display: inline-block;
+  position: relative;
+  max-width: 300px;
+  padding: 5px;
+  border: thin solid;
+  background-color: #fffff0;
+  vertical-align: top;
+  cursor: move;
 }

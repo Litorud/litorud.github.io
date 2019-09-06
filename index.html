@@ -64,20 +64,20 @@
 	<section>
 		<h2><abbr title="Scalable Vector Graphics">SVG</abbr>の話</h2>
 		<p>Firefox は、バージョン67.0現在、SVG の line 要素や polyline 要素が水平または垂直の場合、stroke 属性にグラデーション要素を指定すると、なぜか描画されなくなります。例えば、以下に示すグラデーションを指定した水平の line は、グラデーションがかかりません。わずかでも斜めの line であれば、グラデーションがかかります。</p>
-		<pre>&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
+		<pre><code>&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
 	&lt;defs&gt;
 		&lt;linearGradient id=&quot;grad&quot;&gt;
 			&lt;stop stop-color=&quot;red&quot; offset=&quot;50%&quot; /&gt;
 			&lt;stop stop-color=&quot;black&quot; offset=&quot;100%&quot; /&gt;
 		&lt;/linearGradient&gt;
 	&lt;/defs&gt;
-	&lt;text x=&quot;0&quot; y=&quot;8&quot; font-size=&quot;4&quot;&gt;グラデーションではない水平の line&lt;/text&gt;
+	&lt;text x=&quot;0&quot; y=&quot;8&quot; font-size=&quot;4&quot;&gt;グラデーションを指定しない水平の line&lt;/text&gt;
 	&lt;line x1=&quot;0&quot; y1=&quot;10&quot; x2=&quot;100&quot; y2=&quot;10&quot; stroke=&quot;red&quot; stroke-width=&quot;3&quot; /&gt;
 	&lt;text x=&quot;0&quot; y=&quot;18&quot; font-size=&quot;4&quot;&gt;グラデーションを指定した水平の line&lt;/text&gt;
 	<strong>&lt;line x1=&quot;0&quot; y1=&quot;20&quot; x2=&quot;100&quot; y2=&quot;20&quot; stroke=&quot;url(#grad)&quot; stroke-width=&quot;3&quot; /&gt;</strong>
-	&lt;text x=&quot;0&quot; y=&quot;28&quot; font-size=&quot;4&quot;&gt;グラデーションを指定した水平ではない line&lt;/text&gt;
+	&lt;text x=&quot;0&quot; y=&quot;28&quot; font-size=&quot;4&quot;&gt;グラデーションを指定した斜めの line&lt;/text&gt;
 	&lt;line x1=&quot;0&quot; y1=&quot;30&quot; x2=&quot;100&quot; y2=&quot;30.1&quot; stroke=&quot;url(#grad)&quot; stroke-width=&quot;3&quot; /&gt;
-&lt;/svg&gt;</pre>
+&lt;/svg&gt;</code></pre>
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 35" width="400">
 			<defs>
 				<linearGradient id="grad">
@@ -85,15 +85,15 @@
 					<stop stop-color="black" offset="100%" />
 				</linearGradient>
 			</defs>
-			<text x="0" y="8" font-size="4">グラデーションではない水平の line</text>
+			<text x="0" y="8" font-size="4">グラデーションを指定しない水平の line</text>
 			<line x1="0" y1="10" x2="100" y2="10" stroke="red" stroke-width="3" />
 			<text x="0" y="18" font-size="4">グラデーションを指定した水平の line</text>
 			<line x1="0" y1="20" x2="100" y2="20" stroke="url(#grad)" stroke-width="3" />
-			<text x="0" y="28" font-size="4">グラデーションを指定した水平ではない line</text>
+			<text x="0" y="28" font-size="4">グラデーションを指定した斜めの line</text>
 			<line x1="0" y1="30" x2="100" y2="30.1" stroke="url(#grad)" stroke-width="3" />
 		</svg>
 		<p>線を斜めにする以外の方法で、グラデーションがかかるようにするならば、line の代わりに rect を使うか、あるいはグラデーション要素の gradientUnits 属性を、userSpaceOnUse にします。</p>
-		<pre>&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
+		<pre><code>&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
 	&lt;defs&gt;
 		&lt;linearGradient id=&quot;grad&quot;&gt;
 			&lt;stop stop-color=&quot;red&quot; offset=&quot;50%&quot; /&gt;
@@ -108,7 +108,7 @@
 	<strong>&lt;rect x=&quot;0&quot; y=&quot;9.5&quot; width=&quot;100&quot; height=&quot;1&quot; fill=&quot;url(#grad)&quot; /&gt;</strong>
 	&lt;text x=&quot;0&quot; y=&quot;19&quot; font-size=&quot;4&quot;&gt;gradientUnits 属性を userSpaceOnUse にする&lt;/text&gt;
 	&lt;line x1=&quot;0&quot; y1=&quot;20&quot; x2=&quot;100&quot; y2=&quot;20&quot; stroke=&quot;url(#grad2)&quot; /&gt;
-&lt;/svg&gt;</pre>
+&lt;/svg&gt;</code></pre>
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 25" width="400">
 			<defs>
 				<linearGradient id="grad">
