@@ -14,9 +14,10 @@
             margin: 0 0 30%;
         }
 
-        #result {
+        #resultWrapper {
             display: none;
             margin: auto -2em;
+            text-align: right;
         }
     </style>
     <script>
@@ -94,11 +95,16 @@
             });
 
             async function process(fileList) {
-                result.style.display = "block";
+                changeDisplay();
 
                 const files = Array.from(fileList);
                 const tableData = (await Promise.all(files.map(getData))).filter(i => i);
                 table.setData(tableData);
+            }
+
+            function changeDisplay() {
+                document.getElementById("resultWrapper").style.display = "block";
+                changeDisplay = () => { };
             }
 
             async function getData(file) {
@@ -277,6 +283,14 @@
 
                 return info;
             }
+
+            document.getElementById("downloadJson").addEventListener("click", function () {
+                table.download("json", "TouhouReplay.json");
+            });
+
+            document.getElementById("downloadCsv").addEventListener("click", function () {
+                table.download("csv", "TouhouReplay.csv");
+            });
         });
     </script>
     <meta name="author" content="Itaru">
@@ -291,7 +305,11 @@
         </dl>
     </header>
     <h1>東方Project リプレイ情報表示</h1>
-    <div id="result"></div>
+    <div id="resultWrapper">
+        <div id="result"></div>
+        <button type="button" id="downloadJson">Download Json</button>
+        <button type="button" id="downloadCsv">Download Csv</button>
+    </div>
     <form>
         <p>リプレイファイルを選択するか、このページにドロップしてください。</p>
         <input type="file" name="files" accept=".rpy" multiple>（複数指定可）
