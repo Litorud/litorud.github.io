@@ -19,37 +19,32 @@ footer {
   font-size: smaller;
 }
 
-header > a,
-footer > a {
-  float: left;
-}
-
-header > a:hover,
-footer > a:hover {
+header a:hover,
+footer a:hover {
   background: none;
 }
 
-header > dl,
-footer > dl {
-  text-align: end;
-  padding-top: 1em;
+header dl,
+footer dl {
+  float: right;
 }
 
-header > dl > dt,
-header > dl > dd,
-footer > dl > dt,
-footer > dl > dd {
-  display: inline;
+header dl dt,
+footer dl dt {
+  float: left;
+  clear: left;
+  width: 7em;
 }
 
-header > dl > dt::after,
-footer > dl > dt::after {
+header dl dt:after,
+footer dl dt:after {
   content: ":";
 }
 
-header > dl > dd,
-footer > dl > dd {
-  margin-left: 0;
+header dl dd,
+footer dl dd {
+  float: left;
+  margin-left: 1em;
 }
 
 h1 {
