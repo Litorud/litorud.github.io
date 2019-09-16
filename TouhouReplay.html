@@ -27,6 +27,7 @@
 
             const table = new Tabulator("#result", {
                 layout: "fitData",
+                layoutColumnsOnNewData: true,
                 columns: [
                     { title: "ファイル名", field: "fileName" },
                     { title: "ゲーム", field: "game.name", sorter: gameSorter },
