@@ -44,9 +44,9 @@
                     { column: "game.name", dir: "asc" },
                 ],
                 rowDblClick: function (e, row) {
-                    const rawData = row.getData().rawData;
-                    if (rawData) {
-                        alert(rawData);
+                    const raw = row.getData().raw;
+                    if (raw) {
+                        alert(raw);
                     }
                 }
             });
@@ -54,21 +54,21 @@
             const games = [
                 { magic: "T6RP", number: 6, name: "東方紅魔郷" },
                 { magic: "T7RP", number: 7, name: "東方妖々夢" },
-                { magic: "T8RP", number: 8, name: "東方永夜抄", rawDataStart: "プレイヤー名", getInfo: get永夜抄Info },
-                { magic: "T9RP", number: 9, name: "東方花映塚", rawDataStart: "プレイヤー名", getInfo: get花映塚Info },
-                { magic: "t95r", number: 9.5, name: "東方文花帖", rawDataStart: "東方文花帖 リプレイファイル情報", getInfo: get文花帖Info },
-                { magic: "t10r", number: 10, name: "東方風神録", rawDataStart: "東方風神録 リプレイファイル情報", getInfo: get風神録Info },
-                { magic: "t11r", number: 11, name: "東方地霊殿", rawDataStart: "東方地霊殿 リプレイファイル情報", getInfo: get風神録Info },
-                { magic: "t12r", number: 12, name: "東方星蓮船", rawDataStart: "東方星蓮船 リプレイファイル情報", getInfo: get風神録Info },
-                { magic: "t125", number: 12.5, name: "ダブルスポイラー", rawDataStart: "東方文花帖 リプレイファイル情報", getInfo: getダブルスポイラーInfo },
-                { magic: "128r", number: 12.8, name: "妖精大戦争", rawDataStart: "東方星蓮船 リプレイファイル情報", getInfo: get妖精大戦争Info },
-                { magic: "t13r", number: 13, name: "東方神霊廟", rawDataStart: "東方神霊廟 リプレイファイル情報", getInfo: get風神録Info },
-                { magic: "t13r", number: 14, name: "東方輝針城", rawDataStart: "東方輝針城 リプレイファイル情報", getInfo: get風神録Info },
-                { magic: "t143", number: 14.3, name: "弾幕アマノジャク", rawDataStart: "弾幕アマノジャク リプレイファイル情報", getInfo: get弾幕アマノジャクInfo },
-                { magic: "t15r", number: 15, name: "東方紺珠伝", rawDataStart: "東方紺珠伝 リプレイファイル情報", getInfo: get風神録Info },
-                { magic: "t16r", number: 16, name: "東方天空璋", rawDataStart: "東方天空璋 リプレイファイル情報", getInfo: get風神録Info },
-                { magic: "t156", number: 16.5, name: "秘封ナイトメアダイアリー", rawDataStart: "秘封ナイトメアダイアリー リプレイファイル情報", getInfo: get弾幕アマノジャクInfo },
-                { magic: "t17r", number: 17, name: "東方鬼形獣", rawDataStart: "東方鬼形獣 リプレイファイル情報", getInfo: get風神録Info }
+                { magic: "T8RP", number: 8, name: "東方永夜抄", rawStart: "プレイヤー名", getInfo: get永夜抄Info },
+                { magic: "T9RP", number: 9, name: "東方花映塚", rawStart: "プレイヤー名", getInfo: get花映塚Info },
+                { magic: "t95r", number: 9.5, name: "東方文花帖", rawStart: "東方文花帖 リプレイファイル情報", getInfo: get文花帖Info },
+                { magic: "t10r", number: 10, name: "東方風神録", rawStart: "東方風神録 リプレイファイル情報", getInfo: get風神録Info },
+                { magic: "t11r", number: 11, name: "東方地霊殿", rawStart: "東方地霊殿 リプレイファイル情報", getInfo: get風神録Info },
+                { magic: "t12r", number: 12, name: "東方星蓮船", rawStart: "東方星蓮船 リプレイファイル情報", getInfo: get風神録Info },
+                { magic: "t125", number: 12.5, name: "ダブルスポイラー", rawStart: "東方文花帖 リプレイファイル情報", getInfo: getダブルスポイラーInfo },
+                { magic: "128r", number: 12.8, name: "妖精大戦争", rawStart: "東方星蓮船 リプレイファイル情報", getInfo: get妖精大戦争Info },
+                { magic: "t13r", number: 13, name: "東方神霊廟", rawStart: "東方神霊廟 リプレイファイル情報", getInfo: get風神録Info },
+                { magic: "t13r", number: 14, name: "東方輝針城", rawStart: "東方輝針城 リプレイファイル情報", getInfo: get風神録Info },
+                { magic: "t143", number: 14.3, name: "弾幕アマノジャク", rawStart: "弾幕アマノジャク リプレイファイル情報", getInfo: get弾幕アマノジャクInfo },
+                { magic: "t15r", number: 15, name: "東方紺珠伝", rawStart: "東方紺珠伝 リプレイファイル情報", getInfo: get風神録Info },
+                { magic: "t16r", number: 16, name: "東方天空璋", rawStart: "東方天空璋 リプレイファイル情報", getInfo: get風神録Info },
+                { magic: "t156", number: 16.5, name: "秘封ナイトメアダイアリー", rawStart: "秘封ナイトメアダイアリー リプレイファイル情報", getInfo: get弾幕アマノジャクInfo },
+                { magic: "t17r", number: 17, name: "東方鬼形獣", rawStart: "東方鬼形獣 リプレイファイル情報", getInfo: get風神録Info }
             ];
 
             const ranks = ["Easy", "Normal", "Hard", "Lunatic", "Extra", "Phantasm", "O.D."];
@@ -108,22 +108,26 @@
             }
 
             async function getData(file) {
+                if (file.size < 4 || file.type) {
+                    return null;
+                }
+
                 try {
+                    // const byteArray = new Uint8Array(await file.arrayBuffer());
+                    const byteArray = new Uint8Array(await readFileAsync(file));
+
                     const data = {
                         fileName: file.name
                     };
 
-                    // const byteArray = new Uint8Array(await file.arrayBuffer());
-                    const byteArray = new Uint8Array(await readFileAsync(file));
-
                     const game = getGame(byteArray);
                     data.game = game;
 
-                    if (game.rawDataStart) {
-                        const rawData = getRawData(byteArray, game.rawDataStart);
-                        data.rawData = rawData;
+                    if (game.rawStart) {
+                        const raw = getRaw(byteArray, game.rawStart);
+                        data.raw = raw;
 
-                        data.info = game.getInfo(rawData);
+                        data.info = game.getInfo(raw);
                     }
 
                     return data;
@@ -158,21 +162,23 @@
                 }
 
                 const all = textDecoder.decode(byteArray);
-                return candidates.filter(g => all.includes(g.rawDataStart))[0];
+                return candidates.filter(g => all.includes(g.rawStart))[0];
             }
 
-            function getRawData(byteArray, start) {
+            function getRaw(byteArray, start) {
                 const all = textDecoder.decode(byteArray);
                 const index = all.indexOf(start);
                 return all.substr(index);
             }
 
-            function get永夜抄Info(rawData) {
-                const entries = get永夜抄Entries(rawData, 11);
+            function get永夜抄Info(raw) {
+                const entries = get永夜抄Entries(raw, 11);
 
                 let stage = entries["最終ステージ"];
                 if (!stage) {
                     stage = entries["カード名"];
+                } else if (stage.startsWith("Stage ")) {
+                    stage = stage.substr(6);
                 }
 
                 // ミス回数とボム回数と人間率を表示していない。
@@ -188,8 +194,8 @@
                 };
             }
 
-            function get永夜抄Entries(rawData, limit) {
-                return rawData.split(/[ 　]*\r\n/, limit)
+            function get永夜抄Entries(raw, limit) {
+                return raw.split(/[ 　]*\r\n/, limit)
                     .map(r => r.split(/\t+/, 2))
                     .filter(r => r.length == 2)
                     .reduce((result, row) => {
@@ -198,8 +204,8 @@
                     }, {});
             }
 
-            function get花映塚Info(rawData) {
-                const entries = get永夜抄Entries(rawData, 8);
+            function get花映塚Info(raw) {
+                const entries = get永夜抄Entries(raw, 8);
 
                 // モードと初期体力を表示していない。
                 return {
@@ -211,21 +217,21 @@
                 };
             }
 
-            function get文花帖Info(rawData) {
-                const entries = get文花帖Entries(rawData, 9);
+            function get文花帖Info(raw) {
+                const entries = get文花帖Entries(raw, 9);
 
                 return {
                     playerName: entries["Name"],
                     dateTime: "20" + entries["Date"],
                     score: scoreFormatter.format(entries["Score"]),
-                    stage: entries["Level"] + "-" + entries["Scene"],
+                    stage: entries["Level"].padStart(2) + "-" + entries["Scene"],
                     slowRate: entries["Slow Rate"] + "%",
                     version: entries["Version"]
                 };
             }
 
-            function get文花帖Entries(rawData, limit) {
-                return entries = rawData.split(/ *\r\n/, limit)
+            function get文花帖Entries(raw, limit) {
+                return entries = raw.split(/ *\r\n/, limit)
                     .map(r => r.match(/(Slow Rate|.*?) (.*)/))
                     .filter(r => r.length == 3)
                     .reduce((result, row) => {
@@ -234,8 +240,8 @@
                     }, {});
             }
 
-            function get風神録Info(rawData) {
-                const entries = get文花帖Entries(rawData, 9);
+            function get風神録Info(raw) {
+                const entries = get文花帖Entries(raw, 9);
                 return create風神録Info(entries);
             }
 
@@ -257,17 +263,23 @@
                 };
             }
 
-            function getダブルスポイラーInfo(rawData) {
-                const entries = get文花帖Entries(rawData, 9);
-                const info = create風神録Info(entries);
+            function getダブルスポイラーInfo(raw) {
+                const lines = raw.split(/ *\r\n/, 8);
+                const entries = {
+                    "Version": lines[1].substr(8),
+                    "Name": lines[2].substr(5),
+                    "Date": lines[3].substr(5),
+                    "Chara": lines[4].substr(6),
+                    "Stage": lines[5],
+                    "Score": lines[6].substr(6),
+                    "Slow Rate": lines[7].substr(10)
+                };
 
-                info.stage = entries[""];
-
-                return info;
+                return create風神録Info(entries);
             }
 
-            function get妖精大戦争Info(rawData) {
-                const entries = get文花帖Entries(rawData, 9);
+            function get妖精大戦争Info(raw) {
+                const entries = get文花帖Entries(raw, 9);
                 const info = create風神録Info(entries);
 
                 info.stage = entries["Route"] + " " + info.stage;
@@ -275,8 +287,8 @@
                 return info;
             }
 
-            function get弾幕アマノジャクInfo(rawData) {
-                const entries = get文花帖Entries(rawData, 9);
+            function get弾幕アマノジャクInfo(raw) {
+                const entries = get文花帖Entries(raw, 9);
                 const info = create風神録Info(entries);
 
                 info.stage = entries["Day"] + "-" + entries["Scene"];
@@ -301,7 +313,7 @@
         <a href="/"><img src="Logo.svg" width="400" height="80" alt="トップページへ"></a>
         <dl>
             <dt>最終更新</dt>
-            <dd>2019年9月16日 8時30分</dd>
+            <dd>2019年9月16日 14時0分</dd>
         </dl>
     </header>
     <h1>東方Project リプレイ情報表示</h1>
