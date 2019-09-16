@@ -26,7 +26,7 @@
             const scoreFormatter = new Intl.NumberFormat("ja");
 
             const table = new Tabulator("#result", {
-                layout: "fitDataFill",
+                layout: "fitData",
                 columns: [
                     { title: "ファイル名", field: "fileName" },
                     { title: "ゲーム名", field: "game.name", sorter: gameSorter },
@@ -54,8 +54,8 @@
             const games = [
                 { magic: "T6RP", number: 6, name: "東方紅魔郷" },
                 { magic: "T7RP", number: 7, name: "東方妖々夢" },
-                { magic: "T8RP", number: 8, name: "東方永夜抄", rawStart: "プレイヤー名", getInfo: get永夜抄Info },
-                { magic: "T9RP", number: 9, name: "東方花映塚", rawStart: "プレイヤー名", getInfo: get花映塚Info },
+                { magic: "T8RP", number: 8, name: "東方永夜抄", rawStart: "プレイヤー名\t", getInfo: get永夜抄Info },
+                { magic: "T9RP", number: 9, name: "東方花映塚", rawStart: "プレイヤー名\t", getInfo: get花映塚Info },
                 { magic: "t95r", number: 9.5, name: "東方文花帖", rawStart: "東方文花帖 リプレイファイル情報", getInfo: get文花帖Info },
                 { magic: "t10r", number: 10, name: "東方風神録", rawStart: "東方風神録 リプレイファイル情報", getInfo: get風神録Info },
                 { magic: "t11r", number: 11, name: "東方地霊殿", rawStart: "東方地霊殿 リプレイファイル情報", getInfo: get風神録Info },
@@ -162,7 +162,7 @@
                 }
 
                 const all = textDecoder.decode(byteArray);
-                return candidates.filter(g => all.includes(g.rawStart))[0];
+                return candidates.find(g => all.includes(g.rawStart));
             }
 
             function getRaw(byteArray, start) {
