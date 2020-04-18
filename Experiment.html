@@ -17,7 +17,7 @@
         <a href="/"><img src="Logo.svg" width="400" height="80" alt="トップページへ"></a>
         <dl>
             <dt>最終更新</dt>
-            <dd>2019年11月27日 20時9分</dd>
+            <dd>2020年4月19日 0時46分</dd>
         </dl>
     </header>
     <h1>実験ページ</h1>
@@ -248,11 +248,49 @@
             })();
         </script>
     </svg>
-    <blockquote class="twitter-tweet" data-lang="ja">
-        <p lang="ja" dir="ltr">先日「アメガエリの滝」に行った。水は綺麗で滝は迫力があり、とても素敵な所だった。 <a href="https://t.co/VZNdAfpv9a">pic.twitter.com/VZNdAfpv9a</a></p>&mdash;
-        Itaru (@Litorud) <a href="https://twitter.com/Litorud/status/1052942297774481408?ref_src=twsrc%5Etfw">2018年10月18日</a>
-    </blockquote>
-    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <section>
+        <h2>カメラ</h2>
+        <button id="cameraButton">開始</button>
+        <video id="cameraVideo" autoplay style="display:none"></video>
+        <script>
+            addEventListener("DOMContentLoaded", function () {
+                const cameraButton = document.getElementById("cameraButton");
+                const video = document.getElementById("cameraVideo");
+
+                cameraButton.addEventListener("click", async function () {
+                    if (video.srcObject) {
+                        video.style.display = "none";
+                        for (let track of video.srcObject.getVideoTracks()) {
+                            track.stop();
+                        }
+                        video.srcObject = null;
+
+                        cameraButton.textContent = "開始";
+                    } else {
+                        try {
+                            const mediaStream = await navigator.mediaDevices.getUserMedia({
+                                video: { width: 1280, height: 720 }
+                            });
+
+                            video.srcObject = mediaStream;
+                            video.style.display = "block";
+
+                            cameraButton.textContent = "停止";
+                        } catch{
+                            alert("カメラを開始できませんでした。");
+                        }
+                    }
+                });
+            });
+        </script>
+    </section>
+    <section>
+        <blockquote class="twitter-tweet" data-lang="ja">
+            <p lang="ja" dir="ltr">先日「アメガエリの滝」に行った。水は綺麗で滝は迫力があり、とても素敵な所だった。 <a href="https://t.co/VZNdAfpv9a">pic.twitter.com/VZNdAfpv9a</a></p>&mdash;
+            Itaru (@Litorud) <a href="https://twitter.com/Litorud/status/1052942297774481408?ref_src=twsrc%5Etfw">2018年10月18日</a>
+        </blockquote>
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    </section>
 </body>
 
 </html>
