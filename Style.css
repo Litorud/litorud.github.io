@@ -158,3 +158,8 @@ input:-moz-read-only {
   vertical-align: top;
   cursor: move;
 }
+
+#cameraVideo {
+  display: none;
+  width: 100%;
+}

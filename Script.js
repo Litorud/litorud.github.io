@@ -318,3 +318,37 @@ addEventListener("load", function () {
 		}, false);
 	}
 }, false);
+
+//
+// カメラ
+//
+
+addEventListener("DOMContentLoaded", function () {
+	const cameraButton = document.getElementById("cameraButton");
+	const video = document.getElementById("cameraVideo");
+
+	cameraButton.addEventListener("click", async function () {
+		if (video.srcObject) {
+			video.style.display = "none";
+			for (let track of video.srcObject.getVideoTracks()) {
+				track.stop();
+			}
+			video.srcObject = null;
+
+			cameraButton.textContent = "開始";
+		} else {
+			try {
+				const mediaStream = await navigator.mediaDevices.getUserMedia({
+					video: { width: 1280, height: 720 }
+				});
+
+				video.srcObject = mediaStream;
+				video.style.display = "block";
+
+				cameraButton.textContent = "停止";
+			} catch{
+				alert("カメラを開始できませんでした。");
+			}
+		}
+	});
+});
