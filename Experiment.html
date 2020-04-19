@@ -256,14 +256,14 @@
     <section>
         <h2>Google マップ</h2>
         <div id="map"></div>
-        <form>
-            <input id="latitude" type="number" step="0.00000000000000001" required>
-            <input id="longitude" type="number" step="0.00000000000000001" required>
+        <form id="mapForm">
+            <label for="latitude">緯度</label><input id="latitude" type="number" step="0.00000000000000001" required>
+            <label for="longitude">経度</label><input id="longitude" type="number" step="0.00000000000000001" required><br>
             <input id="address" type="text">
             <button id="currentPositionButton" type="button">現在地</button>
         </form>
         <script>
-            async function initMap() {
+            function initMap() {
                 const initialLat = 35.685175;
                 const initialLng = 139.7527995;
                 const initialCenter = { lat: initialLat, lng: initialLng }
