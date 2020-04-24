@@ -267,89 +267,89 @@
                 const initialLat = 35.685175;
                 const initialLng = 139.7527995;
                 const initialCenter = { lat: initialLat, lng: initialLng }
-                const map = new google.maps.Map(document.getElementById('map'), {
-                    center: initialCenter,
-                    zoom: 5
-                });
-                const marker = new google.maps.Marker({
-                    position: initialCenter,
-                    map: map
-                });
+                // const map = new google.maps.Map(document.getElementById('map'), {
+                //     center: initialCenter,
+                //     zoom: 5
+                // });
+                // const marker = new google.maps.Marker({
+                //     position: initialCenter,
+                //     map: map
+                // });
 
-                const latitude = document.getElementById('latitude');
-                const longitude = document.getElementById('longitude');
-                latitude.value = initialLat;
-                longitude.value = initialLng;
+                // const latitude = document.getElementById('latitude');
+                // const longitude = document.getElementById('longitude');
+                // latitude.value = initialLat;
+                // longitude.value = initialLng;
 
-                const address = document.getElementById('address');
-                const geocoder = new google.maps.Geocoder();
-                geocoder.geocode({
-                    location: initialCenter
-                }, function (results) {
-                    address.value = results[0].formatted_address;
-                });
+                // const address = document.getElementById('address');
+                // const geocoder = new google.maps.Geocoder();
+                // geocoder.geocode({
+                //     location: initialCenter
+                // }, function (results) {
+                //     address.value = results[0].formatted_address;
+                // });
 
-                map.addListener('click', function (event) {
-                    const latLng = event.latLng;
-                    marker.setPosition(latLng);
-                    updateLatitudeLongitude(latLng);
-                    updateAddress(latLng);
-                });
+                // map.addListener('click', function (event) {
+                //     const latLng = event.latLng;
+                //     marker.setPosition(latLng);
+                //     updateLatitudeLongitude(latLng);
+                //     updateAddress(latLng);
+                // });
 
-                function updateLatitudeLongitude(latLng) {
-                    latitude.value = latLng.lat();
-                    longitude.value = latLng.lng();
-                }
+                // function updateLatitudeLongitude(latLng) {
+                //     latitude.value = latLng.lat();
+                //     longitude.value = latLng.lng();
+                // }
 
-                function updateAddress(location) {
-                    geocoder.geocode({
-                        location: location
-                    }, function (results) {
-                        address.value = results && results.length ? results[0].formatted_address : '';
-                    });
-                }
+                // function updateAddress(location) {
+                //     geocoder.geocode({
+                //         location: location
+                //     }, function (results) {
+                //         address.value = results && results.length ? results[0].formatted_address : '';
+                //     });
+                // }
 
-                latitude.addEventListener('change', onLatLngChange);
-                longitude.addEventListener('change', onLatLngChange);
-                address.addEventListener('change', onAddressChange);
+                // latitude.addEventListener('change', onLatLngChange);
+                // longitude.addEventListener('change', onLatLngChange);
+                // address.addEventListener('change', onAddressChange);
 
-                function onLatLngChange() {
-                    if (!latitude.validity.valid || !longitude.validity.valid) {
-                        return;
-                    }
+                // function onLatLngChange() {
+                //     if (!latitude.validity.valid || !longitude.validity.valid) {
+                //         return;
+                //     }
 
-                    const center = {
-                        lat: parseFloat(latitude.value),
-                        lng: parseFloat(longitude.value)
-                    };
-                    map.setCenter(center);
-                    marker.setPosition(center);
-                    updateAddress(center);
-                }
+                //     const center = {
+                //         lat: parseFloat(latitude.value),
+                //         lng: parseFloat(longitude.value)
+                //     };
+                //     map.setCenter(center);
+                //     marker.setPosition(center);
+                //     updateAddress(center);
+                // }
 
-                function onAddressChange() {
-                    geocoder.geocode({
-                        address: address.value
-                    }, function (results) {
-                        if (results.length == 0) {
-                            return;
-                        }
+                // function onAddressChange() {
+                //     geocoder.geocode({
+                //         address: address.value
+                //     }, function (results) {
+                //         if (results.length == 0) {
+                //             return;
+                //         }
 
-                        const location = results[0].geometry.location;
-                        map.setCenter(location);
-                        marker.setPosition(location);
-                        updateLatitudeLongitude(location);
-                    });
-                }
+                //         const location = results[0].geometry.location;
+                //         map.setCenter(location);
+                //         marker.setPosition(location);
+                //         updateLatitudeLongitude(location);
+                //     });
+                // }
 
-                document.getElementById('currentPositionButton')
-                    .addEventListener('click', function () {
-                        navigator.geolocation.getCurrentPosition(function (position) {
-                            latitude.value = position.coords.latitude;
-                            longitude.value = position.coords.longitude;
-                            onLatLngChange();
-                        })
-                    })
+                // document.getElementById('currentPositionButton')
+                //     .addEventListener('click', function () {
+                //         navigator.geolocation.getCurrentPosition(function (position) {
+                //             latitude.value = position.coords.latitude;
+                //             longitude.value = position.coords.longitude;
+                //             onLatLngChange();
+                //         })
+                //     })
             }
         </script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaIR9EmT-DEZ2rLhoJUo0n2d4r4_ZE0cs&callback=initMap" async defer></script>
