@@ -1,17 +1,17 @@
 @charset "UTF-8";
 * {
-  margin-top: 0;
   font-family: "游ゴシック", "Yu Gothic", sans-serif;
 }
 
 html {
-  background-color: #e0e0f0;
+  background-color: antiquewhite;
 }
 
 body {
   margin: 0 8% 30%;
   padding: 0 2em 4em;
-  background-color: whitesmoke;
+  border-radius: 0 0 2em 2em;
+  background-color: floralwhite;
 }
 
 header,
@@ -24,33 +24,35 @@ footer a:hover {
   background: none;
 }
 
-header dl,
-footer dl {
+header table,
+footer table {
   float: right;
 }
 
-header dl dt,
-footer dl dt {
-  float: left;
-  clear: left;
-  width: 7em;
+header th,
+header td,
+footer th,
+footer td {
+  border-style: none;
 }
 
-header dl dt:after,
-footer dl dt:after {
+header th,
+footer th {
+  background: none;
+  font-weight: normal;
+  text-align: start;
+}
+
+header th::after,
+footer th::after {
   content: ":";
-}
-
-header dl dd,
-footer dl dd {
-  float: left;
-  margin-left: 1em;
+  float: right;
 }
 
 h1 {
   margin-top: 100px;
   margin-bottom: 40px;
-  border-bottom-style: double;
+  border-bottom: double burlywood;
 }
 
 h1::first-letter {
@@ -60,8 +62,8 @@ h1::first-letter {
 h2 {
   margin-top: 50px;
   padding: 5px;
-  border-left: 10px solid #c9d0e6;
-  background-color: #e6e8f0;
+  border-left: 10px solid burlywood;
+  background-color: antiquewhite;
 }
 
 p {
@@ -69,30 +71,26 @@ p {
 }
 
 a:hover {
-  background: linear-gradient(transparent, orange);
+  background: linear-gradient(transparent, wheat);
 }
 
 table {
-  border: thin gray solid;
   border-collapse: collapse;
 }
 
 th,
 td {
-  border: thin gray dotted;
-  padding: 2px;
+  border: thin burlywood solid;
+  padding: 0 0.2em;
 }
 
 th {
-  border-bottom: thin gray solid;
-  background-color: #e6e8f0;
+  background-color: antiquewhite;
 }
 
 pre {
   border: thin lightgray ridge;
   white-space: pre-wrap;
-  line-height: 120%;
-  padding: 3px;
 }
 
 code {
@@ -102,22 +100,22 @@ code {
 footer {
   margin-top: 4em;
   padding-top: 1em;
-  border-top: thin darkgray solid;
+  border-top: thin burlywood solid;
 }
 
 .app {
   display: inline-block;
   margin: 5px;
   padding: 10px;
-  border: thin solid;
-  background-color: #ffffeb;
+  border: thin solid burlywood;
+  background-color: oldlace;
   font-size: larger;
   font-weight: bolder;
   text-indent: 0;
 }
 
-a.app:hover {
-  background: orange;
+.app:hover {
+  background-color: wheat;
 }
 
 .note {
@@ -133,10 +131,10 @@ textarea {
 }
 
 input:-moz-read-only {
-  background-color: gainsboro;
+  background-color: whitesmoke;
 }
 
-.text {
+input[type="text"] {
   width: 100%;
 }
 
@@ -152,8 +150,8 @@ input[type="number"],
   position: relative;
   max-width: 300px;
   padding: 5px;
-  border: thin solid;
-  background-color: #fffff0;
+  border: thin solid burlywood;
+  background-color: oldlace;
   vertical-align: top;
   cursor: move;
 }
@@ -168,6 +166,14 @@ input[type="number"],
   height: 50vmax;
 }
 
-#address {
-  width: 100%;
+#mapForm > dl div {
+  display: inline-block;
+}
+
+#mapForm > dl dt {
+  float: left;
+}
+
+#mapForm > dl div:last-of-type {
+  display: block;
 }

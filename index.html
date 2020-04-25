@@ -8,6 +8,9 @@
 	<link rel="stylesheet" type="text/css" href="Style.css">
 	<link rel="icon" type="image/png" href="Icon.png">
 	<link rel="next" href="DesktopBackgroundScribbler.html" title="文字をデスクトップの背景に">
+	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/styles/vs.min.css">
+	<script src="http://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/highlight.min.js"></script>
+	<script>hljs.initHighlightingOnLoad()</script>
 	<meta name="author" content="Itaru">
 	<meta name="description" content="HTML などの Web 系の標準技術を実際に試したくて作成した、基本的には実験サイトです。">
 </head>
@@ -15,10 +18,12 @@
 <body>
 	<header>
 		<a href="/"><img src="Logo.svg" width="400" height="80" alt="トップページへ"></a>
-		<dl>
-			<dt>最終更新</dt>
-			<dd>2019年7月7日 2時3分</dd>
-		</dl>
+		<table>
+			<tr>
+				<th>最終更新</th>
+				<td>2019年7月7日 2時3分</td>
+			</tr>
+		</table>
 	</header>
 	<h1>リートルード</h1>
 	<p>2007年12月20日に、Google Page Creator を使って公開したサイト『リートルード』は、Google Page Creator のサービス終了により、2009年11月29日に消滅しました。その後、一部の内容は Google Sites で公開していましたが、2010年1月8日に Yahoo!ジオシティーズに移行しました。</p>
@@ -66,7 +71,7 @@
 	<section>
 		<h2><abbr title="Scalable Vector Graphics">SVG</abbr>の話</h2>
 		<p>Firefox は、バージョン67.0現在、SVG の line 要素や polyline 要素が水平または垂直の場合、stroke 属性にグラデーション要素を指定すると、なぜか描画されなくなります。例えば、以下に示すグラデーションを指定した水平の line は、グラデーションがかかりません。わずかでも斜めの line であれば、グラデーションがかかります。</p>
-		<pre><code>&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
+		<pre><code class="xml">&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
 	&lt;defs&gt;
 		&lt;linearGradient id=&quot;grad&quot;&gt;
 			&lt;stop stop-color=&quot;red&quot; offset=&quot;50%&quot; /&gt;
@@ -95,7 +100,7 @@
 			<line x1="0" y1="30" x2="100" y2="30.1" stroke="url(#grad)" stroke-width="3" />
 		</svg>
 		<p>線を斜めにする以外の方法で、グラデーションがかかるようにするならば、line の代わりに rect を使うか、あるいはグラデーション要素の gradientUnits 属性を、userSpaceOnUse にします。</p>
-		<pre><code>&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
+		<pre><code class="xml">&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
 	&lt;defs&gt;
 		&lt;linearGradient id=&quot;grad&quot;&gt;
 			&lt;stop stop-color=&quot;red&quot; offset=&quot;50%&quot; /&gt;
@@ -139,7 +144,7 @@
 	<section>
 		<h2>Google App Engine for Javaで、データストアに保存したプロパティーの型の変更法</h2>
 		<p>Google App Engine for Javaにおいてデータストアを使用する場合、以下のようなクラスを作成し、そのインスタンスをPersistenceManagerクラスのmakePersistentメソッドに渡します。</p>
-		<pre><code>@PersistenceCapable(identityType = IdentityType.APPLICATION)
+		<pre><code class="java">@PersistenceCapable(identityType = IdentityType.APPLICATION)
 public class Data {
     @PrimaryKey
     @Persistent(valueStrategy = IdGeneratorStrategy.IDENTITY)
@@ -154,24 +159,26 @@ public class Data {
 	（以下略）</code></pre>
 		<p>このクラスでは、<var>content</var>プロパティーはString型としています。この型を後からcom.google.appengine.api.datastore.Textに変更したい場合などは、低レベルAPIを使用します。</p>
 		<p>まずDatastoreService実装を取得します。</p>
-		<pre><code>DatastoreService service = DatastoreServiceFactory.getDatastoreService();</code></pre>
+		<pre><code class="java">DatastoreService service = DatastoreServiceFactory.getDatastoreService();</code></pre>
 		<p>取得したDatastoreService実装のgetメソッドで、データストアに保存したエンティティーを取得します。getメソッドの引数にはKeyオブジェクトを指定します。KeyオブジェクトはKeyFactoryクラスのcreateKeyメソッドで作成します。createKeyメソッドの引数には、親のKey（親を持つKeyを作成する場合）と、データストアに永続化したオブジェクトのクラス名と、各エンティティーのIDの値を指定します。IDは、Google App Engineのアプリケーション管理ページの、Datastore Viewerで確認することができます。</p>
-		<pre><code>Key key = KeyFactory.createKey("Data", 1);
+		<pre><code class="java">Key key = KeyFactory.createKey("Data", 1);
 Entity entity = service.get(key);</code></pre>
 		<p>取得したエンティティーから、getPropertyメソッドで型を変更したいプロパティーの値を取得します。その値を使って変更したい型で値を作り、setPropertyメソッドでその新しい値をエンティティーに設定します。</p>
-		<pre><code>String str = (String)entity.getProperty("content");
+		<pre><code class="java">String str = (String)entity.getProperty("content");
 Text text = new Text(str);
 entity.setProperty("content", text);</code></pre>
 		<p>後は、DatastoreServiceクラスのputメソッドで変更したエンティティーをデータストアに保存します。</p>
-		<pre><code>service.put(entity);</code></pre>
+		<pre><code class="java">service.put(entity);</code></pre>
 		<p>全てのエンティティーについて、新しい型の値をプロパティーに設定し、データストアへの保存を行えば完了です。</p>
 	</section>
 	<footer>
-		リートルードとは、『ドラゴンクエストⅦ エデンの戦士たち』に登場する町の名前です。最も好きな RPG の、最も好きな町の名前です。
-		<dl>
-			<dt>サイト開設日</dt>
-			<dd>2007年12月20日</dd>
-		</dl>
+		<p>リートルードとは、『ドラゴンクエストⅦ エデンの戦士たち』に登場する町の名前です。最も好きな RPG の、最も好きな町の名前です。</p>
+		<table>
+			<tr>
+				<th>サイト開設日</th>
+				<td>2007年12月20日</td>
+			</tr>
+		</table>
 	</footer>
 </body>
 
