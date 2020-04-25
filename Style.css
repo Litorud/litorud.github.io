@@ -1,8 +1,4 @@
 @charset "UTF-8";
-* {
-  font-family: "游ゴシック", "Yu Gothic", sans-serif;
-}
-
 html {
   background-color: antiquewhite;
 }
@@ -12,6 +8,7 @@ body {
   padding: 0 2em 4em;
   border-radius: 0 0 2em 2em;
   background-color: floralwhite;
+  font-family: "游ゴシック", "Yu Gothic", sans-serif;
 }
 
 header,
@@ -88,13 +85,16 @@ th {
   background-color: antiquewhite;
 }
 
+pre,
+code,
+textarea,
+input {
+  font-family: "Consolas", "BIZ UDゴシック", monospace;
+}
+
 pre {
   border: thin lightgray ridge;
   white-space: pre-wrap;
-}
-
-code {
-  font-family: "Consolas", "BIZ UDゴシック", monospace;
 }
 
 footer {
@@ -140,7 +140,6 @@ input[type="text"] {
 
 input[type="number"],
 .number {
-  font-family: "Consolas", monospace;
   width: 20em;
   text-align: end;
 }
