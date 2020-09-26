@@ -88,7 +88,8 @@ th {
 pre,
 code,
 textarea,
-input {
+input,
+output {
   font-family: "Consolas", "BIZ UDゴシック", monospace;
 }
 
@@ -130,12 +131,16 @@ textarea {
   width: 100%;
 }
 
-input:-moz-read-only {
-  background-color: whitesmoke;
-}
-
 input[type="text"] {
   width: 100%;
+}
+
+output {
+  display: inline-block;
+  width: 100%;
+  border: thin solid gray;
+  font-size: smaller;
+  background-color: whitesmoke;
 }
 
 input[type="number"],

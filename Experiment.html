@@ -2,381 +2,381 @@
 <html lang="ja">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>実験ページ</title>
-    <link rel="stylesheet" type="text/css" href="Style.css">
-    <link rel="icon" type="image/png" href="Icon.png">
-    <link rel="start" href="index.html" title="トップページ">
-    <script src="Script.js" defer></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/styles/vs.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad()</script>
-    <meta name="author" content="Itaru">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>実験ページ</title>
+  <link rel="stylesheet" type="text/css" href="Style.css">
+  <link rel="icon" type="image/png" href="Icon.png">
+  <link rel="start" href="index.html" title="トップページ">
+  <script src="Script.js" defer></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/styles/vs.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad()</script>
+  <meta name="author" content="Itaru">
 </head>
 
 <body>
-    <header>
-        <a href="/"><img src="Logo.svg" width="400" height="80" alt="トップページへ"></a>
-        <table>
-            <tr>
-                <th>最終更新</th>
-                <td>2020年4月19日 23時0分</td>
-            </tr>
-        </table>
-    </header>
-    <h1>実験ページ</h1>
-    <section>
-        <h2>Echo</h2>
-        <form name="echo">
-            <textarea id="input" name="inut" rows="3"></textarea>
-        </form>
-        <pre id="output"></pre>
-    </section>
-    <section>
-        <h2>日本語の独自正規化</h2>
-        <p>全角の英数字記号を半角に変換したり、半角のカタカナを全角に変換したり、カタカナや捨て仮名を捨て仮名でないひらがなに変換したりします。</p>
-        <form name="normalizer">
-            <dl>
-                <dt><label for="source">元の文字列</label></dt>
-                <dd><input type="text" id="source" name="source"><button type="button" name="normalize">正規化</button> </dd>
-                <dt><label for="result">独自正規化</label></dt>
-                <dd><input type="text" id="result" name="result" readonly></dd>
-                <dt><label for="dResult">正規化形式 D</label></dt>
-                <dd><input type="text" id="dResult" name="dResult" readonly></dd>
-                <dt><label for="cResult">正規化形式 C</label></dt>
-                <dd><input type="text" id="cResult" name="cResult" readonly></dd>
-                <dt><label for="kdResult">正規化形式 KD</label></dt>
-                <dd><input type="text" id="kdResult" name="kdResult" readonly></dd>
-                <dt><label for="kcResult">正規化形式 KC</label></dt>
-                <dd><input type="text" id="kcResult" name="kcResult" readonly></dd>
-            </dl>
-        </form>
-    </section>
-    <section>
-        <h2>文字数と空白除去</h2>
-        <p>入力した文字数を数えます。さらに、原文から空白を除去したうえで、その文字数を数えます。</p>
-        <form name="counter">
-            <dl>
-                <dt><label for="original">原文</label></dt>
-                <dd>
-                    <textarea id="original" name="original" rows="7"></textarea>
-                    <input name="originalLength" class="number" readonly>文字
-                    <button type="button" name="count">数える</button><button type="reset">消去</button>
-                </dd>
-                <dt><label for="optimized">行末の空白を除去。また、先頭と末尾の改行を除去</label></dt>
-                <dd>
-                    <textarea id="optimized" name="optimized" rows="5"></textarea>
-                    <input name="optimizedLength" class="number" readonly>文字
-                </dd>
-                <dt><label for="shrinked">連続する空白を圧縮</label></dt>
-                <dd>
-                    <textarea id="shrinked" name="shrinked" rows="1"></textarea>
-                    <input name="shrinkedLength" class="number" readonly>文字
-                </dd>
-                <dt><label for="removed">すべての空白を除去</label></dt>
-                <dd>
-                    <textarea id="removed" name="removed" rows="1"></textarea>
-                    <input id="removedLength" name="removedLength" class="number" readonly>文字
-                </dd>
-            </dl>
-        </form>
-    </section>
-    <section>
-        <h2>基数変換</h2>
-        <form name="radixConverter">
-            <dl>
-                <dt><label for="num2">2進数</label></dt>
-                <dd><input id="num2" name="num2" class="number"></dd>
-                <dt><label for="num10">10進数</label></dt>
-                <dd><input type="number" id="num10" name="num10" class="number"></dd>
-                <dt><label for="num16">16進数</label></dt>
-                <dd><input id="num16" name="num16" class="number"></dd>
-                <dt><label for="num36">36進数</label></dt>
-                <dd><input id="num36" name="num36" class="number"></dd>
-                <dd>“0123456789abcdefghijklmnopqrstuvwxyz” の36文字を使います。</dd>
-                <dt><label for="num64">64進数</label></dt>
-                <dd><input id="num64" name="num64" class="number"></dd>
-                <dd>“0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-” の64文字を使います。ハイフンマイナス‘-’は10進数における63を表します。そのため、負数には対応しません。</dd>
-            </dl>
-        </form>
-    </section>
-    <section>
-        <h2>読み込みと書き出し</h2>
-        <form name="editor">
-            <dl>
-                <dt><label for="file">読み込む UTF-8 のテキストファイル</label></dt>
-                <dd><input type="file" id="file" name="file" accept=".txt"><button type="button" name="import">読み込む</button></dd>
-                <dt><label for="content">内容</label></dt>
-                <dd><textarea id="content" name="content"></textarea><button type="button" name="export">書き出す</button>
-                </dd>
-            </dl>
-        </form>
-    </section>
-    <section>
-        <h2>非同期的取得</h2>
-        <form name="fetcher">
-            <p>
-                <select name="select">
-                    <option selected="selected">index.html</option>
-                    <option>Style.css</option>
-                    <option>Script.js</option>
-                    <option>Logo.svg</option>
-                    <option>Experiment.html</option>
-                    <option>StageTitle.svg</option>
-                    <option>TURB1.svg</option>
-                </select>
-                <button type="button" name="fetch">取得</button>
-            </p>
-        </form>
-        <dl>
-            <dt>取得したコード</dt>
-            <dd>
-                <pre><code id="fetchedCode">-</code></pre>
-            </dd>
-        </dl>
-    </section>
-    <section>
-        <p><object data="StageTitle.svg" type="image/svg+xml" width="382" height="448"><a href="StageTitle.svg">アニメーションするSVG</a></object></p>
-        <p>2度クリックすると止まります。</p>
-    </section>
-    <p>💦💢💮</p>
-    <p class="draggable">ドラッグできます。</p>
-    <ol class="draggable">
-        <li>色は匂えど散りぬるを</li>
-        <li>我が世誰ぞ常ならん</li>
-        <li>有為の奥山今日越えて</li>
-        <li>浅き夢見じ酔いもせず</li>
-        <li><strong>ん</strong></li>
-    </ol>
-    <p>
-        <a href="http://bio100.jp/">Bio_100%</a> の <a href="http://www.vector.co.jp/soft/dos/game/se003374.html">TURB第1話</a>において、旅の楽団Ⅱに話しかける順番です。
-        <object data="TURB1.svg" type="image/svg+xml" width="688" height="608"><a href="TURB1.svg">順番を示す SVG</a></object>
-    </p>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 110" id="star">
-        <style>
-            line {
-                stroke: black
+  <header>
+    <a href="/"><img src="Logo.svg" width="400" height="80" alt="トップページへ"></a>
+    <table>
+      <tr>
+        <th>最終更新</th>
+        <td>2020年4月19日 23時0分</td>
+      </tr>
+    </table>
+  </header>
+  <h1>実験ページ</h1>
+  <section>
+    <h2>Echo</h2>
+    <form name="echo">
+      <textarea id="input" name="inut" rows="3"></textarea>
+    </form>
+    <pre id="output"></pre>
+  </section>
+  <section>
+    <h2>日本語の独自正規化</h2>
+    <p>全角の英数字記号を半角に変換したり、半角のカタカナを全角に変換したり、カタカナや捨て仮名を捨て仮名でないひらがなに変換したりします。</p>
+    <form name="normalizer">
+      <dl>
+        <dt><label for="source">元の文字列</label></dt>
+        <dd><input type="text" id="source" name="source"><button type="button" name="normalize">正規化</button> </dd>
+        <dt><label for="result">独自正規化</label></dt>
+        <dd><output id="result" name="result"></output></dd>
+        <dt><label for="dResult">正規化形式 D</label></dt>
+        <dd><output id="dResult" name="dResult"></output></dd>
+        <dt><label for="cResult">正規化形式 C</label></dt>
+        <dd><output id="cResult" name="cResult"></output></dd>
+        <dt><label for="kdResult">正規化形式 KD</label></dt>
+        <dd><output id="kdResult" name="kdResult"></output></dd>
+        <dt><label for="kcResult">正規化形式 KC</label></dt>
+        <dd><output id="kcResult" name="kcResult"></output></dd>
+      </dl>
+    </form>
+  </section>
+  <section>
+    <h2>文字数と空白除去</h2>
+    <p>入力した文字数を数えます。さらに、原文から空白を除去したうえで、その文字数を数えます。</p>
+    <form name="counter">
+      <dl>
+        <dt><label for="original">原文</label></dt>
+        <dd>
+          <textarea id="original" name="original" rows="7"></textarea>
+          <output name="originalLength" class="number"></output>文字
+          <button type="button" name="count">数える</button><button type="reset">消去</button>
+        </dd>
+        <dt><label for="optimized">行末の空白を除去。また、先頭と末尾の改行を除去</label></dt>
+        <dd>
+          <textarea id="optimized" name="optimized" rows="5"></textarea>
+          <output name="optimizedLength" class="number"></output>文字
+        </dd>
+        <dt><label for="shrinked">連続する空白を圧縮</label></dt>
+        <dd>
+          <textarea id="shrinked" name="shrinked" rows="1"></textarea>
+          <output name="shrinkedLength" class="number"></output>文字
+        </dd>
+        <dt><label for="removed">すべての空白を除去</label></dt>
+        <dd>
+          <textarea id="removed" name="removed" rows="1"></textarea>
+          <output name="removedLength" class="number"></output>文字
+        </dd>
+      </dl>
+    </form>
+  </section>
+  <section>
+    <h2>基数変換</h2>
+    <form name="radixConverter">
+      <dl>
+        <dt><label for="num2">2進数</label></dt>
+        <dd><input id="num2" name="num2" class="number"></dd>
+        <dt><label for="num10">10進数</label></dt>
+        <dd><input type="number" id="num10" name="num10" class="number"></dd>
+        <dt><label for="num16">16進数</label></dt>
+        <dd><input id="num16" name="num16" class="number"></dd>
+        <dt><label for="num36">36進数</label></dt>
+        <dd><input id="num36" name="num36" class="number"></dd>
+        <dd>“0123456789abcdefghijklmnopqrstuvwxyz” の36文字を使います。</dd>
+        <dt><label for="num64">64進数</label></dt>
+        <dd><input id="num64" name="num64" class="number"></dd>
+        <dd>“0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-” の64文字を使います。ハイフンマイナス‘-’は10進数における63を表します。そのため、負数には対応しません。</dd>
+      </dl>
+    </form>
+  </section>
+  <section>
+    <h2>読み込みと書き出し</h2>
+    <form name="editor">
+      <dl>
+        <dt><label for="file">読み込む UTF-8 のテキストファイル</label></dt>
+        <dd><input type="file" id="file" name="file" accept=".txt"><button type="button" name="import">読み込む</button></dd>
+        <dt><label for="content">内容</label></dt>
+        <dd><textarea id="content" name="content"></textarea><button type="button" name="export">書き出す</button>
+        </dd>
+      </dl>
+    </form>
+  </section>
+  <section>
+    <h2>非同期的取得</h2>
+    <form name="fetcher">
+      <p>
+        <select name="select">
+          <option selected="selected">index.html</option>
+          <option>Style.css</option>
+          <option>Script.js</option>
+          <option>Logo.svg</option>
+          <option>Experiment.html</option>
+          <option>StageTitle.svg</option>
+          <option>TURB1.svg</option>
+        </select>
+        <button type="button" name="fetch">取得</button>
+      </p>
+    </form>
+    <dl>
+      <dt>取得したコード</dt>
+      <dd>
+        <pre><code id="fetchedCode">-</code></pre>
+      </dd>
+    </dl>
+  </section>
+  <section>
+    <p><object data="StageTitle.svg" type="image/svg+xml" width="382" height="448"><a href="StageTitle.svg">アニメーションするSVG</a></object></p>
+    <p>2度クリックすると止まります。</p>
+  </section>
+  <p>💦💢💮</p>
+  <p class="draggable">ドラッグできます。</p>
+  <ol class="draggable">
+    <li>色は匂えど散りぬるを</li>
+    <li>我が世誰ぞ常ならん</li>
+    <li>有為の奥山今日越えて</li>
+    <li>浅き夢見じ酔いもせず</li>
+    <li><strong>ん</strong></li>
+  </ol>
+  <p>
+    <a href="http://bio100.jp/">Bio_100%</a> の <a href="http://www.vector.co.jp/soft/dos/game/se003374.html">TURB第1話</a>において、旅の楽団Ⅱに話しかける順番です。
+    <object data="TURB1.svg" type="image/svg+xml" width="688" height="608"><a href="TURB1.svg">順番を示す SVG</a></object>
+  </p>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 110 110" id="star">
+    <style>
+      line {
+        stroke: black
+      }
+    </style>
+    <circle r="2" cx="55" cy="55" />
+    <circle r="2" cx="55" cy="55" />
+    <circle r="2" cx="55" cy="55" />
+    <circle r="2" cx="55" cy="55" />
+    <circle r="2" cx="55" cy="55" />
+    <line x1="0" y1="0" x2="0" y2="0" />
+    <line x1="0" y1="0" x2="0" y2="0" />
+    <line x1="0" y1="0" x2="0" y2="0" />
+    <line x1="0" y1="0" x2="0" y2="0" />
+    <line x1="0" y1="0" x2="0" y2="0" />
+    <script>
+        (function () {
+          var svgElem = document.getElementById("star"), nodes = svgElem.childNodes,
+            c1x = nodes[3].cx.baseVal, c1y = nodes[3].cy.baseVal,
+            c2x = nodes[5].cx.baseVal, c2y = nodes[5].cy.baseVal,
+            c3x = nodes[7].cx.baseVal, c3y = nodes[7].cy.baseVal,
+            c4x = nodes[9].cx.baseVal, c4y = nodes[9].cy.baseVal,
+            c5x = nodes[11].cx.baseVal, c5y = nodes[11].cy.baseVal,
+            theta = -Math.PI / 2, d = 2 * Math.PI / 5,
+            c1xd = Math.cos(theta) * 50, c1yd = Math.sin(theta) * 50,
+            c2xd = Math.cos(theta += d) * 50, c2yd = Math.sin(theta) * 50,
+            c3xd = Math.cos(theta += d) * 50, c3yd = Math.sin(theta) * 50,
+            c4xd = Math.cos(theta += d) * 50, c4yd = Math.sin(theta) * 50,
+            c5xd = Math.cos(theta += d) * 50, c5yd = Math.sin(theta) * 50,
+            count = 0,
+            l1 = nodes[13], l2 = nodes[15], l3 = nodes[17], l4 = nodes[19], l5 = nodes[21],
+            l = l1, index = 13,
+            animate = moveCircle,
+            timer = setInterval(function () {
+              animate();
+            }, 20);
+          function moveCircle() {
+            d = Math.sin(count * Math.PI / 2);
+            c1x.value = 55 + c1xd * d;
+            c2x.value = 55 + c2xd * d;
+            c3x.value = 55 + c3xd * d;
+            c4x.value = 55 + c4xd * d;
+            c5x.value = 55 + c5xd * d;
+            c1y.value = 55 + c1yd * d;
+            c2y.value = 55 + c2yd * d;
+            c3y.value = 55 + c3yd * d;
+            c4y.value = 55 + c4yd * d;
+            c5y.value = 55 + c5yd * d;
+            if ((count += 0.02) >= 1) {
+              l1.xspeed = (c3x.value - (l1.x2.baseVal.value = l1.x1.baseVal.value = c1x.value)) / 10;
+              l2.xspeed = (c5x.value - (l2.x2.baseVal.value = l2.x1.baseVal.value = c3x.value)) / 10;
+              l3.xspeed = (c2x.value - (l3.x2.baseVal.value = l3.x1.baseVal.value = c5x.value)) / 10;
+              l4.xspeed = (c4x.value - (l4.x2.baseVal.value = l4.x1.baseVal.value = c2x.value)) / 10;
+              l5.xspeed = (c1x.value - (l5.x2.baseVal.value = l5.x1.baseVal.value = c4x.value)) / 10;
+              l1.yspeed = (c3y.value - (l1.y2.baseVal.value = l1.y1.baseVal.value = c1y.value)) / 10;
+              l2.yspeed = (c5y.value - (l2.y2.baseVal.value = l2.y1.baseVal.value = c3y.value)) / 10;
+              l3.yspeed = (c2y.value - (l3.y2.baseVal.value = l3.y1.baseVal.value = c5y.value)) / 10;
+              l4.yspeed = (c4y.value - (l4.y2.baseVal.value = l4.y1.baseVal.value = c2y.value)) / 10;
+              l5.yspeed = (c1y.value - (l5.y2.baseVal.value = l5.y1.baseVal.value = c4y.value)) / 10;
+              count = 0;
+              animate = drawLine;
             }
-        </style>
-        <circle r="2" cx="55" cy="55" />
-        <circle r="2" cx="55" cy="55" />
-        <circle r="2" cx="55" cy="55" />
-        <circle r="2" cx="55" cy="55" />
-        <circle r="2" cx="55" cy="55" />
-        <line x1="0" y1="0" x2="0" y2="0" />
-        <line x1="0" y1="0" x2="0" y2="0" />
-        <line x1="0" y1="0" x2="0" y2="0" />
-        <line x1="0" y1="0" x2="0" y2="0" />
-        <line x1="0" y1="0" x2="0" y2="0" />
-        <script>
-                (function () {
-                    var svgElem = document.getElementById("star"), nodes = svgElem.childNodes,
-                        c1x = nodes[3].cx.baseVal, c1y = nodes[3].cy.baseVal,
-                        c2x = nodes[5].cx.baseVal, c2y = nodes[5].cy.baseVal,
-                        c3x = nodes[7].cx.baseVal, c3y = nodes[7].cy.baseVal,
-                        c4x = nodes[9].cx.baseVal, c4y = nodes[9].cy.baseVal,
-                        c5x = nodes[11].cx.baseVal, c5y = nodes[11].cy.baseVal,
-                        theta = -Math.PI / 2, d = 2 * Math.PI / 5,
-                        c1xd = Math.cos(theta) * 50, c1yd = Math.sin(theta) * 50,
-                        c2xd = Math.cos(theta += d) * 50, c2yd = Math.sin(theta) * 50,
-                        c3xd = Math.cos(theta += d) * 50, c3yd = Math.sin(theta) * 50,
-                        c4xd = Math.cos(theta += d) * 50, c4yd = Math.sin(theta) * 50,
-                        c5xd = Math.cos(theta += d) * 50, c5yd = Math.sin(theta) * 50,
-                        count = 0,
-                        l1 = nodes[13], l2 = nodes[15], l3 = nodes[17], l4 = nodes[19], l5 = nodes[21],
-                        l = l1, index = 13,
-                        animate = moveCircle,
-                        timer = setInterval(function () {
-                            animate();
-                        }, 20);
-                    function moveCircle() {
-                        d = Math.sin(count * Math.PI / 2);
-                        c1x.value = 55 + c1xd * d;
-                        c2x.value = 55 + c2xd * d;
-                        c3x.value = 55 + c3xd * d;
-                        c4x.value = 55 + c4xd * d;
-                        c5x.value = 55 + c5xd * d;
-                        c1y.value = 55 + c1yd * d;
-                        c2y.value = 55 + c2yd * d;
-                        c3y.value = 55 + c3yd * d;
-                        c4y.value = 55 + c4yd * d;
-                        c5y.value = 55 + c5yd * d;
-                        if ((count += 0.02) >= 1) {
-                            l1.xspeed = (c3x.value - (l1.x2.baseVal.value = l1.x1.baseVal.value = c1x.value)) / 10;
-                            l2.xspeed = (c5x.value - (l2.x2.baseVal.value = l2.x1.baseVal.value = c3x.value)) / 10;
-                            l3.xspeed = (c2x.value - (l3.x2.baseVal.value = l3.x1.baseVal.value = c5x.value)) / 10;
-                            l4.xspeed = (c4x.value - (l4.x2.baseVal.value = l4.x1.baseVal.value = c2x.value)) / 10;
-                            l5.xspeed = (c1x.value - (l5.x2.baseVal.value = l5.x1.baseVal.value = c4x.value)) / 10;
-                            l1.yspeed = (c3y.value - (l1.y2.baseVal.value = l1.y1.baseVal.value = c1y.value)) / 10;
-                            l2.yspeed = (c5y.value - (l2.y2.baseVal.value = l2.y1.baseVal.value = c3y.value)) / 10;
-                            l3.yspeed = (c2y.value - (l3.y2.baseVal.value = l3.y1.baseVal.value = c5y.value)) / 10;
-                            l4.yspeed = (c4y.value - (l4.y2.baseVal.value = l4.y1.baseVal.value = c2y.value)) / 10;
-                            l5.yspeed = (c1y.value - (l5.y2.baseVal.value = l5.y1.baseVal.value = c4y.value)) / 10;
-                            count = 0;
-                            animate = drawLine;
-                        }
-                    }
-                    function drawLine() {
-                        l.x2.baseVal.value += l.xspeed;
-                        l.y2.baseVal.value += l.yspeed;
-                        if (++count >= 10) {
-                            if (index < 20) {
-                                l = nodes[index += 2];
-                                count = 0;
-                            } else {
-                                clearInterval(timer);
-                                addEventListener("click", restart, false);
-                            }
-                        }
-                    }
-                    function restart() {
-                        removeEventListener("click", restart, false);
-                        count = 1;
-                        animate = clear;
-                        timer = setInterval(function () {
-                            animate();
-                        }, 20);
-                    }
-                    function clear() {
-                        if (count <= 0) {
-                            c1x.value = c1y.value = c2x.value = c2y.value = c3x.value = c3y.value = c4x.value = c4y.value = c5x.value = c5y.value = 55;
-                            (l = l1).x1.baseVal.value = l2.x1.baseVal.value = l3.x1.baseVal.value = l4.x1.baseVal.value = l5.x1.baseVal.value = l1.y1.baseVal.value = l2.y1.baseVal.value = l3.y1.baseVal.value = l4.y1.baseVal.value = l5.y1.baseVal.value = l1.x2.baseVal.value = l2.x2.baseVal.value = l3.x2.baseVal.value = l4.x2.baseVal.value = l5.x2.baseVal.value = l1.y2.baseVal.value = l2.y2.baseVal.value = l3.y2.baseVal.value = l4.y2.baseVal.value = l5.y2.baseVal.value = count = 0;
-                            index = 13;
-                            animate = moveCircle;
-                            svgElem.setAttribute("opacity", 1);
-                        } else {
-                            svgElem.setAttribute("opacity", count -= 0.05);
-                        }
-                    }
-                })();
-        </script>
-    </svg>
-    <section>
-        <h2>カメラ</h2>
-        <button id="cameraButton">開始</button>
-        <video id="cameraVideo" autoplay></video>
-        <p class="note">単にカメラの映像を表示するだけであり、送信は一切しません。</p>
-    </section>
-    <section>
-        <h2>Google マップ</h2>
-        <div id="map"></div>
-        <form id="mapForm">
-            <dl>
-                <div>
-                    <dt><label for="latitude">緯度</label></dt>
-                    <dd><input id="latitude" type="number" step="0.00000000000000001" required></dd>
-                </div>
-                <div>
-                    <dt><label for="longitude">経度</label></dt>
-                    <dd><input id="longitude" type="number" step="0.00000000000000001" required></dd>
-                </div>
-                <div>
-                    <dt><label for="address">住所</label></dt>
-                    <dd><input id="address" type="text"></dd>
-                    <dd><button id="currentPositionButton" type="button">現在地</button></dd>
-                </div>
-            </dl>
-        </form>
-        <script>
-            function initMap() {
-                const initialLat = 35.685175;
-                const initialLng = 139.7527995;
-                const initialCenter = { lat: initialLat, lng: initialLng }
-                const map = new google.maps.Map(document.getElementById('map'), {
-                    center: initialCenter,
-                    zoom: 5
-                });
-                const marker = new google.maps.Marker({
-                    position: initialCenter,
-                    map: map
-                });
-
-                const latitude = document.getElementById('latitude');
-                const longitude = document.getElementById('longitude');
-                latitude.value = initialLat;
-                longitude.value = initialLng;
-
-                const address = document.getElementById('address');
-                const geocoder = new google.maps.Geocoder();
-                geocoder.geocode({
-                    location: initialCenter
-                }, function (results) {
-                    address.value = results[0].formatted_address;
-                });
-
-                map.addListener('click', function (event) {
-                    const latLng = event.latLng;
-                    marker.setPosition(latLng);
-                    updateLatitudeLongitude(latLng);
-                    updateAddress(latLng);
-                });
-
-                function updateLatitudeLongitude(latLng) {
-                    latitude.value = latLng.lat();
-                    longitude.value = latLng.lng();
-                }
-
-                function updateAddress(location) {
-                    geocoder.geocode({
-                        location: location
-                    }, function (results) {
-                        address.value = results && results.length ? results[0].formatted_address : '';
-                    });
-                }
-
-                latitude.addEventListener('change', onLatLngChange);
-                longitude.addEventListener('change', onLatLngChange);
-                address.addEventListener('change', onAddressChange);
-
-                function onLatLngChange() {
-                    if (!latitude.validity.valid || !longitude.validity.valid) {
-                        return;
-                    }
-
-                    const center = {
-                        lat: parseFloat(latitude.value),
-                        lng: parseFloat(longitude.value)
-                    };
-                    map.setCenter(center);
-                    marker.setPosition(center);
-                    updateAddress(center);
-                }
-
-                function onAddressChange() {
-                    geocoder.geocode({
-                        address: address.value
-                    }, function (results) {
-                        if (results.length == 0) {
-                            return;
-                        }
-
-                        const location = results[0].geometry.location;
-                        map.setCenter(location);
-                        marker.setPosition(location);
-                        updateLatitudeLongitude(location);
-                    });
-                }
-
-                document.getElementById('currentPositionButton')
-                    .addEventListener('click', function () {
-                        navigator.geolocation.getCurrentPosition(function (position) {
-                            latitude.value = position.coords.latitude;
-                            longitude.value = position.coords.longitude;
-                            onLatLngChange();
-                        })
-                    })
+          }
+          function drawLine() {
+            l.x2.baseVal.value += l.xspeed;
+            l.y2.baseVal.value += l.yspeed;
+            if (++count >= 10) {
+              if (index < 20) {
+                l = nodes[index += 2];
+                count = 0;
+              } else {
+                clearInterval(timer);
+                addEventListener("click", restart, false);
+              }
             }
-        </script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaIR9EmT-DEZ2rLhoJUo0n2d4r4_ZE0cs&callback=initMap" async defer></script>
-    </section>
-    <section>
-        <blockquote class="twitter-tweet" data-lang="ja">
-            <p lang="ja" dir="ltr">先日「アメガエリの滝」に行った。水は綺麗で滝は迫力があり、とても素敵な所だった。 <a href="https://t.co/VZNdAfpv9a">pic.twitter.com/VZNdAfpv9a</a></p>&mdash;
-            Itaru (@Litorud) <a href="https://twitter.com/Litorud/status/1052942297774481408?ref_src=twsrc%5Etfw">2018年10月18日</a>
-        </blockquote>
-        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-    </section>
+          }
+          function restart() {
+            removeEventListener("click", restart, false);
+            count = 1;
+            animate = clear;
+            timer = setInterval(function () {
+              animate();
+            }, 20);
+          }
+          function clear() {
+            if (count <= 0) {
+              c1x.value = c1y.value = c2x.value = c2y.value = c3x.value = c3y.value = c4x.value = c4y.value = c5x.value = c5y.value = 55;
+              (l = l1).x1.baseVal.value = l2.x1.baseVal.value = l3.x1.baseVal.value = l4.x1.baseVal.value = l5.x1.baseVal.value = l1.y1.baseVal.value = l2.y1.baseVal.value = l3.y1.baseVal.value = l4.y1.baseVal.value = l5.y1.baseVal.value = l1.x2.baseVal.value = l2.x2.baseVal.value = l3.x2.baseVal.value = l4.x2.baseVal.value = l5.x2.baseVal.value = l1.y2.baseVal.value = l2.y2.baseVal.value = l3.y2.baseVal.value = l4.y2.baseVal.value = l5.y2.baseVal.value = count = 0;
+              index = 13;
+              animate = moveCircle;
+              svgElem.setAttribute("opacity", 1);
+            } else {
+              svgElem.setAttribute("opacity", count -= 0.05);
+            }
+          }
+        })();
+    </script>
+  </svg>
+  <section>
+    <h2>カメラ</h2>
+    <button id="cameraButton">開始</button>
+    <video id="cameraVideo" autoplay></video>
+    <p class="note">単にカメラの映像を表示するだけであり、送信は一切しません。</p>
+  </section>
+  <section>
+    <h2>Google マップ</h2>
+    <div id="map"></div>
+    <form id="mapForm">
+      <dl>
+        <div>
+          <dt><label for="latitude">緯度</label></dt>
+          <dd><input id="latitude" type="number" step="0.00000000000000001" required></dd>
+        </div>
+        <div>
+          <dt><label for="longitude">経度</label></dt>
+          <dd><input id="longitude" type="number" step="0.00000000000000001" required></dd>
+        </div>
+        <div>
+          <dt><label for="address">住所</label></dt>
+          <dd><input id="address" type="text"></dd>
+          <dd><button id="currentPositionButton" type="button">現在地</button></dd>
+        </div>
+      </dl>
+    </form>
+    <script>
+      function initMap() {
+        const initialLat = 35.685175;
+        const initialLng = 139.7527995;
+        const initialCenter = { lat: initialLat, lng: initialLng }
+        const map = new google.maps.Map(document.getElementById('map'), {
+          center: initialCenter,
+          zoom: 5
+        });
+        const marker = new google.maps.Marker({
+          position: initialCenter,
+          map: map
+        });
+
+        const latitude = document.getElementById('latitude');
+        const longitude = document.getElementById('longitude');
+        latitude.value = initialLat;
+        longitude.value = initialLng;
+
+        const address = document.getElementById('address');
+        const geocoder = new google.maps.Geocoder();
+        geocoder.geocode({
+          location: initialCenter
+        }, function (results) {
+          address.value = results[0].formatted_address;
+        });
+
+        map.addListener('click', function (event) {
+          const latLng = event.latLng;
+          marker.setPosition(latLng);
+          updateLatitudeLongitude(latLng);
+          updateAddress(latLng);
+        });
+
+        function updateLatitudeLongitude(latLng) {
+          latitude.value = latLng.lat();
+          longitude.value = latLng.lng();
+        }
+
+        function updateAddress(location) {
+          geocoder.geocode({
+            location: location
+          }, function (results) {
+            address.value = results && results.length ? results[0].formatted_address : '';
+          });
+        }
+
+        latitude.addEventListener('change', onLatLngChange);
+        longitude.addEventListener('change', onLatLngChange);
+        address.addEventListener('change', onAddressChange);
+
+        function onLatLngChange() {
+          if (!latitude.validity.valid || !longitude.validity.valid) {
+            return;
+          }
+
+          const center = {
+            lat: parseFloat(latitude.value),
+            lng: parseFloat(longitude.value)
+          };
+          map.setCenter(center);
+          marker.setPosition(center);
+          updateAddress(center);
+        }
+
+        function onAddressChange() {
+          geocoder.geocode({
+            address: address.value
+          }, function (results) {
+            if (results.length == 0) {
+              return;
+            }
+
+            const location = results[0].geometry.location;
+            map.setCenter(location);
+            marker.setPosition(location);
+            updateLatitudeLongitude(location);
+          });
+        }
+
+        document.getElementById('currentPositionButton')
+          .addEventListener('click', function () {
+            navigator.geolocation.getCurrentPosition(function (position) {
+              latitude.value = position.coords.latitude;
+              longitude.value = position.coords.longitude;
+              onLatLngChange();
+            })
+          })
+      }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDaIR9EmT-DEZ2rLhoJUo0n2d4r4_ZE0cs&callback=initMap" async defer></script>
+  </section>
+  <section>
+    <blockquote class="twitter-tweet" data-lang="ja">
+      <p lang="ja" dir="ltr">先日「アメガエリの滝」に行った。水は綺麗で滝は迫力があり、とても素敵な所だった。 <a href="https://t.co/VZNdAfpv9a">pic.twitter.com/VZNdAfpv9a</a></p>&mdash;
+      Itaru (@Litorud) <a href="https://twitter.com/Litorud/status/1052942297774481408?ref_src=twsrc%5Etfw">2018年10月18日</a>
+    </blockquote>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+  </section>
 </body>
 
 </html>
