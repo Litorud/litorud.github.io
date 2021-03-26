@@ -140,7 +140,9 @@ const num10 = radixConverterForm.num10;
 const num16 = radixConverterForm.num16;
 const num36 = radixConverterForm.num36;
 const num64 = radixConverterForm.num64;
-const chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_-";
+// URL アプリケーションのための変形 Base64 ('base64url' encoding) では、
+// 62番目の文字に-を、63番目の文字に_を使うので、それに倣う。
+const chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_";
 
 num2.addEventListener("input", function () {
 	const i = parseInt(num2.value, 2);
@@ -346,7 +348,7 @@ addEventListener("DOMContentLoaded", function () {
 				video.style.display = "block";
 
 				cameraButton.textContent = "停止";
-			} catch{
+			} catch {
 				alert("カメラを開始できませんでした。");
 			}
 		}
