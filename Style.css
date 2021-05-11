@@ -1,12 +1,6 @@
 @charset "UTF-8";
-html {
-  background-color: antiquewhite;
-}
-
 body {
-  margin: 0 8% 30%;
-  padding: 0 2em 4em;
-  border-radius: 0 0 2em 2em;
+  padding-bottom: 4em;
   background-color: floralwhite;
   font-family: "游ゴシック", "Yu Gothic", sans-serif;
 }
@@ -180,4 +174,15 @@ input[type="number"],
 
 #mapForm > dl div:last-of-type {
   display: block;
+}
+
+@media (min-width: 576px) {
+  html {
+    background-color: antiquewhite;
+  }
+  body {
+    margin: 0 8% 30%;
+    padding: 0 2em 4em;
+    border-radius: 0 0 2em 2em;
+  }
 }
