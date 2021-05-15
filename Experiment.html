@@ -9,9 +9,6 @@
   <link rel="icon" type="image/png" href="Icon.png">
   <link rel="start" href="index.html" title="トップページ">
   <script src="Script.js" defer></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/styles/vs.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad()</script>
   <meta name="author" content="Itaru">
 </head>
 
@@ -21,7 +18,7 @@
     <table>
       <tr>
         <th>最終更新</th>
-        <td>2020年4月19日 23時0分</td>
+        <td>2021年5月15日 22時43分</td>
       </tr>
     </table>
   </header>
@@ -94,10 +91,10 @@
         <dd><input id="num16" name="num16" class="number"></dd>
         <dt><label for="num36">36進数</label></dt>
         <dd><input id="num36" name="num36" class="number"></dd>
-        <dd>“0123456789abcdefghijklmnopqrstuvwxyz” の36文字を使います。</dd>
+        <dd><kbd>0123456789abcdefghijklmnopqrstuvwxyz</kbd> の36文字を使います。</dd>
         <dt><label for="num64">64進数</label></dt>
         <dd><input id="num64" name="num64" class="number"></dd>
-        <dd>“0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_” の64文字を使います。ハイフンマイナス‘-’は10進数における62を表します。そのため、負数には対応しません。</dd>
+        <dd><kbd>0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ-_</kbd> の64文字を使います。ハイフンマイナス <kbd>-</kbd> は10進数における62を表します。そのため、負数には対応しません。</dd>
       </dl>
     </form>
   </section>
@@ -170,86 +167,86 @@
     <line x1="0" y1="0" x2="0" y2="0" />
     <line x1="0" y1="0" x2="0" y2="0" />
     <script>
-        (function () {
-          var svgElem = document.getElementById("star"), nodes = svgElem.childNodes,
-            c1x = nodes[3].cx.baseVal, c1y = nodes[3].cy.baseVal,
-            c2x = nodes[5].cx.baseVal, c2y = nodes[5].cy.baseVal,
-            c3x = nodes[7].cx.baseVal, c3y = nodes[7].cy.baseVal,
-            c4x = nodes[9].cx.baseVal, c4y = nodes[9].cy.baseVal,
-            c5x = nodes[11].cx.baseVal, c5y = nodes[11].cy.baseVal,
-            theta = -Math.PI / 2, d = 2 * Math.PI / 5,
-            c1xd = Math.cos(theta) * 50, c1yd = Math.sin(theta) * 50,
-            c2xd = Math.cos(theta += d) * 50, c2yd = Math.sin(theta) * 50,
-            c3xd = Math.cos(theta += d) * 50, c3yd = Math.sin(theta) * 50,
-            c4xd = Math.cos(theta += d) * 50, c4yd = Math.sin(theta) * 50,
-            c5xd = Math.cos(theta += d) * 50, c5yd = Math.sin(theta) * 50,
-            count = 0,
-            l1 = nodes[13], l2 = nodes[15], l3 = nodes[17], l4 = nodes[19], l5 = nodes[21],
-            l = l1, index = 13,
-            animate = moveCircle,
-            timer = setInterval(function () {
-              animate();
-            }, 20);
-          function moveCircle() {
-            d = Math.sin(count * Math.PI / 2);
-            c1x.value = 55 + c1xd * d;
-            c2x.value = 55 + c2xd * d;
-            c3x.value = 55 + c3xd * d;
-            c4x.value = 55 + c4xd * d;
-            c5x.value = 55 + c5xd * d;
-            c1y.value = 55 + c1yd * d;
-            c2y.value = 55 + c2yd * d;
-            c3y.value = 55 + c3yd * d;
-            c4y.value = 55 + c4yd * d;
-            c5y.value = 55 + c5yd * d;
-            if ((count += 0.02) >= 1) {
-              l1.xspeed = (c3x.value - (l1.x2.baseVal.value = l1.x1.baseVal.value = c1x.value)) / 10;
-              l2.xspeed = (c5x.value - (l2.x2.baseVal.value = l2.x1.baseVal.value = c3x.value)) / 10;
-              l3.xspeed = (c2x.value - (l3.x2.baseVal.value = l3.x1.baseVal.value = c5x.value)) / 10;
-              l4.xspeed = (c4x.value - (l4.x2.baseVal.value = l4.x1.baseVal.value = c2x.value)) / 10;
-              l5.xspeed = (c1x.value - (l5.x2.baseVal.value = l5.x1.baseVal.value = c4x.value)) / 10;
-              l1.yspeed = (c3y.value - (l1.y2.baseVal.value = l1.y1.baseVal.value = c1y.value)) / 10;
-              l2.yspeed = (c5y.value - (l2.y2.baseVal.value = l2.y1.baseVal.value = c3y.value)) / 10;
-              l3.yspeed = (c2y.value - (l3.y2.baseVal.value = l3.y1.baseVal.value = c5y.value)) / 10;
-              l4.yspeed = (c4y.value - (l4.y2.baseVal.value = l4.y1.baseVal.value = c2y.value)) / 10;
-              l5.yspeed = (c1y.value - (l5.y2.baseVal.value = l5.y1.baseVal.value = c4y.value)) / 10;
+      (function () {
+        var svgElem = document.getElementById("star"), nodes = svgElem.childNodes,
+          c1x = nodes[3].cx.baseVal, c1y = nodes[3].cy.baseVal,
+          c2x = nodes[5].cx.baseVal, c2y = nodes[5].cy.baseVal,
+          c3x = nodes[7].cx.baseVal, c3y = nodes[7].cy.baseVal,
+          c4x = nodes[9].cx.baseVal, c4y = nodes[9].cy.baseVal,
+          c5x = nodes[11].cx.baseVal, c5y = nodes[11].cy.baseVal,
+          theta = -Math.PI / 2, d = 2 * Math.PI / 5,
+          c1xd = Math.cos(theta) * 50, c1yd = Math.sin(theta) * 50,
+          c2xd = Math.cos(theta += d) * 50, c2yd = Math.sin(theta) * 50,
+          c3xd = Math.cos(theta += d) * 50, c3yd = Math.sin(theta) * 50,
+          c4xd = Math.cos(theta += d) * 50, c4yd = Math.sin(theta) * 50,
+          c5xd = Math.cos(theta += d) * 50, c5yd = Math.sin(theta) * 50,
+          count = 0,
+          l1 = nodes[13], l2 = nodes[15], l3 = nodes[17], l4 = nodes[19], l5 = nodes[21],
+          l = l1, index = 13,
+          animate = moveCircle,
+          timer = setInterval(function () {
+            animate();
+          }, 20);
+        function moveCircle() {
+          d = Math.sin(count * Math.PI / 2);
+          c1x.value = 55 + c1xd * d;
+          c2x.value = 55 + c2xd * d;
+          c3x.value = 55 + c3xd * d;
+          c4x.value = 55 + c4xd * d;
+          c5x.value = 55 + c5xd * d;
+          c1y.value = 55 + c1yd * d;
+          c2y.value = 55 + c2yd * d;
+          c3y.value = 55 + c3yd * d;
+          c4y.value = 55 + c4yd * d;
+          c5y.value = 55 + c5yd * d;
+          if ((count += 0.02) >= 1) {
+            l1.xspeed = (c3x.value - (l1.x2.baseVal.value = l1.x1.baseVal.value = c1x.value)) / 10;
+            l2.xspeed = (c5x.value - (l2.x2.baseVal.value = l2.x1.baseVal.value = c3x.value)) / 10;
+            l3.xspeed = (c2x.value - (l3.x2.baseVal.value = l3.x1.baseVal.value = c5x.value)) / 10;
+            l4.xspeed = (c4x.value - (l4.x2.baseVal.value = l4.x1.baseVal.value = c2x.value)) / 10;
+            l5.xspeed = (c1x.value - (l5.x2.baseVal.value = l5.x1.baseVal.value = c4x.value)) / 10;
+            l1.yspeed = (c3y.value - (l1.y2.baseVal.value = l1.y1.baseVal.value = c1y.value)) / 10;
+            l2.yspeed = (c5y.value - (l2.y2.baseVal.value = l2.y1.baseVal.value = c3y.value)) / 10;
+            l3.yspeed = (c2y.value - (l3.y2.baseVal.value = l3.y1.baseVal.value = c5y.value)) / 10;
+            l4.yspeed = (c4y.value - (l4.y2.baseVal.value = l4.y1.baseVal.value = c2y.value)) / 10;
+            l5.yspeed = (c1y.value - (l5.y2.baseVal.value = l5.y1.baseVal.value = c4y.value)) / 10;
+            count = 0;
+            animate = drawLine;
+          }
+        }
+        function drawLine() {
+          l.x2.baseVal.value += l.xspeed;
+          l.y2.baseVal.value += l.yspeed;
+          if (++count >= 10) {
+            if (index < 20) {
+              l = nodes[index += 2];
               count = 0;
-              animate = drawLine;
-            }
-          }
-          function drawLine() {
-            l.x2.baseVal.value += l.xspeed;
-            l.y2.baseVal.value += l.yspeed;
-            if (++count >= 10) {
-              if (index < 20) {
-                l = nodes[index += 2];
-                count = 0;
-              } else {
-                clearInterval(timer);
-                addEventListener("click", restart, false);
-              }
-            }
-          }
-          function restart() {
-            removeEventListener("click", restart, false);
-            count = 1;
-            animate = clear;
-            timer = setInterval(function () {
-              animate();
-            }, 20);
-          }
-          function clear() {
-            if (count <= 0) {
-              c1x.value = c1y.value = c2x.value = c2y.value = c3x.value = c3y.value = c4x.value = c4y.value = c5x.value = c5y.value = 55;
-              (l = l1).x1.baseVal.value = l2.x1.baseVal.value = l3.x1.baseVal.value = l4.x1.baseVal.value = l5.x1.baseVal.value = l1.y1.baseVal.value = l2.y1.baseVal.value = l3.y1.baseVal.value = l4.y1.baseVal.value = l5.y1.baseVal.value = l1.x2.baseVal.value = l2.x2.baseVal.value = l3.x2.baseVal.value = l4.x2.baseVal.value = l5.x2.baseVal.value = l1.y2.baseVal.value = l2.y2.baseVal.value = l3.y2.baseVal.value = l4.y2.baseVal.value = l5.y2.baseVal.value = count = 0;
-              index = 13;
-              animate = moveCircle;
-              svgElem.setAttribute("opacity", 1);
             } else {
-              svgElem.setAttribute("opacity", count -= 0.05);
+              clearInterval(timer);
+              addEventListener("click", restart, false);
             }
           }
-        })();
+        }
+        function restart() {
+          removeEventListener("click", restart, false);
+          count = 1;
+          animate = clear;
+          timer = setInterval(function () {
+            animate();
+          }, 20);
+        }
+        function clear() {
+          if (count <= 0) {
+            c1x.value = c1y.value = c2x.value = c2y.value = c3x.value = c3y.value = c4x.value = c4y.value = c5x.value = c5y.value = 55;
+            (l = l1).x1.baseVal.value = l2.x1.baseVal.value = l3.x1.baseVal.value = l4.x1.baseVal.value = l5.x1.baseVal.value = l1.y1.baseVal.value = l2.y1.baseVal.value = l3.y1.baseVal.value = l4.y1.baseVal.value = l5.y1.baseVal.value = l1.x2.baseVal.value = l2.x2.baseVal.value = l3.x2.baseVal.value = l4.x2.baseVal.value = l5.x2.baseVal.value = l1.y2.baseVal.value = l2.y2.baseVal.value = l3.y2.baseVal.value = l4.y2.baseVal.value = l5.y2.baseVal.value = count = 0;
+            index = 13;
+            animate = moveCircle;
+            svgElem.setAttribute("opacity", 1);
+          } else {
+            svgElem.setAttribute("opacity", count -= 0.05);
+          }
+        }
+      })();
     </script>
   </svg>
   <section>

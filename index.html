@@ -8,9 +8,9 @@
 	<link rel="stylesheet" type="text/css" href="Style.css">
 	<link rel="icon" type="image/png" href="Icon.png">
 	<link rel="next" href="DesktopBackgroundScribbler.html" title="文字をデスクトップの背景に">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/styles/vs.min.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.0/highlight.min.js"></script>
-	<script>hljs.initHighlightingOnLoad()</script>
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/styles/vs.min.css">
+	<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.7.2/highlight.min.js" defer></script>
+	<script>addEventListener('DOMContentLoaded', () => hljs.highlightAll())</script>
 	<meta name="author" content="Itaru">
 	<meta name="description" content="HTML などの Web 系の標準技術を実際に試したくて作成した、基本的には実験サイトです。">
 </head>
@@ -21,69 +21,56 @@
 		<table>
 			<tr>
 				<th>最終更新</th>
-				<td>2019年7月7日 2時3分</td>
+				<td>2021年5月15日 22時43分</td>
 			</tr>
 		</table>
 	</header>
 	<h1>リートルード</h1>
-	<p>2007年12月20日に、Google Page Creator を使って公開したサイト『リートルード』は、Google Page Creator のサービス終了により、2009年11月29日に消滅しました。その後、一部の内容は Google Sites で公開していましたが、2010年1月8日に Yahoo!ジオシティーズに移行しました。</p>
-	<p>その Yahoo!ジオシティーズも、2019年3月31日に終了することが決まったため、2018年10月31日、『リートルード』は GitHub Pages に移行しました。</p>
+	<p>HTML などの Web 系の標準技術を実際に試したくて作成した、基本的には実験サイトです。</p>
 	<ul>
 		<li><a href="DesktopBackgroundScribbler.html">文字をデスクトップの背景に</a></li>
-		<li><a href="WPF.html">WPFによる開発覚え書き</a></li>
+		<li><a href="WPF.html">WPF による開発覚え書き</a></li>
 		<li><a href="Experiment.html">実験ページ</a></li>
 		<li><a href="Bookmarklet.html">人気投票のコメント掲載ページから見たくないコメントを消し飛ばすブックマークレット</a></li>
 		<li><a href="AstrologicalSigns.svg">黄道12星座</a></li>
 		<li><a href="Tarot.svg">タロット 大アルカナ</a></li>
 		<li><a href="TouhouReplay.html">東方Project リプレイ情報表示</a></li>
 	</ul>
+	<p>2007年12月20日に、Google Page Creator を使って公開した「リートルード」は、Google Page Creator のサービス終了により、2009年11月29日に消滅しました。その後、一部の内容は Google Sites で公開していましたが、2010年1月8日に Yahoo!ジオシティーズに移行しました。</p>
+	<p>その Yahoo!ジオシティーズも、2019年3月31日に終了することが決まったため、2018年10月31日、「リートルード」は GitHub Pages に移行しました。</p>
 	<section>
 		<h2>「PowerShell ウィンドウをここに開く」のコマンド</h2>
-		<p>エクスプローラーのフォルダー上、または何も選択していないときに何もない所で Shift+右クリックすると、「PowerShell ウィンドウをここに開く」というメニューが表示されます。これを選択したとき、どのようなコマンドでPowerShell が起動するのか検索しました。</p>
+		<p>エクスプローラーのフォルダー上で Shift+右クリックすると、「PowerShell ウィンドウをここに開く」という項目が表れます。何も選択していないときに何もない所で Shift+右クリックした場合も、同様の項目が表れます。これを選択したとき、どのようなコマンドでPowerShell が起動するのか検索しました。</p>
 		<p>コマンドは、レジストリの“<code>HKEY_CLASSES_ROOT\Directory\shell\Powershell\command</code>”または“<code>HKEY_CLASSES_ROOT\Directory\Background\shell\Powershell\command</code>”に保存されていることが分かりました。前者がフォルダー上で Shift+右クリックしたとき、後者が何も選択していないときに何もない所で Shift+右クリックしたときだと思います。</p>
-		<p>次のような値になっていました。</p>
-		<table>
-			<tr>
-				<th>キー</th>
-				<th>値</th>
-			</tr>
-			<tr>
-				<td><code>HKEY_CLASSES_ROOT\Directory\shell\Powershell\command</code></td>
-				<td><code>powershell.exe -noexit -command Set-Location '%V'</code></td>
-			</tr>
-			<tr>
-				<td><code>HKEY_CLASSES_ROOT\Directory\Background\shell\Powershell\command</code></td>
-				<td><code>powershell.exe -noexit -command Set-Location -literalPath '%V'</code></td>
-			</tr>
-		</table>
-		<p>コマンド中に現れる“<code>%V</code>”という文字列については、<a href="https://superuser.com/questions/136838/which-special-variables-are-available-when-writing-a-shell-command-for-a-context">Which special variables are available when writing a shell command for a context menu</a> に記述を見つけました。</p>
-		<p>このページ、およびさらにリンク先のページによると、“<code>%v</code>”は基本的に「<span title="ファイルのコンテキストメニューで見られる「開く」「印刷」「編集」などのことだと思います。">動詞</span>」を表し、それが無いときは作業ディレクトリを表すようです。これによって、上記コマンドは「<code>powershell.exe</code> を起動し、<code>Set-Location</code> コマンドで作業ディレクトリに移動し、そのまま実行を継続する」ということを実現しているようです。</p>
-		<p>一方のコマンドだけ <code>-literalPath</code> オプションで指定していることには何か理由があるのか分かりませんでした。PowerShell では、ファイルやディレクトリの名前に使える [ と ] を、複数のパスをまとめて指定するための特別な意味を持つ文字として使えるため、これによる意図しない動作を防ぐためには、<code>-literalPath</code> を使うべきだといえそうです。</p>
+		<p>その値は次のようになっていました。</p>
+		<pre><code>powershell.exe -noexit -command Set-Location -literalPath '%V'</code></pre>
+		<p>コマンド中に現れる“<code>%V</code>”という文字列については、<a href="https://superuser.com/questions/136838/which-special-variables-are-available-when-writing-a-shell-command-for-a-context">Which special variables are available when writing a shell command for a context menu</a> に記述を見つけました。このページ、およびさらにリンク先のページによると、“<code>%v</code>”は基本的に「<span title="ファイルのコンテキストメニューで見られる「開く」「印刷」「編集」などのことだと思います。">動詞</span>」を表し、それが無いときは作業ディレクトリを表すようです。これによって、上記コマンドは「<code>powershell.exe</code> を起動し、<code>Set-Location</code> コマンドで作業ディレクトリに移動し、そのまま実行を継続する」ということを実現しているようです。</p>
+		<p>以前の Windows では、保存されているコマンドが“<code>HKEY_CLASSES_ROOT\Directory\shell\Powershell\command</code>”と“<code>HKEY_CLASSES_ROOT\Directory\Background\shell\Powershell\command</code>”とで少し異なりました。具体的には“<code>HKEY_CLASSES_ROOT\Directory\shell\Powershell\command</code>”のほうでは <code>-literalPath</code> オプションを使っていなかったのですが、いつの間にか修正したようです。</p>
+		<p>PowerShell では、ファイルやディレクトリの名前に使える <kbd>[</kbd> と <kbd>]</kbd> を、複数のパスをまとめて指定するための特別な意味を持つ文字として使えるため、これによる意図しない動作を防ぐためには、<code>-literalPath</code> を使うべきだといえそうです。</p>
 	</section>
 	<section>
 		<h2>ブックマークレット</h2>
 		<a class="app" href="javascript:void(document.body.style.fontFamily = &quot;ＭＳ Ｐゴシック&quot;)">ＭＳ Ｐゴシックに</a>
-		<a class="app" href="javascript:(function(a){if(!a.isCollapsed||(a=prompt(&quot;Google Search&quot;)))open(&quot;http://www.google.com/search?q=-\u006e\u0069\u0063\u006f -&quot;+encodeURIComponent(&quot;\u30cb\u30b3\u30cb\u30b3 -\u30cb\u30b3 -\u306b\u3053 &quot;+a))})(getSelection())">除外検索
-			(Google)</a>
-		<a class="app" href="javascript:(function(a){if(!a.isCollapsed||(a=prompt(&quot;Bing Search&quot;)))open(&quot;http://www.bing.com/search?q=-\u006e\u0069\u0063\u006f -&quot;+encodeURIComponent(&quot;\u30cb\u30b3\u30cb\u30b3 -\u30cb\u30b3 &quot;+a))})(getSelection())">除外検索
-			(Bing)</a>
+		<a class="app" href="javascript:(function(a){if(!a.isCollapsed||(a=prompt(&quot;Google Search&quot;)))open(&quot;http://www.google.com/search?q=-\u006e\u0069\u0063\u006f -&quot;+encodeURIComponent(&quot;\u30cb\u30b3\u30cb\u30b3 -\u30cb\u30b3 -\u306b\u3053 &quot;+a))})(getSelection())">除外検索 (Google)</a>
+		<a class="app" href="javascript:(function(a){if(!a.isCollapsed||(a=prompt(&quot;Bing Search&quot;)))open(&quot;http://www.bing.com/search?q=-\u006e\u0069\u0063\u006f -&quot;+encodeURIComponent(&quot;\u30cb\u30b3\u30cb\u30b3 -\u30cb\u30b3 &quot;+a))})(getSelection())">除外検索 (Bing)</a>
 	</section>
 	<section>
-		<h2><abbr title="Scalable Vector Graphics">SVG</abbr>の話</h2>
-		<p>Firefox は、バージョン67.0現在、SVG の line 要素や polyline 要素が水平または垂直の場合、stroke 属性にグラデーション要素を指定すると、なぜか描画されなくなります。例えば、以下に示すグラデーションを指定した水平の line は、グラデーションがかかりません。わずかでも斜めの line であれば、グラデーションがかかります。</p>
+		<h2><abbr title="Scalable Vector Graphics">SVG</abbr> の話</h2>
+		<h3>水平 <code>line</code> のグラデーション</h3>
+		<p>Firefox は、バージョン88.0.1現在、SVG の <code>line</code> 要素や <code>polyline</code> 要素が水平または垂直の場合、<code>stroke</code> 属性にグラデーション要素を指定すると、なぜか描画されません。例えば、以下に示すグラデーションを指定した水平の <code>line</code> は描画されません。わずかでも斜めなら描画されます。</p>
 		<pre><code class="xml">&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
-	&lt;defs&gt;
-		&lt;linearGradient id=&quot;grad&quot;&gt;
-			&lt;stop stop-color=&quot;red&quot; offset=&quot;50%&quot; /&gt;
-			&lt;stop stop-color=&quot;black&quot; offset=&quot;100%&quot; /&gt;
-		&lt;/linearGradient&gt;
-	&lt;/defs&gt;
-	&lt;text x=&quot;0&quot; y=&quot;8&quot; font-size=&quot;4&quot;&gt;グラデーションを指定しない水平の line&lt;/text&gt;
-	&lt;line x1=&quot;0&quot; y1=&quot;10&quot; x2=&quot;100&quot; y2=&quot;10&quot; stroke=&quot;red&quot; stroke-width=&quot;3&quot; /&gt;
-	&lt;text x=&quot;0&quot; y=&quot;18&quot; font-size=&quot;4&quot;&gt;グラデーションを指定した水平の line&lt;/text&gt;
-	<strong>&lt;line x1=&quot;0&quot; y1=&quot;20&quot; x2=&quot;100&quot; y2=&quot;20&quot; stroke=&quot;url(#grad)&quot; stroke-width=&quot;3&quot; /&gt;</strong>
-	&lt;text x=&quot;0&quot; y=&quot;28&quot; font-size=&quot;4&quot;&gt;グラデーションを指定した斜めの line&lt;/text&gt;
-	&lt;line x1=&quot;0&quot; y1=&quot;30&quot; x2=&quot;100&quot; y2=&quot;30.1&quot; stroke=&quot;url(#grad)&quot; stroke-width=&quot;3&quot; /&gt;
+    &lt;defs&gt;
+        &lt;linearGradient id=&quot;grad&quot;&gt;
+            &lt;stop stop-color=&quot;red&quot; offset=&quot;50%&quot; /&gt;
+            &lt;stop stop-color=&quot;black&quot; offset=&quot;100%&quot; /&gt;
+        &lt;/linearGradient&gt;
+    &lt;/defs&gt;
+    &lt;text x=&quot;0&quot; y=&quot;8&quot; font-size=&quot;4&quot;&gt;グラデーションを指定しない水平の line&lt;/text&gt;
+    &lt;line x1=&quot;0&quot; y1=&quot;10&quot; x2=&quot;100&quot; y2=&quot;10&quot; stroke=&quot;red&quot; stroke-width=&quot;1&quot; /&gt;
+    &lt;text x=&quot;0&quot; y=&quot;18&quot; font-size=&quot;4&quot;&gt;グラデーションを指定した水平の line（描画されない）&lt;/text&gt;
+    <strong>&lt;line x1=&quot;0&quot; y1=&quot;20&quot; x2=&quot;100&quot; y2=&quot;20&quot; stroke=&quot;url(#grad)&quot; stroke-width=&quot;1&quot; /&gt;</strong>
+    &lt;text x=&quot;0&quot; y=&quot;28&quot; font-size=&quot;4&quot;&gt;グラデーションを指定した斜めの line&lt;/text&gt;
+    &lt;line x1=&quot;0&quot; y1=&quot;30&quot; x2=&quot;100&quot; y2=&quot;30.1&quot; stroke=&quot;url(#grad)&quot; stroke-width=&quot;1&quot; /&gt;
 &lt;/svg&gt;</code></pre>
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 35" width="400">
 			<defs>
@@ -93,28 +80,28 @@
 				</linearGradient>
 			</defs>
 			<text x="0" y="8" font-size="4">グラデーションを指定しない水平の line</text>
-			<line x1="0" y1="10" x2="100" y2="10" stroke="red" stroke-width="3" />
-			<text x="0" y="18" font-size="4">グラデーションを指定した水平の line</text>
-			<line x1="0" y1="20" x2="100" y2="20" stroke="url(#grad)" stroke-width="3" />
+			<line x1="0" y1="10" x2="100" y2="10" stroke="red" stroke-width="1" />
+			<text x="0" y="18" font-size="4">グラデーションを指定した水平の line（描画されない）</text>
+			<line x1="0" y1="20" x2="100" y2="20" stroke="url(#grad)" stroke-width="1" />
 			<text x="0" y="28" font-size="4">グラデーションを指定した斜めの line</text>
-			<line x1="0" y1="30" x2="100" y2="30.1" stroke="url(#grad)" stroke-width="3" />
+			<line x1="0" y1="30" x2="100" y2="30.1" stroke="url(#grad)" stroke-width="1" />
 		</svg>
-		<p>線を斜めにする以外の方法で、グラデーションがかかるようにするならば、line の代わりに rect を使うか、あるいはグラデーション要素の gradientUnits 属性を、userSpaceOnUse にします。</p>
+		<p>線を斜めにする以外の方法で描画されるようにするならば、<code>line</code> の代わりに <code>rect</code> を使うか、あるいはグラデーション要素の <code>gradientUnits</code> 属性を、<code>userSpaceOnUse</code> にします。</p>
 		<pre><code class="xml">&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
-	&lt;defs&gt;
-		&lt;linearGradient id=&quot;grad&quot;&gt;
-			&lt;stop stop-color=&quot;red&quot; offset=&quot;50%&quot; /&gt;
-			&lt;stop stop-color=&quot;black&quot; offset=&quot;100%&quot; /&gt;
-		&lt;/linearGradient&gt;
-		&lt;linearGradient id=&quot;grad2&quot; <strong>gradientUnits=&quot;userSpaceOnUse&quot;</strong>&gt;
-			&lt;stop stop-color=&quot;red&quot; offset=&quot;50%&quot; /&gt;
-			&lt;stop stop-color=&quot;black&quot; offset=&quot;100%&quot; /&gt;
-		&lt;/linearGradient&gt;
-	&lt;/defs&gt;
-	&lt;text x=&quot;0&quot; y=&quot;9&quot; font-size=&quot;4&quot;&gt;rect 要素を使う&lt;/text&gt;
-	<strong>&lt;rect x=&quot;0&quot; y=&quot;9.5&quot; width=&quot;100&quot; height=&quot;1&quot; fill=&quot;url(#grad)&quot; /&gt;</strong>
-	&lt;text x=&quot;0&quot; y=&quot;19&quot; font-size=&quot;4&quot;&gt;gradientUnits 属性を userSpaceOnUse にする&lt;/text&gt;
-	&lt;line x1=&quot;0&quot; y1=&quot;20&quot; x2=&quot;100&quot; y2=&quot;20&quot; stroke=&quot;url(#grad2)&quot; /&gt;
+    &lt;defs&gt;
+        &lt;linearGradient id=&quot;grad&quot;&gt;
+            &lt;stop stop-color=&quot;red&quot; offset=&quot;50%&quot; /&gt;
+            &lt;stop stop-color=&quot;black&quot; offset=&quot;100%&quot; /&gt;
+        &lt;/linearGradient&gt;
+        &lt;linearGradient id=&quot;grad2&quot; <strong>gradientUnits=&quot;userSpaceOnUse&quot;</strong>&gt;
+            &lt;stop stop-color=&quot;red&quot; offset=&quot;50%&quot; /&gt;
+            &lt;stop stop-color=&quot;black&quot; offset=&quot;100%&quot; /&gt;
+        &lt;/linearGradient&gt;
+    &lt;/defs&gt;
+    &lt;text x=&quot;0&quot; y=&quot;9&quot; font-size=&quot;4&quot;&gt;rect 要素を使う&lt;/text&gt;
+    <strong>&lt;rect x=&quot;0&quot; y=&quot;9.5&quot; width=&quot;100&quot; height=&quot;1&quot; fill=&quot;url(#grad)&quot; /&gt;</strong>
+    &lt;text x=&quot;0&quot; y=&quot;19&quot; font-size=&quot;4&quot;&gt;gradientUnits 属性を userSpaceOnUse にする&lt;/text&gt;
+    &lt;line x1=&quot;0&quot; y1=&quot;20&quot; x2=&quot;100&quot; y2=&quot;20&quot; stroke=&quot;url(#grad2)&quot; /&gt;
 &lt;/svg&gt;</code></pre>
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 25" width="400">
 			<defs>
@@ -132,7 +119,8 @@
 			<text x="0" y="18" font-size="4">gradientUnits 属性を userSpaceOnUse にする</text>
 			<line x1="0" y1="20" x2="100" y2="20" stroke="url(#grad2)" />
 		</svg>
-		<p>textPath 要素は、xlink:href 属性に path 要素の id を指定します（XLink の名前空間接頭辞を “xlink” としています）。このときは、<code>xlink:href=&quot;#path&quot;</code> のように、‘#’ に続けて id を記述すれば正しく解釈されます。しかし、何らかの要素にグラデーションを掛けるなどの目的で、fill 属性に linearGradient 要素などの id を指定するときは、<code>fill=&quot;url(#grad)&quot;</code> のように url() 関数を使う必要があります。xlink:href が XLink の仕様であるのに対し、fill は SVG の仕様なので、このような違いがあるのでしょうか。</p>
+		<h3><code>url()</code> 関数の要不要</h3>
+		<p><code>textPath</code> 要素は、<code>xlink:href</code> 属性に <code>path</code> 要素の <code>id</code> を指定します（XLink の名前空間接頭辞を “xlink” としています）。このときは、<code>xlink:href=&quot;#path&quot;</code> のように、‘<kbd>#</kbd>’ に続けて <code>id</code> を記述すれば正しく解釈されます。一方、何らかの要素にグラデーションを掛けるなどの目的で、<code>fill</code> 属性に <code>linearGradient</code> 要素などの <code>id</code> を指定するときは、<code>fill=&quot;url(#grad)&quot;</code> のように <code>url()</code> 関数を使う必要があります。<code>xlink:href</code> が XLink の仕様であるのに対し、<code>fill</code> は SVG の仕様なので、このような違いがあるのでしょうか。</p>
 	</section>
 	<section>
 		<h2>CSSのz-indexプロパティーの話</h2>
