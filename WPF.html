@@ -46,7 +46,7 @@
         <table>
             <tr>
                 <th>最終更新</th>
-                <td>2018年12月2日 22時35分</td>
+                <td>2021年5月17日 1時8分</td>
             </tr>
         </table>
     </header>
@@ -414,7 +414,7 @@
         [<span class="usertype">STAThread</span>]
         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> Main(<span class="keyword">string</span>[] args)
         {
-            <em><span class="keyword">bool</span> createdNew;
+<em>            <span class="keyword">bool</span> createdNew;
             <span class="keyword">using</span> (<span class="keyword">var</span> semaphore = <span class="keyword">new</span> <span class="usertype">Semaphore</span>(1, 1, ApplicationId, <span class="keyword">out</span> createdNew))
             {
                 <span class="keyword">if</span> (createdNew)
@@ -422,7 +422,7 @@
                     <span class="keyword">var</span> app = <span class="keyword">new</span> <span class="usertype">App</span>();
                     app.InitializeComponent();
                     app.Run();
-                <em>}
+<em>                }
             }</em>
         }
     }
@@ -451,7 +451,7 @@
          <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">object</span> InitializeLifetimeService() => <span class="keyword">null</span>;
      }
  }</code></pre>
-        <p><code>MarshalByRefObject</code>を継承した<code>メッセージ</code>クラスでは、<code>InitializeLifetimeService</code>というメソッドをオーバーライドしています。これは、時間経過によって、通信できなくなる状態に自動的になってしまうのを防ぐためです。</p>
+        <p><code>MarshalByRefObject</code>を継承した<code>Handler</code>クラスでは、<code>InitializeLifetimeService</code>というメソッドをオーバーライドしています。これは、時間経過によって、通信できなくなる状態に自動的になってしまうのを防ぐためです。</p>
         <p>通信のサーバー側は、次のように記述します。<code>IpcServerChannel</code>のコンストラクターでは、UUIDなど、アプリケーションを一意に識別するための文字列を渡します。<code>RemotingServices.Marshal</code>メソッドの第2引数では、<code>MarshalByRefObject</code>オブジェクトを識別するための文字列を指定します。</p>
         <pre><code><span class="keyword">const</span> <span class="keyword">string</span> ApplicationId = <span class="string">"00000000-0000-0000-0000-000000000000"</span>; <span class="comment">// 実際はUUIDなどが良い。</span>
 <span class="keyword">const</span> <span class="keyword">string</span> HandlerName = <span class="string">"handler"</span>;
@@ -489,14 +489,14 @@
             {
                 <span class="keyword">if</span> (createdNew)
                 {
-                    <em><span class="usertype">ChannelServices</span>.RegisterChannel(<span class="keyword">new</span> <span class="usertype">IpcServerChannel</span>(ApplicationId), <span class="keyword">true</span>);
+<em>                    <span class="usertype">ChannelServices</span>.RegisterChannel(<span class="keyword">new</span> <span class="usertype">IpcServerChannel</span>(ApplicationId), <span class="keyword">true</span>);
                     <span class="usertype">RemotingServices</span>.Marshal(<span class="keyword">new</span> <span class="usertype">Handler</span>(), HandlerName, <span class="keyword">typeof</span>(<span class="usertype">Handler</span>));</em>
 
                     <span class="keyword">var</span> app = <span class="keyword">new</span> <span class="usertype">App</span>();
                     app.InitializeComponent();
                     app.Run();
                 }
-                <em><span class="keyword">else</span>
+<em>                <span class="keyword">else</span>
                 {
                     <span class="usertype">ChannelServices</span>.RegisterChannel(<span class="keyword">new</span> <span class="usertype">IpcClientChannel</span>(), <span class="keyword">true</span>);
                     ((<span class="usertype">Handler</span>)<span class="usertype">Activator</span>.GetObject(<span class="keyword">typeof</span>(<span class="usertype">Handler</span>), <span class="string">&quot;ipc://&quot;</span> + ApplicationId + <span class="string">&quot;/&quot;</span> + HandlerName)).Handle();
@@ -504,7 +504,7 @@
             }
         }
 
-        <em><span class="keyword">class</span> <span class="usertype">Handler</span> : <span class="usertype">MarshalByRefObject</span>
+<em>        <span class="keyword">class</span> <span class="usertype">Handler</span> : <span class="usertype">MarshalByRefObject</span>
         {
             <span class="keyword">public</span> <span class="keyword">void</span> Handle()
             {
@@ -533,7 +533,7 @@
         <span class="keyword">const</span> <span class="keyword">string</span> ApplicationId = <span class="string">&quot;00000000-0000-0000-0000-000000000000&quot;</span>; <span class="comment">// 実際はUUIDなどが良い。</span>
         <span class="keyword">const</span> <span class="keyword">string</span> HandlerName = <span class="string">&quot;handler&quot;</span>;
 
-        <em><span class="keyword">public</span> <span class="keyword">delegate</span> <span class="keyword">void</span> <span class="usertype">ArgsReceivedEventHandler</span>(<span class="keyword">string</span>[] args);
+<em>        <span class="keyword">public</span> <span class="keyword">delegate</span> <span class="keyword">void</span> <span class="usertype">ArgsReceivedEventHandler</span>(<span class="keyword">string</span>[] args);
 
         <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">event</span> <span class="usertype">ArgsReceivedEventHandler</span> ArgsReceived;</em>
 
@@ -564,7 +564,7 @@
         {
             <span class="keyword">public</span> <span class="keyword">void</span> Handle(<em><span class="keyword">string</span>[] args</em>)
             {
-                <em><span class="keyword">if</span> (ArgsReceived != <span class="keyword">null</span>)
+<em>                <span class="keyword">if</span> (ArgsReceived != <span class="keyword">null</span>)
                     Current.Dispatcher.Invoke(ArgsReceived, (<span class="keyword">object</span>)args);</em>
             }
 
@@ -584,7 +584,7 @@
         {
             InitializeComponent();
 
-            <em><span class="usertype">App</span>.ArgsReceived += args =&gt;
+<em>            <span class="usertype">App</span>.ArgsReceived += args =&gt;
             {
                 Activate();
 
@@ -632,8 +632,8 @@ namespace WpfApp1
     }
 }</code></pre>
         <p>そして、<code>App.xaml.cs</code> の <code>Main</code> メソッドを記述します。<code>Semaphore</code> で二重起動かどうかを判定し、二重起動であれば、メモリマップトファイルから、起動済みウィンドウのウィンドウハンドルを読み込みます。</p>
-        <p>起動済みウィンドウをアクティブにするには、Windows API の <code>SetForegroundWindow</code> 関数を使います。この引数にウィンドウハンドルを指定します。また、ウィンドウが最小化していた場合は元のサイズに戻すため、<code>IsIconic</code> 関数と <code>ShowWindowAsync</code> 関数も使っています。</p>
-        <p>なお、ごく短い時間ですが、「<code>Semaphore</code> によって二重起動は抑止できているが、まだウィンドウハンドルは書き込まれていない」というタイミングが存在します。そのため、<code>TryActivateExistingWindow</code> メソッド（起動済みウィンドウのアクティブ化を試みるメソッド）では、メモリマップトファイルから読み込んだ値が <kbd>0</kbd> だった場合、10回まで再試行するようにしています。</p>
+        <p>起動済みウィンドウをアクティブにするには、Windows API の <code>SetForegroundWindow</code> 関数を使います。この関数にウィンドウハンドルを渡します。また、ウィンドウが最小化していた場合は元のサイズに戻すため、<code>IsIconic</code> 関数と <code>ShowWindowAsync</code> 関数も使っています。</p>
+        <p>なお、ごく短い時間ですが、「<code>Semaphore</code> によって二重起動は防止できているが、まだウィンドウハンドルは書き込まれていない」というタイミングが存在します。そのため、<code>TryActivateExistingWindow</code> メソッド（起動済みウィンドウのアクティブ化を試みるメソッド）では、メモリマップトファイルから読み込んだ値が <kbd>0</kbd> だった場合、10回まで再試行するようにしています。</p>
         <pre><code class="C#">using System;
 using System.IO;
 using System.IO.MemoryMappedFiles;
@@ -675,7 +675,7 @@ namespace WpfApp1
 
                 var mainWindow = new MainWindow();
 
-                using (var mmf = MemoryMappedFile.CreateNew(memoryMappedFileName, 8))
+                using (var mmf = <em>MemoryMappedFile.CreateNew(memoryMappedFileName, 8)</em>)
                 {
                     mainWindow.SourceInitialized += (sender, e) =>
                     {
@@ -700,7 +700,7 @@ namespace WpfApp1
             {
                 try
                 {
-                    using (var mmf = MemoryMappedFile.OpenExisting(memoryMappedFileName))
+                    using (var mmf = <em>MemoryMappedFile.OpenExisting(memoryMappedFileName)</em>)
                     using (var stream = mmf.CreateViewStream(0, 8, MemoryMappedFileAccess.Read))
                     {
                         var binaryReader = new BinaryReader(stream);
@@ -727,7 +727,7 @@ namespace WpfApp1
                 ShowWindowAsync(hWnd, SW_RESTORE);
             }
 
-            SetForegroundWindow(hWnd);
+            <em>SetForegroundWindow(hWnd);</em>
         }
     }
 }</code></pre>
