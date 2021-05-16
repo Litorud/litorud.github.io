@@ -51,8 +51,7 @@
         </table>
     </header>
     <h1>WPF による開発覚え書き</h1>
-    <p>Visual C# 2010 Express や、Visual Studio Community 2015、Visual Studio Community 2017 で、WPF
-        アプリケーションを開発した際の覚え書きです。未だ WPF には詳しくないので、ここに書いてあることは大間違いかもしれません。</p>
+    <p>Visual C# 2010 Express や、Visual Studio Community 2015、Visual Studio Community 2017 で、WPF アプリケーションを開発した際の覚え書きです。未だ WPF には詳しくないので、ここに書いてあることは大間違いかもしれません。</p>
     <ol>
         <li>
             Visual C# 2010 Express 時代
@@ -72,23 +71,20 @@
                 <li><a href="#8">コマンドライン引数を取得する（<code>Main</code>メソッドを使う）</a></li>
                 <li><a href="#9">二重起動を防止する（<code>Semaphore</code>を使う）</a></li>
                 <li><a href="#10">アプリケーション間の通信</a></li>
-                <li><a href="#11">二重起動を防止し、起動中のウィンドウをアクティブにする</a></li>
-                <li><a href="#12">二重起動を防止し、起動中のウィンドウをアクティブにしてコマンドライン引数を渡す</a></li>
+                <li><a href="#11">二重起動を防止し、起動済みのウィンドウをアクティブにする</a></li>
+                <li><a href="#12">二重起動を防止し、起動済みのウィンドウをアクティブにしてコマンドライン引数を渡す</a></li>
             </ul>
         </li>
         <li>
             Visual Studio Community 2017 時代
             <ul>
-                <li><a href="#13">二重起動を防止し、起動中のウィンドウをアクティブにする（メモリマップトファイルを使う）</a></li>
+                <li><a href="#13">二重起動を防止し、起動済みのウィンドウをアクティブにする（メモリマップトファイルを使う）</a></li>
             </ul>
         </li>
     </ol>
     <section>
         <h2 id="1">コマンドライン引数を取得する（<code>Startup</code>イベントを使う）</h2>
-        <p>Visual C# 2010 Express で WPF アプリケーション プロジェクトを作成すると、App.xaml、App.xaml.cs、MainWindow.xaml、MainWindow.xaml.cs
-            の4つのファイルが生成されます。このうちの App.xaml
-            の<code>Application</code>要素から<code>StartupUri</code>属性を削除し、<code>Startup</code>属性にイベントハンドラーとなるメソッドの名前を指定します。
-        </p>
+        <p>Visual C# 2010 Express で WPF アプリケーション プロジェクトを作成すると、App.xaml、App.xaml.cs、MainWindow.xaml、MainWindow.xaml.cs の4つのファイルが生成されます。このうちの App.xaml の <code>Application</code> 要素から <code>StartupUri</code> 属性を削除し、<code>Startup</code> 属性にイベントハンドラーとなるメソッドの名前を指定します。</p>
         <pre><code><span class="xamlsign">&lt;</span><span class="xamlname">Application</span> <span class="xamlattr">x</span>:<span class="xamlattr">Class</span><span class="xamlsign">="WpfApplication1.App"</span>
              <span class="xamlattr">xmlns</span><span class="xamlsign">="http://schemas.microsoft.com/winfx/2006/xaml/presentation"</span>
              <span class="xamlattr">xmlns</span><span class="xamlsign">:</span><span class="xamlattr">x</span><span class="xamlsign">="http://schemas.microsoft.com/winfx/2006/xaml"</span>
@@ -97,8 +93,7 @@
 
     <span class="xamlsign">&lt;/</span><span class="xamlname">Application.Resources</span><span class="xamlsign">&gt;</span>
 <span class="xamlsign">&lt;/</span><span class="xamlname">Application</span><span class="xamlsign">&gt;</span></code></pre>
-        <p>App.xaml.csは次のようにします。イベントハンドラーに渡される<code>StartupEventArgs</code>オブジェクトの<code>Args</code>プロパティーがコマンドライン引数です。
-        </p>
+        <p>App.xaml.csは次のようにします。イベントハンドラーに渡される<code>StartupEventArgs</code>オブジェクトの<code>Args</code>プロパティーがコマンドライン引数です。</p>
         <pre><code><span class="keyword">using</span> System.Windows;
 
 <span class="keyword">namespace</span> WpfApplication1
@@ -148,13 +143,11 @@
         }
     }
 }</code></pre>
-        <p>注意点として、生成した<code>Mutex</code>オブジェクトがガーベッジコレクションによって消滅すると、2つ目以降のインスタンスが起動できるようになってしまいます。そこで上記の例では、<code>Mutex</code>オブジェクトをstaticフィールドとすることで、消滅しないようにしています。
-        </p>
+        <p>注意点として、生成した<code>Mutex</code>オブジェクトがガーベッジコレクションによって消滅すると、2つ目以降のインスタンスが起動できるようになってしまいます。そこで上記の例では、<code>Mutex</code>オブジェクトをstaticフィールドとすることで、消滅しないようにしています。</p>
     </section>
     <section>
         <h2 id="3">任意のコレクションオブジェクトの内容を<code>ListBox</code>や<code>ListView</code>で表示する</h2>
-        <p>次のように、<code>ListBox</code>や<code>ListView</code>の<code>ItemsSource</code>プロパティーにコレクションオブジェクトを指定するだけです。コレクションオブジェクトは、<code>System.Collections.IEnumerable</code>を実装している必要があります。
-        </p>
+        <p>次のように、<code>ListBox</code>や<code>ListView</code>の<code>ItemsSource</code>プロパティーにコレクションオブジェクトを指定するだけです。コレクションオブジェクトは、<code>System.Collections.IEnumerable</code>を実装している必要があります。</p>
         <pre><code><span class="keyword">using</span> System.Collections.Generic;
 <span class="keyword">using</span> System.ComponentModel;
 <span class="keyword">using</span> System.Windows;
@@ -184,8 +177,7 @@
         }
     }
 }</code></pre>
-        <p>ただし、コレクションオブジェクトの更新を<code>ListBox</code>や<code>ListView</code>の表示に反映させるには、26行目のように<code>ICollectionView.Refresh</code>メソッドを呼び出す必要があります。あるいは、ObservableCollectionクラスを使えば、Refresh()は不要です。
-        </p>
+        <p>ただし、コレクションオブジェクトの更新を<code>ListBox</code>や<code>ListView</code>の表示に反映させるには、26行目のように<code>ICollectionView.Refresh</code>メソッドを呼び出す必要があります。あるいは、ObservableCollectionクラスを使えば、Refresh()は不要です。</p>
     </section>
     <section>
         <h2 id="4"><code>ListView</code>の各列に指定したプロパティを表示する</h2>
@@ -205,8 +197,7 @@
         <span class="xamlsign">&lt;/</span><span class="xamlname">ListView</span><span class="xamlsign">&gt;</span>
     <span class="xamlsign">&lt;/</span><span class="xamlname">Grid</span><span class="xamlsign">&gt;</span>
 <span class="xamlsign">&lt;/</span><span class="xamlname">Window</span><span class="xamlsign">&gt;</span></code></pre>
-        <p>この例では、App.xaml.csは次のようにしています。<code>User</code>というクラスがあり、<code>ListView</code>の各行に表示されるのは、<code>List</code>に格納された<code>User</code>のインスタンスです。
-        </p>
+        <p>この例では、App.xaml.csは次のようにしています。<code>User</code>というクラスがあり、<code>ListView</code>の各行に表示されるのは、<code>List</code>に格納された<code>User</code>のインスタンスです。</p>
         <pre><code><span class="keyword">using</span> System.Collections.Generic;
 <span class="keyword">using</span> System.ComponentModel;
 <span class="keyword">using</span> System.Windows;
@@ -256,8 +247,7 @@
     column.Width = 0;
     column.Width = <span class="keyword">double</span>.NaN;
 }</code></pre>
-        <p>このようにすれば、列ヘッダーの境界をダブルクリックしたときのように、列幅が最適な状態になります。何度も行うなら、その<code>GridViewColumn</code>をフィールドに保持しておいてもいいでしょう。
-        </p>
+        <p>このようにすれば、列ヘッダーの境界をダブルクリックしたときのように、列幅が最適な状態になります。何度も行うなら、その<code>GridViewColumn</code>をフィールドに保持しておいてもいいでしょう。</p>
     </section>
     <section>
         <h2 id="6">アニメーションの開始/一時停止/再開/停止</h2>
@@ -274,8 +264,7 @@
          <span class="comment">&lt;!-- 起動直後はPause/ResumeボタンとStopボタンは無効状態としている。--&gt;</span>
      <span class="xamlsign">&lt;/</span><span class="xamlname">StackPanel</span><span class="xamlsign">&gt;</span>
  <span class="xamlsign">&lt;/</span><span class="xamlname">Window</span><span class="xamlsign">&gt;</span></code></pre>
-        <p>Startボタンを押すとアニメーション開始、Pause/Resumeボタンを押すと一時停止、同じボタンをもう一度押すと再開、Stopボタンを押すと停止、という挙動をC#コードで実現するには、MainWindow.xaml.csを次のようにします。
-        </p>
+        <p>Startボタンを押すとアニメーション開始、Pause/Resumeボタンを押すと一時停止、同じボタンをもう一度押すと再開、Stopボタンを押すと停止、という挙動をC#コードで実現するには、MainWindow.xaml.csを次のようにします。</p>
         <pre><code><span class="keyword">using</span> System;
 <span class="keyword">using</span> System.Windows;
 <span class="keyword">using</span> System.Windows.Media.Animation;
@@ -343,8 +332,7 @@
          <span class="xamlsign">&lt;/</span><span class="xamlname">ListBox</span><span class="xamlsign">&gt;</span>
      <span class="xamlsign">&lt;/</span><span class="xamlname">Grid</span><span class="xamlsign">&gt;</span>
  <span class="xamlsign">&lt;/</span><span class="xamlname">Window</span><span class="xamlsign">&gt;</span></code></pre>
-        <p>まず<code>ListBoxItem</code>の<code>AllowDrop</code>プロパティをOnにします。そして、<code>MouseMove</code>と<code>DragEnter</code>という2つのイベントにイベントハンドラーを指定します。
-        </p>
+        <p>まず<code>ListBoxItem</code>の<code>AllowDrop</code>プロパティをOnにします。そして、<code>MouseMove</code>と<code>DragEnter</code>という2つのイベントにイベントハンドラーを指定します。</p>
         <p>MainWindow.xaml.csは次のようにします。</p>
         <pre><code><span class="keyword">using</span> System.Windows;
 <span class="keyword">using</span> System.Windows.Controls;
@@ -377,19 +365,13 @@
         }
     }
 }</code></pre>
-        <p>ドラッグの開始は、<code>MouseMove</code>のイベントハンドラーの中で、<code>DragDrop</code>クラスの静的メソッドである<code>DoDragDrop()</code>によって行います。このとき、並べ替える<code>ListBoxItem</code>を引数に指定しておきます。
-        </p>
-        <p>並べ替えは、<code>DragEnter</code>のイベントハンドラーの中で行います。第2引数の<code>DragEventArgs</code>オブジェクトの<code>Data</code>プロパティーの<code>GetData</code>メソッドで、先に指定した<code>ListBoxItem</code>が取得できます。
-        </p>
+        <p>ドラッグの開始は、<code>MouseMove</code>のイベントハンドラーの中で、<code>DragDrop</code>クラスの静的メソッドである<code>DoDragDrop()</code>によって行います。このとき、並べ替える<code>ListBoxItem</code>を引数に指定しておきます。</p>
+        <p>並べ替えは、<code>DragEnter</code>のイベントハンドラーの中で行います。第2引数の<code>DragEventArgs</code>オブジェクトの<code>Data</code>プロパティーの<code>GetData</code>メソッドで、先に指定した<code>ListBoxItem</code>が取得できます。</p>
     </section>
     <section>
         <h2 id="8">コマンドライン引数を取得する（<code>Main</code>メソッドを使う）</h2>
-        <p>Visual Studio Community 2015でWPF アプリケーション
-            プロジェクトを作成すると、App.xaml、App.xaml.cs、MainWindow.xaml、MainWindow.xaml.csの4つのファイルが生成されます。このうち、App.xamlのプロパティで、ビルド
-            アクションをApplicationDefinitionからPageに変更します。</p>
-        <p>ビルド
-            アクションをPageにすると、<code>Main</code>メソッドが自動で実装されなくなり、以下のようにApp.xaml.csに明示的に定義する必要があります。このとき、<code>Main</code>メソッドの仮引数からコマンドライン引数を取得できます。
-        </p>
+        <p>Visual Studio Community 2015でWPF アプリケーション プロジェクトを作成すると、App.xaml、App.xaml.cs、MainWindow.xaml、MainWindow.xaml.csの4つのファイルが生成されます。このうち、App.xamlのプロパティで、ビルド アクションをApplicationDefinitionからPageに変更します。</p>
+        <p>ビルド アクションをPageにすると、<code>Main</code>メソッドが自動で実装されなくなり、以下のようにApp.xaml.csに明示的に定義する必要があります。このとき、<code>Main</code>メソッドの仮引数からコマンドライン引数を取得できます。</p>
         <pre><code><span class="keyword">using</span> System;
 <span class="keyword">using</span> System.Windows;
 
@@ -410,18 +392,15 @@
         }
     }
 }</code></pre>
-        <p>このコードでは、コマンドライン引数をほかの場所からも参照できるようにするため、<code>App</code>に<code>Args</code>という静的プロパティを定義し、そこに代入しています。また、<code>Main</code>メソッドを明示的に実装しているため、15～17行目を記述しなければアプリケーションは開始しません。
-        </p>
+        <p>このコードでは、コマンドライン引数をほかの場所からも参照できるようにするため、<code>App</code>に<code>Args</code>という静的プロパティを定義し、そこに代入しています。また、<code>Main</code>メソッドを明示的に実装しているため、15～17行目を記述しなければアプリケーションは開始しません。</p>
         <dl>
             <dt>参考</dt>
-            <dd><a href="http://www.atmarkit.co.jp/ait/articles/1511/04/news027.html">WPF：Mainメソッドを書き変えるには？［C#／VB］</a>
-            </dd>
+            <dd><a href="http://www.atmarkit.co.jp/ait/articles/1511/04/news027.html">WPF：Mainメソッドを書き変えるには？［C#／VB］</a></dd>
         </dl>
     </section>
     <section>
         <h2 id="9">二重起動を防止する（<code>Semaphore</code>を使う）</h2>
-        <p><code>System.Threading.Semaphore</code>を使う方法です。<code>Semaphore</code>のコンストラクターで、UUIDなど、アプリケーションを一意に識別するための文字列を渡します。
-        </p>
+        <p><code>System.Threading.Semaphore</code>を使う方法です。<code>Semaphore</code>のコンストラクターで、UUIDなど、アプリケーションを一意に識別するための文字列を渡します。</p>
         <pre><code><span class="keyword">using</span> System;
 <span class="keyword">using</span> System.Threading;
 <span class="keyword">using</span> System.Windows;
@@ -472,10 +451,8 @@
          <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">object</span> InitializeLifetimeService() => <span class="keyword">null</span>;
      }
  }</code></pre>
-        <p><code>MarshalByRefObject</code>を継承した<code>メッセージ</code>クラスでは、<code>InitializeLifetimeService</code>というメソッドをオーバーライドしています。これは、時間経過によって、通信できなくなる状態に自動的になってしまうのを防ぐためです。
-        </p>
-        <p>通信のサーバー側は、次のように記述します。<code>IpcServerChannel</code>のコンストラクターでは、UUIDなど、アプリケーションを一意に識別するための文字列を渡します。<code>RemotingServices.Marshal</code>メソッドの第2引数では、<code>MarshalByRefObject</code>オブジェクトを識別するための文字列を指定します。
-        </p>
+        <p><code>MarshalByRefObject</code>を継承した<code>メッセージ</code>クラスでは、<code>InitializeLifetimeService</code>というメソッドをオーバーライドしています。これは、時間経過によって、通信できなくなる状態に自動的になってしまうのを防ぐためです。</p>
+        <p>通信のサーバー側は、次のように記述します。<code>IpcServerChannel</code>のコンストラクターでは、UUIDなど、アプリケーションを一意に識別するための文字列を渡します。<code>RemotingServices.Marshal</code>メソッドの第2引数では、<code>MarshalByRefObject</code>オブジェクトを識別するための文字列を指定します。</p>
         <pre><code><span class="keyword">const</span> <span class="keyword">string</span> ApplicationId = <span class="string">"00000000-0000-0000-0000-000000000000"</span>; <span class="comment">// 実際はUUIDなどが良い。</span>
 <span class="keyword">const</span> <span class="keyword">string</span> HandlerName = <span class="string">"handler"</span>;
 
@@ -484,13 +461,11 @@
         <p>通信のクライアント側は、次のように記述します。</p>
         <pre><code><span class="usertype">ChannelServices</span>.RegisterChannel(<span class="keyword">new</span> <span class="usertype">IpcClientChannel</span>(), <span class="keyword">true</span>);
 ((<span class="usertype">Handler</span>)<span class="usertype">Activator</span>.GetObject(<span class="keyword">typeof</span>(<span class="usertype">Handler</span>), <span class="string">"ipc://"</span> + ApplicationId + <span class="string">"/"</span> + HandlerName)).Handle();</code></pre>
-        <p>ただし、ユーザーインターフェースに変更を加えるなど、別のスレッドに関係する処理を行う場合は、<code>Dispatcher.Invoke</code>メソッドを使う必要があります。次のセクションの例では、<code>Dispatcher.Invoke</code>メソッドを使っています。
-        </p>
+        <p>ただし、ユーザーインターフェースに変更を加えるなど、別のスレッドに関係する処理を行う場合は、<code>Dispatcher.Invoke</code>メソッドを使う必要があります。次のセクションの例では、<code>Dispatcher.Invoke</code>メソッドを使っています。</p>
     </section>
     <section>
-        <h2 id="11">二重起動を防止し、起動中のウィンドウをアクティブにする</h2>
-        <p><code>Semaphore</code>を使って二重起動を防止し、<code>System.Runtime.Remoting.Channels.Ipc</code>名前空間のクラスを使って起動中のウィンドウと通信します。
-        </p>
+        <h2 id="11">二重起動を防止し、起動済みのウィンドウをアクティブにする</h2>
+        <p><code>Semaphore</code>を使って二重起動を防止し、<code>System.Runtime.Remoting.Channels.Ipc</code>名前空間のクラスを使って起動済みのウィンドウと通信します。</p>
         <p><code>System.Runtime.Remoting.Channels.Ipc</code>名前空間のクラスを使うので、参照設定にSystem.Runtime.Remotingを追加する必要があります。</p>
         <pre><code><span class="keyword">using</span> System;
 <span class="keyword">using</span> System.Runtime.Remoting;
@@ -542,9 +517,8 @@
 }</code></pre>
     </section>
     <section>
-        <h2 id="12">二重起動を防止し、起動中のウィンドウをアクティブにしてコマンドライン引数を渡す</h2>
-        <p>App.xaml.csは以下のようにします。<code>ArgsReceived</code>という静的イベントを宣言し、二重起動を防止したとき、イベントが発生するようにしています。このとき、引数にコマンドライン引数を指定します。
-        </p>
+        <h2 id="12">二重起動を防止し、起動済みのウィンドウをアクティブにしてコマンドライン引数を渡す</h2>
+        <p>App.xaml.csは以下のようにします。<code>ArgsReceived</code>という静的イベントを宣言し、二重起動を防止したとき、イベントが発生するようにしています。このとき、引数にコマンドライン引数を指定します。</p>
         <pre><code><span class="keyword">using</span> System;
 <span class="keyword">using</span> System.Runtime.Remoting;
 <span class="keyword">using</span> System.Runtime.Remoting.Channels;
@@ -598,10 +572,8 @@
         }
     }
 }</code></pre>
-        <p><code><span class="usertype">Handler</span></code>クラスの<code>Handle</code>メソッドで、<code>args</code>を<code><span class="keyword">object</span></code>にキャストしている所で<q>キャストが冗長です。</q>という警告が出ます。しかし、このキャストは必要です。キャストしないと、<code><span class="keyword">string</span>[]</code>型の<code>args</code>が<code><span class="keyword">string</span></code>型の可変長引数と判断され、例外が発生します。もしくは、<code><span class="keyword">new</span> <span class="keyword">object</span>[] { args }</code>のように記述すれば警告も例外も出ません。
-        </p>
-        <p>MainWindow.xaml.csは以下のようにします。<code>App</code>の<code>ArgsReceived</code>静的イベントに、渡されたコマンドライン引数を処理するイベントハンドラーを追加しています。イベントハンドラーの中でウィンドウをアクティブにし、またコマンドライン引数を処理しています。
-        </p>
+        <p><code><span class="usertype">Handler</span></code>クラスの<code>Handle</code>メソッドで、<code>args</code>を<code><span class="keyword">object</span></code>にキャストしている所で<q>キャストが冗長です。</q>という警告が出ます。しかし、このキャストは必要です。キャストしないと、<code><span class="keyword">string</span>[]</code>型の<code>args</code>が<code><span class="keyword">string</span></code>型の可変長引数と判断され、例外が発生します。もしくは、<code><span class="keyword">new</span> <span class="keyword">object</span>[] { args }</code>のように記述すれば警告も例外も出ません。</p>
+        <p>MainWindow.xaml.csは以下のようにします。<code>App</code>の<code>ArgsReceived</code>静的イベントに、渡されたコマンドライン引数を処理するイベントハンドラーを追加しています。イベントハンドラーの中でウィンドウをアクティブにし、またコマンドライン引数を処理しています。</p>
         <pre><code><span class="keyword">using</span> System.Windows;
 
 <span class="keyword">namespace</span> WpfApplication1
@@ -624,9 +596,44 @@
 }</code></pre>
     </section>
     <section>
-        <h2 id="13">二重起動を防止し、起動中のウィンドウをアクティブにする（メモリマップトファイルを使う）</h2>
-        <p>以下のようにします。ちゃんとした解説はそのうち書くかもしれません。</p>
-        <p>コード中の<code>HandleInitialized</code>は独自に追加したイベントです。本来は<code>SourceInitialized</code>を使えばよいものです。</p>
+        <h2 id="13">二重起動を防止し、起動済みのウィンドウをアクティブにする（メモリマップトファイルを使う）</h2>
+        <p>まずは <code>Main</code> メソッドを明示的に定義するようにします。そのために、<code>App.xaml</code> のビルド アクションを <code>Page</code> に変更します。</p>
+        <p>また、<code>App.xaml</code> から <code>StartupUri</code> 属性を削除します。これで、表示処理を明示的に実行するまで、メインウィンドウは表示されません。</p>
+        <pre><code class="xml">&lt;Application x:Class="WpfApp1.App"
+            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+            xmlns:local="clr-namespace:WpfApp1"&gt;
+   &lt;Application.Resources&gt;
+        
+   &lt;/Application.Resources&gt;
+&lt;/Application&gt;</code></pre>
+        <p>次に、<code>MainWindow</code> に、ウィンドウハンドルを公開するプロパティを定義します。このプロパティには、<code>SourceInitialized</code> イベントで値を設定します。<code>SourceInitialized</code> イベントは、ウィンドウハンドルを取得できるようになる、最も早いタイミングのイベントです。</p>
+        <pre><code class="C#">using System;
+using System.Windows;
+using System.Windows.Interop;
+
+namespace WpfApp1
+{
+    public partial class MainWindow : Window
+    {
+        <em>public IntPtr Handle { get; private set; }</em>
+
+        public MainWindow()
+        {
+            InitializeComponent();
+        }
+
+        protected override void OnSourceInitialized(EventArgs e)
+        {
+            <em>Handle = new WindowInteropHelper(this).Handle;</em>
+
+            base.OnSourceInitialized(e);
+        }
+    }
+}</code></pre>
+        <p>そして、<code>App.xaml.cs</code> の <code>Main</code> メソッドを記述します。<code>Semaphore</code> で二重起動かどうかを判定し、二重起動であれば、メモリマップトファイルから、起動済みウィンドウのウィンドウハンドルを読み込みます。</p>
+        <p>起動済みウィンドウをアクティブにするには、Windows API の <code>SetForegroundWindow</code> 関数を使います。この引数にウィンドウハンドルを指定します。また、ウィンドウが最小化していた場合は元のサイズに戻すため、<code>IsIconic</code> 関数と <code>ShowWindowAsync</code> 関数も使っています。</p>
+        <p>なお、ごく短い時間ですが、「<code>Semaphore</code> によって二重起動は抑止できているが、まだウィンドウハンドルは書き込まれていない」というタイミングが存在します。そのため、<code>TryActivateExistingWindow</code> メソッド（起動済みウィンドウのアクティブ化を試みるメソッド）では、メモリマップトファイルから読み込んだ値が <kbd>0</kbd> だった場合、10回まで再試行するようにしています。</p>
         <pre><code class="C#">using System;
 using System.IO;
 using System.IO.MemoryMappedFiles;
@@ -634,31 +641,28 @@ using System.Runtime.InteropServices;
 using System.Threading;
 using System.Windows;
 
-namespace DesktopBackgroundScribbler
+namespace WpfApp1
 {
-    /// &lt;summary&gt;
-    /// App.xaml の相互作用ロジック
-    /// &lt;/summary&gt;
     public partial class App : Application
     {
-        const string id = "{14482529-941C-4025-80F8-1836D76B064B}";
-        const string memoryMappedFileName = id + ".dat";
+        const string applicationId = "00000000-0000-0000-0000-000000000000"; // 実際はUUIDなどが良い。
+        const string memoryMappedFileName = applicationId + ".dat";
 
         const int SW_RESTORE = 9;
 
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        [DllImport("user32.dll")]
         static extern bool IsIconic(IntPtr hWnd);
 
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        [DllImport("user32.dll")]
         static extern bool ShowWindowAsync(IntPtr hWnd, int nCmdShow);
 
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+        [DllImport("user32.dll")]
         static extern bool SetForegroundWindow(IntPtr hWnd);
 
         [STAThread]
-        public static void Main()
+        public static void Main(string[] args)
         {
-            using (var semaphore = new Semaphore(1, 1, id, out var createdNew))
+            using (var semaphore = new Semaphore(1, 1, applicationId, out var createdNew))
             {
                 if (!createdNew)
                 {
@@ -673,7 +677,7 @@ namespace DesktopBackgroundScribbler
 
                 using (var mmf = MemoryMappedFile.CreateNew(memoryMappedFileName, 8))
                 {
-                    mainWindow.HandleInitialized += (sender, e) =>
+                    mainWindow.SourceInitialized += (sender, e) =>
                     {
                         var windowHandle = mainWindow.Handle.ToInt64();
 
