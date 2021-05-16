@@ -40,12 +40,12 @@
 	<p>その Yahoo!ジオシティーズも、2019年3月31日に終了することが決まったため、2018年10月31日、「リートルード」は GitHub Pages に移行しました。</p>
 	<section>
 		<h2>「PowerShell ウィンドウをここに開く」のコマンド</h2>
-		<p>エクスプローラーのフォルダー上で Shift+右クリックすると、「PowerShell ウィンドウをここに開く」という項目が表れます。何も選択していないときに何もない所で Shift+右クリックした場合も、同様の項目が表れます。これを選択したとき、どのようなコマンドでPowerShell が起動するのか検索しました。</p>
-		<p>コマンドは、レジストリの“<code>HKEY_CLASSES_ROOT\Directory\shell\Powershell\command</code>”または“<code>HKEY_CLASSES_ROOT\Directory\Background\shell\Powershell\command</code>”に保存されていることが分かりました。前者がフォルダー上で Shift+右クリックしたとき、後者が何も選択していないときに何もない所で Shift+右クリックしたときだと思います。</p>
+		<p>エクスプローラーのフォルダー上で Shift+右クリックすると、「PowerShell ウィンドウをここに開く」という項目が表れます。何も選択していないときに何もない所で Shift+右クリックした場合も、同様の項目が表れます。これを選択したとき、どのようなコマンドで PowerShell が起動するのか検索しました。</p>
+		<p>コマンドは、レジストリの <code>HKEY_CLASSES_ROOT\Directory\shell\Powershell\command</code> または <code>HKEY_CLASSES_ROOT\Directory\Background\shell\Powershell\command</code> に保存されていることが分かりました。前者がフォルダー上で Shift+右クリックしたとき、後者が何も選択していないときに何もない所で Shift+右クリックしたときだと思います。</p>
 		<p>その値は次のようになっていました。</p>
 		<pre><code>powershell.exe -noexit -command Set-Location -literalPath '%V'</code></pre>
-		<p>コマンド中に現れる“<code>%V</code>”という文字列については、<a href="https://superuser.com/questions/136838/which-special-variables-are-available-when-writing-a-shell-command-for-a-context">Which special variables are available when writing a shell command for a context menu</a> に記述を見つけました。このページ、およびさらにリンク先のページによると、“<code>%v</code>”は基本的に「<span title="ファイルのコンテキストメニューで見られる「開く」「印刷」「編集」などのことだと思います。">動詞</span>」を表し、それが無いときは作業ディレクトリを表すようです。これによって、上記コマンドは「<code>powershell.exe</code> を起動し、<code>Set-Location</code> コマンドで作業ディレクトリに移動し、そのまま実行を継続する」ということを実現しているようです。</p>
-		<p>以前の Windows では、保存されているコマンドが“<code>HKEY_CLASSES_ROOT\Directory\shell\Powershell\command</code>”と“<code>HKEY_CLASSES_ROOT\Directory\Background\shell\Powershell\command</code>”とで少し異なりました。具体的には“<code>HKEY_CLASSES_ROOT\Directory\shell\Powershell\command</code>”のほうでは <code>-literalPath</code> オプションを使っていなかったのですが、いつの間にか修正したようです。</p>
+		<p>コマンド中に現れる <code>%V</code> という文字列については、<a href="https://superuser.com/questions/136838/which-special-variables-are-available-when-writing-a-shell-command-for-a-context">Which special variables are available when writing a shell command for a context menu</a> に記述を見つけました。このページ、およびさらにリンク先のページによると、<code>%v</code> は基本的に「<span title="ファイルのコンテキストメニューで見られる「開く」「印刷」「編集」などのことだと思います。">動詞</span>」を表し、それが無いときは作業ディレクトリを表すようです。これによって、上記コマンドは「<code>powershell.exe</code> を起動し、<code>Set-Location</code> コマンドで作業ディレクトリに移動し、そのまま実行を継続する」ということを実現しているようです。</p>
+		<p>以前の Windows では、保存されているコマンドが <code>HKEY_CLASSES_ROOT\Directory\shell\Powershell\command</code> と <code>HKEY_CLASSES_ROOT\Directory\Background\shell\Powershell\command</code> とで少し異なりました。具体的には <code>HKEY_CLASSES_ROOT\Directory\shell\Powershell\command</code> のほうでは <code>-literalPath</code> オプションを使っていなかったのですが、いつの間にか修正したようです。</p>
 		<p>PowerShell では、ファイルやディレクトリの名前に使える <kbd>[</kbd> と <kbd>]</kbd> を、複数のパスをまとめて指定するための特別な意味を持つ文字として使えるため、これによる意図しない動作を防ぐためには、<code>-literalPath</code> を使うべきだといえそうです。</p>
 	</section>
 	<section>
@@ -120,7 +120,7 @@
 			<line x1="0" y1="20" x2="100" y2="20" stroke="url(#grad2)" />
 		</svg>
 		<h3><code>url()</code> 関数の要不要</h3>
-		<p><code>textPath</code> 要素は、<code>xlink:href</code> 属性に <code>path</code> 要素の <code>id</code> を指定します（XLink の名前空間接頭辞を “xlink” としています）。このときは、<code>xlink:href=&quot;#path&quot;</code> のように、‘<kbd>#</kbd>’ に続けて <code>id</code> を記述すれば正しく解釈されます。一方、何らかの要素にグラデーションを掛けるなどの目的で、<code>fill</code> 属性に <code>linearGradient</code> 要素などの <code>id</code> を指定するときは、<code>fill=&quot;url(#grad)&quot;</code> のように <code>url()</code> 関数を使う必要があります。<code>xlink:href</code> が XLink の仕様であるのに対し、<code>fill</code> は SVG の仕様なので、このような違いがあるのでしょうか。</p>
+		<p><code>textPath</code> 要素は、<code>xlink:href</code> 属性に <code>path</code> 要素の <code>id</code> を指定します（XLink の名前空間接頭辞を “xlink” としています）。このときは、<code>xlink:href=&quot;#path&quot;</code> のように、<kbd>#</kbd> に続けて <code>id</code> を記述すれば正しく解釈されます。一方、何らかの要素にグラデーションを掛けるなどの目的で、<code>fill</code> 属性に <code>linearGradient</code> 要素などの <code>id</code> を指定するときは、<code>fill=&quot;url(#grad)&quot;</code> のように <code>url()</code> 関数を使う必要があります。<code>xlink:href</code> が XLink の仕様であるのに対し、<code>fill</code> は SVG の仕様なので、このような違いがあるのでしょうか。</p>
 	</section>
 	<section>
 		<h2>CSSのz-indexプロパティーの話</h2>

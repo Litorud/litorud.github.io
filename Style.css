@@ -1,5 +1,6 @@
 @charset "UTF-8";
 body {
+  margin-top: 0;
   padding-bottom: 4em;
   background-color: floralwhite;
   font-family: "游ゴシック", "Yu Gothic", sans-serif;
@@ -41,7 +42,7 @@ footer th::after {
 }
 
 h1 {
-  margin-top: 100px;
+  margin-top: 80px;
   margin-bottom: 40px;
   border-bottom: double burlywood;
 }
@@ -66,7 +67,7 @@ p {
 }
 
 a:hover {
-  background: linear-gradient(transparent, wheat);
+  background: linear-gradient(transparent, khaki);
 }
 
 table {
@@ -85,15 +86,31 @@ th {
 
 pre,
 code,
+kbd,
 textarea,
 input,
 output {
-  font-family: "Consolas", "BIZ UDゴシック", monospace;
+  font-family: "Consolas", "メイリオ", monospace;
 }
 
-pre {
+pre,
+code,
+kbd {
   border: thin lightgray ridge;
+  background-color: white;
   white-space: pre-wrap;
+}
+
+code,
+kbd {
+  padding: 0.1em;
+  border-radius: 0.2em;
+}
+
+pre > code {
+  display: block;
+  padding: 0.5em;
+  border-style: none;
 }
 
 footer {
@@ -114,15 +131,16 @@ footer {
 }
 
 .app:hover {
-  background-color: wheat;
+  background-color: khaki;
 }
 
 .note {
   color: #505050;
   font-size: smaller;
-  margin-left: 2em;
-  margin-right: 2em;
-  border: 1px darkgray dotted;
+  margin: 0 1em;
+  padding: 0.2em 0.5em;
+  border-radius: 1em;
+  background-color: whitesmoke;
 }
 
 textarea {
@@ -136,14 +154,19 @@ input[type="text"] {
 output {
   display: inline-block;
   width: 100%;
-  border: thin solid gray;
-  font-size: smaller;
+  min-height: 1em;
+  border: thin solid lightgray;
   background-color: whitesmoke;
+}
+
+pre > output {
+  display: block;
+  border-style: none;
 }
 
 input[type="number"],
 .number {
-  width: 20em;
+  width: 12em;
   text-align: end;
 }
 

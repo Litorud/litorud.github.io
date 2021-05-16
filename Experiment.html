@@ -27,7 +27,7 @@
     <h2>Echo</h2>
     <form name="echo">
       <textarea id="input" name="input" rows="3"></textarea>
-      <output name="output" for="input"></output>
+      <pre><output name="output" for="input"></output></pre>
     </form>
   </section>
   <section>
@@ -113,18 +113,16 @@
   <section>
     <h2>非同期的取得</h2>
     <form name="fetcher">
-      <p>
-        <select name="select">
-          <option selected="selected">index.html</option>
-          <option>Style.css</option>
-          <option>Script.js</option>
-          <option>Logo.svg</option>
-          <option>Experiment.html</option>
-          <option>StageTitle.svg</option>
-          <option>TURB1.svg</option>
-        </select>
-        <button type="button" name="fetch">取得</button>
-      </p>
+      <select name="select">
+        <option selected>index.html</option>
+        <option>Style.css</option>
+        <option>Script.js</option>
+        <option>Logo.svg</option>
+        <option>Experiment.html</option>
+        <option>StageTitle.svg</option>
+        <option>TURB1.svg</option>
+      </select>
+      <button type="button" name="fetch">取得</button>
     </form>
     <dl>
       <dt>取得したコード</dt>
