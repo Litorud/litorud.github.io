@@ -76,7 +76,7 @@ table {
 
 th,
 td {
-  border: thin burlywood solid;
+  border: thin solid burlywood;
   padding: 0 0.2em;
 }
 
@@ -96,7 +96,7 @@ output {
 pre,
 code,
 kbd {
-  border: thin lightgray ridge;
+  border: thin solid lightgray;
   background-color: white;
   white-space: pre-wrap;
 }
@@ -121,7 +121,7 @@ pre > code strong {
 footer {
   margin-top: 4em;
   padding-top: 1em;
-  border-top: thin burlywood solid;
+  border-top: thin solid burlywood;
 }
 
 .app {
