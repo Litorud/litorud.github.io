@@ -253,17 +253,17 @@
         <h2 id="6">アニメーションの開始/一時停止/再開/停止</h2>
         <p>次のようなXAMLがあるとします。</p>
         <pre><code><span class="xamlsign">&lt;</span><span class="xamlname">Window</span> <span class="xamlattr">x</span><span class="xamlsign">:</span><span class="xamlattr">Class</span><span class="xamlsign">="WpfApplication1.MainWindow"</span>
-         <span class="xamlattr">xmlns</span><span class="xamlsign">="http://schemas.microsoft.com/winfx/2006/xaml/presentation"</span>
-         <span class="xamlattr">xmlns</span><span class="xamlsign">:</span><span class="xamlattr">x</span><span class="xamlsign">="http://schemas.microsoft.com/winfx/2006/xaml"</span>
-         <span class="xamlattr">Title</span><span class="xamlsign">="MainWindow"</span> <span class="xamlattr">Width</span><span class="xamlsign">="400"</span> <span class="xamlattr">Height</span><span class="xamlsign">="300"&gt;</span>
-     <span class="xamlsign">&lt;</span><span class="xamlname">StackPanel</span><span class="xamlsign">&gt;</span>
-         <span class="xamlsign">&lt;</span><span class="xamlname">Rectangle</span> <span class="xamlattr">Name</span><span class="xamlsign">="rectangle1"</span> <span class="xamlattr">Width</span><span class="xamlsign">="0"</span> <span class="xamlattr">Height</span><span class="xamlsign">="20"</span> <span class="xamlattr">Fill</span><span class="xamlsign">="Blue"/&gt;</span>
-         <span class="xamlsign">&lt;</span><span class="xamlname">Button</span> <span class="xamlattr">Content</span><span class="xamlsign">="Start"</span> <span class="xamlattr">Click</span><span class="xamlsign">="StartButton_Click"/&gt;</span>
-         <span class="xamlsign">&lt;</span><span class="xamlname">Button</span> <span class="xamlattr">Content</span><span class="xamlsign">="Pause/Resume"</span> <span class="xamlattr">Click</span><span class="xamlsign">="PauseResumeButton_Click"</span> <span class="xamlattr">IsEnabled</span><span class="xamlsign">="False"</span> <span class="xamlattr">Name</span><span class="xamlsign">="pauseResumeButton"/&gt;</span>
-         <span class="xamlsign">&lt;</span><span class="xamlname">Button</span> <span class="xamlattr">Content</span><span class="xamlsign">="Stop"</span> <span class="xamlattr">Click</span><span class="xamlsign">="StopButton_Click"</span> <span class="xamlattr">IsEnabled</span><span class="xamlsign">="False"</span> <span class="xamlattr">Name</span><span class="xamlsign">="stopButton"/&gt;</span>
-         <span class="comment">&lt;!-- 起動直後はPause/ResumeボタンとStopボタンは無効状態としている。--&gt;</span>
-     <span class="xamlsign">&lt;/</span><span class="xamlname">StackPanel</span><span class="xamlsign">&gt;</span>
- <span class="xamlsign">&lt;/</span><span class="xamlname">Window</span><span class="xamlsign">&gt;</span></code></pre>
+        <span class="xamlattr">xmlns</span><span class="xamlsign">="http://schemas.microsoft.com/winfx/2006/xaml/presentation"</span>
+        <span class="xamlattr">xmlns</span><span class="xamlsign">:</span><span class="xamlattr">x</span><span class="xamlsign">="http://schemas.microsoft.com/winfx/2006/xaml"</span>
+        <span class="xamlattr">Title</span><span class="xamlsign">="MainWindow"</span> <span class="xamlattr">Width</span><span class="xamlsign">="400"</span> <span class="xamlattr">Height</span><span class="xamlsign">="300"&gt;</span>
+    <span class="xamlsign">&lt;</span><span class="xamlname">StackPanel</span><span class="xamlsign">&gt;</span>
+        <span class="xamlsign">&lt;</span><span class="xamlname">Rectangle</span> <span class="xamlattr">Name</span><span class="xamlsign">="rectangle1"</span> <span class="xamlattr">Width</span><span class="xamlsign">="0"</span> <span class="xamlattr">Height</span><span class="xamlsign">="20"</span> <span class="xamlattr">Fill</span><span class="xamlsign">="Blue"/&gt;</span>
+        <span class="xamlsign">&lt;</span><span class="xamlname">Button</span> <span class="xamlattr">Content</span><span class="xamlsign">="Start"</span> <span class="xamlattr">Click</span><span class="xamlsign">="StartButton_Click"/&gt;</span>
+        <span class="xamlsign">&lt;</span><span class="xamlname">Button</span> <span class="xamlattr">Content</span><span class="xamlsign">="Pause/Resume"</span> <span class="xamlattr">Click</span><span class="xamlsign">="PauseResumeButton_Click"</span> <span class="xamlattr">IsEnabled</span><span class="xamlsign">="False"</span> <span class="xamlattr">Name</span><span class="xamlsign">="pauseResumeButton"/&gt;</span>
+        <span class="xamlsign">&lt;</span><span class="xamlname">Button</span> <span class="xamlattr">Content</span><span class="xamlsign">="Stop"</span> <span class="xamlattr">Click</span><span class="xamlsign">="StopButton_Click"</span> <span class="xamlattr">IsEnabled</span><span class="xamlsign">="False"</span> <span class="xamlattr">Name</span><span class="xamlsign">="stopButton"/&gt;</span>
+        <span class="comment">&lt;!-- 起動直後はPause/ResumeボタンとStopボタンは無効状態としている。--&gt;</span>
+    <span class="xamlsign">&lt;/</span><span class="xamlname">StackPanel</span><span class="xamlsign">&gt;</span>
+<span class="xamlsign">&lt;/</span><span class="xamlname">Window</span><span class="xamlsign">&gt;</span></code></pre>
         <p>Startボタンを押すとアニメーション開始、Pause/Resumeボタンを押すと一時停止、同じボタンをもう一度押すと再開、Stopボタンを押すと停止、という挙動をC#コードで実現するには、MainWindow.xaml.csを次のようにします。</p>
         <pre><code><span class="keyword">using</span> System;
 <span class="keyword">using</span> System.Windows;
@@ -320,18 +320,18 @@
         <h2 id="7"><code>ListBox</code>の項目のドラッグによる並べ替え</h2>
         <p>MainWindow.xamlは次のようにします。</p>
         <pre><code><span class="xamlsign">&lt;</span><span class="xamlname">Window</span> <span class="xamlattr">x</span><span class="xamlsign">:</span><span class="xamlattr">Class</span><span class="xamlsign">="ListBoxExTest.MainWindow"</span>
-         <span class="xamlattr">xmlns</span><span class="xamlsign">="http://schemas.microsoft.com/winfx/2006/xaml/presentation"</span>
-         <span class="xamlattr">xmlns</span><span class="xamlsign">:</span><span class="xamlattr">x</span><span class="xamlsign">="http://schemas.microsoft.com/winfx/2006/xaml"</span>
-         <span class="xamlattr">Title</span><span class="xamlsign">="MainWindow"</span> <span class="xamlattr">Height</span><span class="xamlsign">="350"</span> <span class="xamlattr">Width</span><span class="xamlsign">="525"&gt;</span>
-     <span class="xamlsign">&lt;</span><span class="xamlname">Grid</span><span class="xamlsign">&gt;</span>
-         <span class="xamlsign">&lt;</span><span class="xamlname">ListBox</span> <span class="xamlattr">Name</span><span class="xamlsign">="listBox1"&gt;</span>
-             <span class="xamlsign">&lt;</span><span class="xamlname">ListBoxItem</span> <span class="xamlattr">AllowDrop</span><span class="xamlsign">="True"</span> <span class="xamlattr">MouseMove</span><span class="xamlsign">="ListBoxItem_MouseMove"</span> <span class="xamlattr">DragEnter</span><span class="xamlsign">="ListBoxItem_DragEnter"&gt;</span><span class="xamlname">色は匂えど</span><span class="xamlsign">&lt;/</span><span class="xamlname">ListBoxItem</span><span class="xamlsign">&gt;</span>
-             <span class="xamlsign">&lt;</span><span class="xamlname">ListBoxItem</span> <span class="xamlattr">AllowDrop</span><span class="xamlsign">="True"</span> <span class="xamlattr">MouseMove</span><span class="xamlsign">="ListBoxItem_MouseMove"</span> <span class="xamlattr">DragEnter</span><span class="xamlsign">="ListBoxItem_DragEnter"&gt;</span><span class="xamlname">散りぬるを</span><span class="xamlsign">&lt;/</span><span class="xamlname">ListBoxItem</span><span class="xamlsign">&gt;</span>
-             <span class="xamlsign">&lt;</span><span class="xamlname">ListBoxItem</span> <span class="xamlattr">AllowDrop</span><span class="xamlsign">="True"</span> <span class="xamlattr">MouseMove</span><span class="xamlsign">="ListBoxItem_MouseMove"</span> <span class="xamlattr">DragEnter</span><span class="xamlsign">="ListBoxItem_DragEnter"&gt;</span><span class="xamlname">我が世誰ぞ</span><span class="xamlsign">&lt;/</span><span class="xamlname">ListBoxItem</span><span class="xamlsign">&gt;</span>
-             <span class="xamlsign">&lt;</span><span class="xamlname">ListBoxItem</span> <span class="xamlattr">AllowDrop</span><span class="xamlsign">="True"</span> <span class="xamlattr">MouseMove</span><span class="xamlsign">="ListBoxItem_MouseMove"</span> <span class="xamlattr">DragEnter</span><span class="xamlsign">="ListBoxItem_DragEnter"&gt;</span><span class="xamlname">常ならん</span><span class="xamlsign">&lt;/</span><span class="xamlname">ListBoxItem</span><span class="xamlsign">&gt;</span>
-         <span class="xamlsign">&lt;/</span><span class="xamlname">ListBox</span><span class="xamlsign">&gt;</span>
-     <span class="xamlsign">&lt;/</span><span class="xamlname">Grid</span><span class="xamlsign">&gt;</span>
- <span class="xamlsign">&lt;/</span><span class="xamlname">Window</span><span class="xamlsign">&gt;</span></code></pre>
+        <span class="xamlattr">xmlns</span><span class="xamlsign">="http://schemas.microsoft.com/winfx/2006/xaml/presentation"</span>
+        <span class="xamlattr">xmlns</span><span class="xamlsign">:</span><span class="xamlattr">x</span><span class="xamlsign">="http://schemas.microsoft.com/winfx/2006/xaml"</span>
+        <span class="xamlattr">Title</span><span class="xamlsign">="MainWindow"</span> <span class="xamlattr">Height</span><span class="xamlsign">="350"</span> <span class="xamlattr">Width</span><span class="xamlsign">="525"&gt;</span>
+    <span class="xamlsign">&lt;</span><span class="xamlname">Grid</span><span class="xamlsign">&gt;</span>
+        <span class="xamlsign">&lt;</span><span class="xamlname">ListBox</span> <span class="xamlattr">Name</span><span class="xamlsign">="listBox1"&gt;</span>
+            <span class="xamlsign">&lt;</span><span class="xamlname">ListBoxItem</span> <span class="xamlattr">AllowDrop</span><span class="xamlsign">="True"</span> <span class="xamlattr">MouseMove</span><span class="xamlsign">="ListBoxItem_MouseMove"</span> <span class="xamlattr">DragEnter</span><span class="xamlsign">="ListBoxItem_DragEnter"&gt;</span><span class="xamlname">色は匂えど</span><span class="xamlsign">&lt;/</span><span class="xamlname">ListBoxItem</span><span class="xamlsign">&gt;</span>
+            <span class="xamlsign">&lt;</span><span class="xamlname">ListBoxItem</span> <span class="xamlattr">AllowDrop</span><span class="xamlsign">="True"</span> <span class="xamlattr">MouseMove</span><span class="xamlsign">="ListBoxItem_MouseMove"</span> <span class="xamlattr">DragEnter</span><span class="xamlsign">="ListBoxItem_DragEnter"&gt;</span><span class="xamlname">散りぬるを</span><span class="xamlsign">&lt;/</span><span class="xamlname">ListBoxItem</span><span class="xamlsign">&gt;</span>
+            <span class="xamlsign">&lt;</span><span class="xamlname">ListBoxItem</span> <span class="xamlattr">AllowDrop</span><span class="xamlsign">="True"</span> <span class="xamlattr">MouseMove</span><span class="xamlsign">="ListBoxItem_MouseMove"</span> <span class="xamlattr">DragEnter</span><span class="xamlsign">="ListBoxItem_DragEnter"&gt;</span><span class="xamlname">我が世誰ぞ</span><span class="xamlsign">&lt;/</span><span class="xamlname">ListBoxItem</span><span class="xamlsign">&gt;</span>
+            <span class="xamlsign">&lt;</span><span class="xamlname">ListBoxItem</span> <span class="xamlattr">AllowDrop</span><span class="xamlsign">="True"</span> <span class="xamlattr">MouseMove</span><span class="xamlsign">="ListBoxItem_MouseMove"</span> <span class="xamlattr">DragEnter</span><span class="xamlsign">="ListBoxItem_DragEnter"&gt;</span><span class="xamlname">常ならん</span><span class="xamlsign">&lt;/</span><span class="xamlname">ListBoxItem</span><span class="xamlsign">&gt;</span>
+        <span class="xamlsign">&lt;/</span><span class="xamlname">ListBox</span><span class="xamlsign">&gt;</span>
+    <span class="xamlsign">&lt;/</span><span class="xamlname">Grid</span><span class="xamlsign">&gt;</span>
+<span class="xamlsign">&lt;/</span><span class="xamlname">Window</span><span class="xamlsign">&gt;</span></code></pre>
         <p>まず<code>ListBoxItem</code>の<code>AllowDrop</code>プロパティをOnにします。そして、<code>MouseMove</code>と<code>DragEnter</code>という2つのイベントにイベントハンドラーを指定します。</p>
         <p>MainWindow.xaml.csは次のようにします。</p>
         <pre><code><span class="keyword">using</span> System.Windows;
@@ -437,20 +437,20 @@
         <p>まず、参照設定にSystem.Runtime.Remotingを追加する必要があります。</p>
         <p>次に、<code>System.MarshalByRefObject</code>を継承したクラスを作成します。</p>
         <pre><code><span class="keyword">using</span> System;
- 
- <span class="keyword">namespace</span> WpfApplication1
- {
-     <span class="keyword">class</span> <span class="usertype">Handler</span> : <span class="usertype">MarshalByRefObject</span>
-     {
-         <span class="keyword">public</span> <span class="keyword">void</span> Handle()
-         {
-             <span class="comment">// 通信が行われたときの処理を記述する。</span>
-         }
- 
-         <span class="comment">// 通信可能な状態を保ち続けるためのオーバーライド。</span>
-         <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">object</span> InitializeLifetimeService() => <span class="keyword">null</span>;
-     }
- }</code></pre>
+
+<span class="keyword">namespace</span> WpfApplication1
+{
+    <span class="keyword">class</span> <span class="usertype">Handler</span> : <span class="usertype">MarshalByRefObject</span>
+    {
+        <span class="keyword">public</span> <span class="keyword">void</span> Handle()
+        {
+            <span class="comment">// 通信が行われたときの処理を記述する。</span>
+        }
+
+        <span class="comment">// 通信可能な状態を保ち続けるためのオーバーライド。</span>
+        <span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">object</span> InitializeLifetimeService() => <span class="keyword">null</span>;
+    }
+}</code></pre>
         <p><code>MarshalByRefObject</code>を継承した<code>Handler</code>クラスでは、<code>InitializeLifetimeService</code>というメソッドをオーバーライドしています。これは、時間経過によって、通信できなくなる状態に自動的になってしまうのを防ぐためです。</p>
         <p>通信のサーバー側は、次のように記述します。<code>IpcServerChannel</code>のコンストラクターでは、UUIDなど、アプリケーションを一意に識別するための文字列を渡します。<code>RemotingServices.Marshal</code>メソッドの第2引数では、<code>MarshalByRefObject</code>オブジェクトを識別するための文字列を指定します。</p>
         <pre><code><span class="keyword">const</span> <span class="keyword">string</span> ApplicationId = <span class="string">"00000000-0000-0000-0000-000000000000"</span>; <span class="comment">// 実際はUUIDなどが良い。</span>
@@ -603,9 +603,9 @@
             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
             xmlns:local="clr-namespace:WpfApp1"&gt;
-   &lt;Application.Resources&gt;
-        
-   &lt;/Application.Resources&gt;
+    &lt;Application.Resources&gt;
+
+    &lt;/Application.Resources&gt;
 &lt;/Application&gt;</code></pre>
         <p>次に、<code>MainWindow</code> に、ウィンドウハンドルを公開するプロパティを定義します。このプロパティには、<code>SourceInitialized</code> イベントで値を設定します。<code>SourceInitialized</code> イベントは、ウィンドウハンドルを取得できるようになる、最も早いタイミングのイベントです。</p>
         <pre><code class="C#">using System;
