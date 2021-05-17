@@ -58,19 +58,19 @@
 		<h2><abbr title="Scalable Vector Graphics">SVG</abbr> の話</h2>
 		<h3>水平 <code>line</code> のグラデーション</h3>
 		<p>Firefox は、バージョン88.0.1現在、SVG の <code>line</code> 要素や <code>polyline</code> 要素が水平または垂直の場合、<code>stroke</code> 属性にグラデーション要素を指定すると、なぜか描画されません。例えば、以下に示すグラデーションを指定した水平の <code>line</code> は描画されません。わずかでも斜めなら描画されます。</p>
-		<pre><code class="xml">&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
+		<pre><code class="xml">&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 35" width="400"&gt;
     &lt;defs&gt;
-        &lt;linearGradient id=&quot;grad&quot;&gt;
-            &lt;stop stop-color=&quot;red&quot; offset=&quot;50%&quot; /&gt;
-            &lt;stop stop-color=&quot;black&quot; offset=&quot;100%&quot; /&gt;
+        &lt;linearGradient id="grad"&gt;
+            &lt;stop stop-color="red" offset="50%" /&gt;
+            &lt;stop stop-color="black" offset="100%" /&gt;
         &lt;/linearGradient&gt;
     &lt;/defs&gt;
-    &lt;text x=&quot;0&quot; y=&quot;8&quot; font-size=&quot;4&quot;&gt;グラデーションを指定しない水平の line&lt;/text&gt;
-    &lt;line x1=&quot;0&quot; y1=&quot;10&quot; x2=&quot;100&quot; y2=&quot;10&quot; stroke=&quot;red&quot; stroke-width=&quot;1&quot; /&gt;
-    &lt;text x=&quot;0&quot; y=&quot;18&quot; font-size=&quot;4&quot;&gt;グラデーションを指定した水平の line（描画されない）&lt;/text&gt;
-    <strong>&lt;line x1=&quot;0&quot; y1=&quot;20&quot; x2=&quot;100&quot; y2=&quot;20&quot; stroke=&quot;url(#grad)&quot; stroke-width=&quot;1&quot; /&gt;</strong>
-    &lt;text x=&quot;0&quot; y=&quot;28&quot; font-size=&quot;4&quot;&gt;グラデーションを指定した斜めの line&lt;/text&gt;
-    &lt;line x1=&quot;0&quot; y1=&quot;30&quot; x2=&quot;100&quot; y2=&quot;30.1&quot; stroke=&quot;url(#grad)&quot; stroke-width=&quot;1&quot; /&gt;
+    &lt;text x="0" y="8" font-size="4"&gt;グラデーションを指定しない水平の line&lt;/text&gt;
+    &lt;line x1="0" y1="10" x2="100" y2="10" stroke="red" stroke-width="2" /&gt;
+    &lt;text x="0" y="18" font-size="4"&gt;グラデーションを指定した水平の line（描画されない）&lt;/text&gt;
+    <strong>&lt;line x1="0" y1="20" x2="100" y2="20" stroke="url(#grad)" stroke-width="2" /&gt;</strong>
+    &lt;text x="0" y="28" font-size="4"&gt;グラデーションを指定した斜めの line&lt;/text&gt;
+    &lt;line x1="0" y1="30" x2="100" y2="30.1" stroke="url(#grad)" stroke-width="2" /&gt;
 &lt;/svg&gt;</code></pre>
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 35" width="400">
 			<defs>
@@ -80,28 +80,28 @@
 				</linearGradient>
 			</defs>
 			<text x="0" y="8" font-size="4">グラデーションを指定しない水平の line</text>
-			<line x1="0" y1="10" x2="100" y2="10" stroke="red" stroke-width="1" />
+			<line x1="0" y1="10" x2="100" y2="10" stroke="red" stroke-width="2" />
 			<text x="0" y="18" font-size="4">グラデーションを指定した水平の line（描画されない）</text>
-			<line x1="0" y1="20" x2="100" y2="20" stroke="url(#grad)" stroke-width="1" />
+			<line x1="0" y1="20" x2="100" y2="20" stroke="url(#grad)" stroke-width="2" />
 			<text x="0" y="28" font-size="4">グラデーションを指定した斜めの line</text>
-			<line x1="0" y1="30" x2="100" y2="30.1" stroke="url(#grad)" stroke-width="1" />
+			<line x1="0" y1="30" x2="100" y2="30.1" stroke="url(#grad)" stroke-width="2" />
 		</svg>
 		<p>線を斜めにする以外の方法で描画されるようにするならば、<code>line</code> の代わりに <code>rect</code> を使うか、あるいはグラデーション要素の <code>gradientUnits</code> 属性を、<code>userSpaceOnUse</code> にします。</p>
-		<pre><code class="xml">&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;
+		<pre><code class="xml">&lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 25" width="400"&gt;
     &lt;defs&gt;
-        &lt;linearGradient id=&quot;grad&quot;&gt;
-            &lt;stop stop-color=&quot;red&quot; offset=&quot;50%&quot; /&gt;
-            &lt;stop stop-color=&quot;black&quot; offset=&quot;100%&quot; /&gt;
+        &lt;linearGradient id="grad"&gt;
+            &lt;stop stop-color="red" offset="50%" /&gt;
+            &lt;stop stop-color="black" offset="100%" /&gt;
         &lt;/linearGradient&gt;
-        &lt;linearGradient id=&quot;grad2&quot; <strong>gradientUnits=&quot;userSpaceOnUse&quot;</strong>&gt;
-            &lt;stop stop-color=&quot;red&quot; offset=&quot;50%&quot; /&gt;
-            &lt;stop stop-color=&quot;black&quot; offset=&quot;100%&quot; /&gt;
+        &lt;linearGradient id="grad2" <strong>gradientUnits="userSpaceOnUse"</strong>&gt;
+            &lt;stop stop-color="red" offset="50%" /&gt;
+            &lt;stop stop-color="black" offset="100%" /&gt;
         &lt;/linearGradient&gt;
     &lt;/defs&gt;
-    &lt;text x=&quot;0&quot; y=&quot;9&quot; font-size=&quot;4&quot;&gt;rect 要素を使う&lt;/text&gt;
-    <strong>&lt;rect x=&quot;0&quot; y=&quot;9.5&quot; width=&quot;100&quot; height=&quot;1&quot; fill=&quot;url(#grad)&quot; /&gt;</strong>
-    &lt;text x=&quot;0&quot; y=&quot;19&quot; font-size=&quot;4&quot;&gt;gradientUnits 属性を userSpaceOnUse にする&lt;/text&gt;
-    &lt;line x1=&quot;0&quot; y1=&quot;20&quot; x2=&quot;100&quot; y2=&quot;20&quot; stroke=&quot;url(#grad2)&quot; /&gt;
+    &lt;text x="0" y="8" font-size="4"&gt;rect 要素を使う&lt;/text&gt;
+    <strong>&lt;rect x="0" y="9" width="100" height="2" fill="url(#grad)" /&gt;</strong>
+    &lt;text x="0" y="18" font-size="4"&gt;gradientUnits 属性を userSpaceOnUse にする&lt;/text&gt;
+    &lt;line x1="0" y1="20" x2="100" y2="20" stroke="url(#grad2)" stroke-width="2" /&gt;
 &lt;/svg&gt;</code></pre>
 		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 25" width="400">
 			<defs>
@@ -115,9 +115,9 @@
 				</linearGradient>
 			</defs>
 			<text x="0" y="8" font-size="4">rect 要素を使う</text>
-			<rect x="0" y="9.5" width="100" height="1" fill="url(#grad)" />
+			<rect x="0" y="9" width="100" height="2" fill="url(#grad)" />
 			<text x="0" y="18" font-size="4">gradientUnits 属性を userSpaceOnUse にする</text>
-			<line x1="0" y1="20" x2="100" y2="20" stroke="url(#grad2)" />
+			<line x1="0" y1="20" x2="100" y2="20" stroke="url(#grad2)" stroke-width="2" />
 		</svg>
 		<h3><code>url()</code> 関数の要不要</h3>
 		<p><code>textPath</code> 要素は、<code>xlink:href</code> 属性に <code>path</code> 要素の <code>id</code> を指定します（XLink の名前空間接頭辞を “xlink” としています）。このときは、<code>xlink:href=&quot;#path&quot;</code> のように、<kbd>#</kbd> に続けて <code>id</code> を記述すれば正しく解釈されます。一方、何らかの要素にグラデーションを掛けるなどの目的で、<code>fill</code> 属性に <code>linearGradient</code> 要素などの <code>id</code> を指定するときは、<code>fill=&quot;url(#grad)&quot;</code> のように <code>url()</code> 関数を使う必要があります。<code>xlink:href</code> が XLink の仕様であるのに対し、<code>fill</code> は SVG の仕様なので、このような違いがあるのでしょうか。</p>
