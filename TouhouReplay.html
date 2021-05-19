@@ -86,19 +86,47 @@
                 event.preventDefault();
             });
 
-            addEventListener("drop", function (event) {
+            addEventListener("drop", async function (event) {
                 event.preventDefault();
-                process(event.dataTransfer.files);
+
+                const files = [];
+
+                await Promise.all(Array.from(event.dataTransfer.items)
+                    .map(i => i.webkitGetAsEntry())
+                    .filter(e => e)
+                    .map(e => scanFiles(e)));
+
+                async function scanFiles(entry) {
+                    if (!entry.isDirectory) {
+                        files.push(await new Promise((resolve, reject) => entry.file(resolve, reject)));
+                        return;
+                    }
+
+                    const reader = entry.createReader();
+
+                    // readEntries() は、Chromium では一度に100ファイルまでしか取得しないので、
+                    // 全ファイルを取得するなら、空の配列が返ってくるまで繰り返し readEntries() を呼び出す。
+                    let entries = await readEntriesAsync();
+                    while (entries.length) {
+                        await Promise.all(entries.map(e => scanFiles(e)));
+                        entries = await readEntriesAsync();
+                    }
+
+                    function readEntriesAsync() {
+                        return new Promise((resolve, reject) => reader.readEntries(resolve, reject));
+                    }
+                }
+
+                process(files);
             });
 
             document.forms[0].files.addEventListener("change", function () {
-                process(this.files);
+                process(Array.from(this.files));
             });
 
-            async function process(fileList) {
+            async function process(files) {
                 changeDisplay();
 
-                const files = Array.from(fileList);
                 const tableData = (await Promise.all(files.map(getData))).filter(i => i);
                 table.setData(tableData);
             }
@@ -117,11 +145,15 @@
                     // const byteArray = new Uint8Array(await file.arrayBuffer());
                     const byteArray = new Uint8Array(await readFileAsync(file));
 
+                    const game = getGame(byteArray);
+                    if (!game) {
+                        return null;
+                    }
+
                     const data = {
                         fileName: file.name
                     };
 
-                    const game = getGame(byteArray);
                     data.game = game;
 
                     if (game.rawStart) {
