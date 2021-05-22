@@ -19,6 +19,17 @@
             margin: auto -2em;
             text-align: right;
         }
+
+        .app {
+            margin-left: 10px;
+            padding: 5px;
+            font-size: medium;
+            font-weight: normal;
+        }
+
+        input[type="file"] {
+            display: none;
+        }
     </style>
     <script>
         addEventListener("load", function () {
@@ -121,9 +132,12 @@
                 process(files);
             });
 
-            document.forms[0].files.addEventListener("change", function () {
+            document.forms[0].files.addEventListener("change", handleChange);
+            document.forms[0].directory.addEventListener("change", handleChange);
+
+            function handleChange() {
                 process(Array.from(this.files));
-            });
+            }
 
             async function process(files) {
                 changeDisplay();
@@ -332,7 +346,7 @@
         <table>
             <tr>
                 <th>最終更新</th>
-                <td>2019年11月28日 23時19分</td>
+                <td></td>
             </tr>
         </table>
     </header>
@@ -344,7 +358,8 @@
     </div>
     <form>
         <p>リプレイファイルを選択するか、このページにドロップしてください。</p>
-        <input type="file" name="files" accept=".rpy" multiple>（複数選択可）
+        <label for="files" class="app">ファイルを選択（複数選択可）</label><input type="file" name="files" id="files" accept=".rpy" multiple>
+        <label for="directory" class="app">ディレクトリを選択</label><input type="file" name="directory" id="directory" webkitdirectory>
     </form>
     <p><a href="replay.zip">サンプル replay.zip</a></p>
     <footer>
