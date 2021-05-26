@@ -20,6 +20,13 @@
             text-align: right;
         }
 
+        #progress {
+            position: fixed;
+            left: 2em;
+            bottom: 2em;
+            box-shadow: 0 5px 15px 0 darkgray;
+        }
+
         .app {
             margin-left: 10px;
             padding: 5px;
@@ -151,11 +158,19 @@
                 process(Array.from(this.files));
             }
 
+            const progress = document.getElementById('progress');
+
             async function process(files) {
                 changeDisplay();
 
+                progress.max = files.length;
+                progress.value = 0;
+                progress.hidden = false;
+
                 const tableData = (await Promise.all(files.map(getData))).filter(i => i);
                 table.setData(tableData);
+
+                progress.hidden = true;
             }
 
             function changeDisplay() {
@@ -164,12 +179,18 @@
             }
 
             async function getData(file) {
-                if (file.size < 4 || file.type) {
-                    return null;
-                }
-
                 try {
-                    const byteArray = new Uint8Array(await file.arrayBuffer());
+                    if (file.size < 4 || file.type) {
+                        return null;
+                    }
+
+                    let byteArray;
+                    try {
+                        byteArray = new Uint8Array(await file.arrayBuffer());
+                    } catch (e) {
+                        console.log(e);
+                        return null;
+                    }
 
                     const game = getGame(byteArray);
                     if (!game) {
@@ -190,9 +211,8 @@
                     }
 
                     return data;
-                } catch (e) {
-                    console.log(e);
-                    return null;
+                } finally {
+                    progress.value++;
                 }
             }
 
@@ -358,7 +378,7 @@
         <table>
             <tr>
                 <th>最終更新</th>
-                <td>2021年5月26日 18時03分</td>
+                <td></td>
             </tr>
         </table>
     </header>
@@ -374,6 +394,7 @@
         <label for="directory" class="app">ディレクトリを選択</label><input type="file" name="directory" id="directory" webkitdirectory><!-- 非標準。-->
     </form>
     <p><a href="replay.zip">サンプル replay.zip</a></p>
+    <progress id="progress" hidden>読み込み中...</progress>
     <footer>
         <table>
             <tr>
