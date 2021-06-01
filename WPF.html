@@ -46,12 +46,12 @@
         <table>
             <tr>
                 <th>最終更新</th>
-                <td>2021年6月1日 20時36分</td>
+                <td>2021年6月1日 20時58分</td>
             </tr>
         </table>
     </header>
     <h1>WPF による開発覚え書き</h1>
-    <p>Visual C# 2010 Express や、Visual Studio Community 2015、Visual Studio Community 2017 で、WPF アプリケーションを開発した際の覚え書きです。未だ WPF には詳しくないので、ここに書いてあることは大間違いかもしれません。</p>
+    <p>Visual C# 2010 Express ～ Visual Studio 2019 で、WPF アプリケーションを開発した際の覚え書きです。未だ WPF には詳しくないので、ここに書いてあることは大間違いかもしれません。</p>
     <ol>
         <li>
             Visual C# 2010 Express 時代
@@ -742,8 +742,8 @@ namespace WpfApp1
     </section>
     <section>
         <h2 id="14">null 許容参照型を使う</h2>
-        <p>今後の .NET 開発では、.NET Framework ではなく .NET 5.0 およびその後継を検討するべきです。ここでも .NET 5.0 を使っています。</p>
-        <p>Visual Studio 2019 で作成したプロジェクトで、C# 8.0 で追加された null 許容参照型を使うには、<code>.csproj</code> を直接編集します。下記のように、<code>&lt;Nullable&gt;enable&lt;/Nullable&gt;</code>を記述すると、null 許容参照型が有効になります。</p>
+        <p>今後の .NET 開発では、.NET Framework ではなく .NET 5.0 以降を検討するべきです。ここでも .NET 5.0 を使っています。</p>
+        <p>C# 8.0 で null 許容参照型が追加されました。Visual Studio 2019 で作成したプロジェクトで null 許容参照型を使うには、<code>.csproj</code> を直接編集します。下記のように、<code>&lt;Nullable&gt;enable&lt;/Nullable&gt;</code> を記述すると、null 許容参照型が有効になります。</p>
         <pre><code class="xml">&lt;Project Sdk="Microsoft.NET.Sdk"&gt;
 
     &lt;PropertyGroup&gt;
@@ -758,7 +758,7 @@ namespace WpfApp1
     <section>
         <h2 id="15"><code>Main</code> メソッドを明示的に実装する</h2>
         <p>.NET 5.0 の WPF アプリケーションでは、<code>App.xaml</code> というファイルは、ビルド アクションが自動的に ApplicationDefinition になります。そのため、Visual Studio のプロパティ ウィンドウで、<code>App.xaml</code> のビルド アクションを変更するとエラーが発生します。</p>
-        <p><code>Main</code> メソッドを明示的に実装するには、まずこの挙動を変更します。それには、<code>.csproj</code> を直接編集して、<code>&lt;EnableDefaultApplicationDefinition&gt;false&lt;/EnableDefaultApplicationDefinition&gt;</code>を記述します。</p>
+        <p><code>Main</code> メソッドを明示的に実装するには、まずこの挙動を変更します。それには、<code>.csproj</code> を直接編集して、<code>&lt;EnableDefaultApplicationDefinition&gt;false&lt;/EnableDefaultApplicationDefinition&gt;</code> を記述します。</p>
         <pre><code code="xml">&lt;Project Sdk="Microsoft.NET.Sdk"&gt;
 
   &lt;PropertyGroup&gt;
@@ -784,8 +784,8 @@ namespace WpfApp1
     </section>
     <section>
         <h2 id="16"><code>Console.WriteLine()</code> の値を表示する</h2>
-        <p>Visual Studio 2019 で、新たに WPF アプリケーションを作成し、<code>Console.WriteLine()</code> を記述しても、コンソールに表示はされません。.NET Framework の場合、プロジェクトのプロパティで「出力の種類」を「コンソール アプリケーション」にすると表示されるようになりますが、.NET 5.0 の場合は、単にこの操作を行っても、自動的に「WPF アプリケーション」に戻ります。</p>
-        <p>あえて「コンソール アプリケーション」にするならば、<code>.csproj</code>に<code>&lt;DisableWinExeOutputInference&gt;true&lt;/DisableWinExeOutputInference&gt;</code>を記述します。これで、自動的に「WPF アプリケーション」に戻ることはなくなります。あとは、<code>OutputType</code>を<code>Exe</code>に変更するか、プロジェクトのプロパティの「出力の種類」を「コンソール アプリケーション」にします。</p>
+        <p>Visual Studio 2019 で、新たに WPF アプリケーションを作成し、<code>Console.WriteLine()</code> を記述しても、値はコンソールに表示されません。.NET Framework の場合は、プロジェクトのプロパティで「出力の種類」を「コンソール アプリケーション」にすると表示されるようになりますが、.NET 5.0 の場合、単にこの操作を行っても、自動的に「WPF アプリケーション」に戻ります。</p>
+        <p>あえて「コンソール アプリケーション」にするならば、<code>.csproj</code> に <code>&lt;DisableWinExeOutputInference&gt;true&lt;/DisableWinExeOutputInference&gt;</code> を記述します。これで、自動的に「WPF アプリケーション」に戻ることはなくなります。あとは、<code>OutputType</code> を <code>Exe</code> に変更するか、プロジェクトのプロパティの「出力の種類」を「コンソール アプリケーション」にします。</p>
         <pre><code>&lt;Project Sdk="Microsoft.NET.Sdk"&gt;
 
   &lt;PropertyGroup&gt;
@@ -796,7 +796,7 @@ namespace WpfApp1
   &lt;/PropertyGroup&gt;
 
 &lt;/Project&gt;</code></pre>
-        <p>なお、このように設定すると、実行時にコンソール ウィンドウが表示されるようになります。プログラムがデスクトップ アプリケーションであり、実行時にコンソール ウィンドウが表示されるのが不格好だと感じるならば、このように設定するべきではありません。</p>
+        <p>なお、このようにすると、実行時にコンソール ウィンドウが表示されるようになります。プログラムがデスクトップ アプリケーションであり、実行時にコンソール ウィンドウが表示されるのが不格好だと感じるならば、するべきではありません。</p>
         <dl>
             <dt>参考</dt>
             <dd><a href="https://docs.microsoft.com/ja-jp/dotnet/core/compatibility/sdk/5.0/automatically-infer-winexe-output-type">OutputType set to WinExe for WPF and WinForms apps</a></dd>
