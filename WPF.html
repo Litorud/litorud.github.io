@@ -46,7 +46,7 @@
         <table>
             <tr>
                 <th>最終更新</th>
-                <td>2021年5月17日 1時8分</td>
+                <td></td>
             </tr>
         </table>
     </header>
@@ -79,6 +79,13 @@
             Visual Studio Community 2017 時代
             <ul>
                 <li><a href="#13">二重起動を防止し、起動済みのウィンドウをアクティブにする（メモリマップトファイルを使う）</a></li>
+            </ul>
+        </li>
+        <li>
+            Visual Studio 2019 時代（.NET 5.0 時代）
+            <ul>
+                <li><a href="#14">null 許容参照型を使う</a></li>
+                <li><a href="#15"><code>Main</code> メソッドを明示的に実装する</a></li>
             </ul>
         </li>
     </ol>
@@ -730,6 +737,48 @@ namespace WpfApp1
             <em>SetForegroundWindow(hWnd);</em>
         }
     }
+}</code></pre>
+    </section>
+    <section>
+        <h2 id="14">null 許容参照型を使う</h2>
+        <p>今後の .NET 開発では、.NET Framework ではなく .NET 5.0 およびその後継を検討するべきです。ここでも .NET 5.0 を使っています。</p>
+        <p>Visual Studio 2019 で作成したプロジェクトで、C# 8.0 で追加された null 許容参照型を使うには、<code>.csproj</code> を直接編集します。下記のように、<code>&lt;Nullable&gt;enable&lt;/Nullable&gt;</code>を記述すると、null 許容参照型が有効になります。</p>
+        <pre><code class="xml">&lt;Project Sdk="Microsoft.NET.Sdk"&gt;
+
+    &lt;PropertyGroup&gt;
+    &lt;OutputType&gt;WinExe&lt;/OutputType&gt;
+    &lt;TargetFramework&gt;net5.0-windows&lt;/TargetFramework&gt;
+    &lt;UseWPF&gt;true&lt;/UseWPF&gt;
+    <em>&lt;Nullable&gt;enable&lt;/Nullable&gt;</em>
+  &lt;/PropertyGroup&gt;
+
+&lt;/Project&gt;</code></pre>
+    </section>
+    <section>
+        <h2 id="15"><code>Main</code> メソッドを明示的に実装する</h2>
+        <p>.NET 5.0 の WPF アプリケーションでは、<code>App.xaml</code> というファイルは、ビルド アクションが自動的に ApplicationDefinition になります。そのため、Visual Studio のプロパティ ウィンドウで、<code>App.xaml</code> のビルド アクションを変更するとエラーが発生します。</p>
+        <p><code>Main</code> メソッドを明示的に実装するには、まずこの挙動を変更します。それには、<code>.csproj</code> を直接編集して、<code>&lt;EnableDefaultApplicationDefinition&gt;false&lt;/EnableDefaultApplicationDefinition&gt;</code>を記述します。</p>
+        <pre><code code="xml">&lt;Project Sdk="Microsoft.NET.Sdk"&gt;
+
+  &lt;PropertyGroup&gt;
+    &lt;OutputType&gt;WinExe&lt;/OutputType&gt;
+    &lt;TargetFramework&gt;net5.0-windows&lt;/TargetFramework&gt;
+    &lt;UseWPF&gt;true&lt;/UseWPF&gt;
+    &lt;Nullable&gt;enable&lt;/Nullable&gt;
+    <em>&lt;EnableDefaultApplicationDefinition&gt;false&lt;/EnableDefaultApplicationDefinition&gt;</em>
+  &lt;/PropertyGroup&gt;
+
+&lt;/Project&gt;</code></pre>
+        <p>これで、<code>Main</code> メソッドが自動生成されなくなるので、<code>App.xaml.cs</code> に、<code>Main</code> メソッドを明示的に実装します。コマンドライン引数を受け取ることもできます。</p>
+        <pre><code class="C#">public partial class App : Application
+{
+<em>    [STAThread]
+    public static void Main(string[] args)
+    {
+        var app = new App();
+        app.InitializeComponent();
+        app.Run();
+    }</em>
 }</code></pre>
     </section>
 </body>
