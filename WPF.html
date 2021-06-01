@@ -46,7 +46,7 @@
         <table>
             <tr>
                 <th>最終更新</th>
-                <td></td>
+                <td>2021年6月1日 20時32分</td>
             </tr>
         </table>
     </header>
@@ -86,6 +86,7 @@
             <ul>
                 <li><a href="#14">null 許容参照型を使う</a></li>
                 <li><a href="#15"><code>Main</code> メソッドを明示的に実装する</a></li>
+                <li><a href="#16"><code>Console.WriteLine()</code> の値を表示する</a></li>
             </ul>
         </li>
     </ol>
@@ -780,6 +781,26 @@ namespace WpfApp1
         app.Run();
     }</em>
 }</code></pre>
+    </section>
+    <section>
+        <h2 id="16"><code>Console.WriteLine()</code> の値を表示する</h2>
+        <p>Visual Studio 2019 で、新たに WPF アプリケーションを作成し、<code>Console.WriteLine()</code> を記述しても、コンソールに表示はされません。.NET Framework の場合、プロジェクトのプロパティで「出力の種類」を「コンソール アプリケーション」にすると表示されるようになりますが、.NET 5.0 の場合は、単にこの操作を行っても、自動的に「WPF アプリケーション」に戻ります。</p>
+        <p>あえて「コンソール アプリケーション」にするならば、<code>.csproj</code>に<code>&lt;DisableWinExeOutputInference&gt;true&lt;/DisableWinExeOutputInference&gt;</code>を記述します。これで、自動的に「WPF アプリケーション」に戻ることはなくなります。あとは、<code>OutputType</code>を<code>Exe</code>に変更するか、プロジェクトのプロパティの「出力の種類」を「コンソール アプリケーション」にします。</p>
+        <pre><code>&lt;Project Sdk="Microsoft.NET.Sdk"&gt;
+
+  &lt;PropertyGroup&gt;
+    <em>&lt;OutputType&gt;Exe&lt;/OutputType&gt;</em>
+    &lt;TargetFramework&gt;net5.0-windows&lt;/TargetFramework&gt;
+    &lt;UseWPF&gt;true&lt;/UseWPF&gt;
+    <em>&lt;DisableWinExeOutputInference&gt;true&lt;/DisableWinExeOutputInference&gt;</em>
+  &lt;/PropertyGroup&gt;
+
+&lt;/Project&gt;</code></pre>
+        <p>なお、このように設定すると、実行時にコンソール ウィンドウが表示されるようになります。プログラムがデスクトップ アプリケーションであり、実行時にコンソール ウィンドウが表示されるのが不格好だと感じるならば、このように設定するべきではありません。</p>
+        <dl>
+            <dt>参考</dt>
+            <dd><a href="https://docs.microsoft.com/ja-jp/dotnet/core/compatibility/sdk/5.0/automatically-infer-winexe-output-type">OutputType set to WinExe for WPF and WinForms apps</a></dd>
+        </dl>
     </section>
 </body>
 
